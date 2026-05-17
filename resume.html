@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume — Giridhar Reddy Parlapalli</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #080c14;
+      --navy2: #0d1526;
+      --navy3: #111d35;
+      --card: #0f1a2e;
+      --accent: #38c9a0;
+      --accent2: #4fa8e8;
+      --accent3: #f4a261;
+      --muted: #8a9bb5;
+      --text: #dce8f5;
+      --border: rgba(56,201,160,0.15);
+      --border2: rgba(79,168,232,0.12);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(8,12,20,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--accent); }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding-top: 120px;
+      padding-bottom: 48px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb span { color: var(--muted); }
+
+    .page-header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--text) 0%, var(--muted) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .download-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 12px 24px;
+      background: var(--accent);
+      color: #04201a;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: opacity 0.2s, transform 0.15s;
+      align-self: center;
+    }
+
+    .download-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SECTION HELPERS ── */
+    .section-wrap { padding: 72px 0 0; }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.16em;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SUMMARY ── */
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 32px 36px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 72px;
+    }
+
+    .summary-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+    }
+
+    .summary-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .summary-role {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--accent2);
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+
+    .summary-text {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 760px;
+    }
+
+    .summary-contacts {
+      display: flex;
+      gap: 24px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .summary-contact-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .summary-contact-item a { color: var(--accent); text-decoration: none; }
+
+    /* ── TWO-COLUMN RESUME LAYOUT ── */
+    .resume-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      padding-bottom: 80px;
+    }
+
+    /* ── RESUME SECTION TITLE ── */
+    .resume-section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 24px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .resume-section-title::before {
+      content: '';
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── TIMELINE ITEM ── */
+    .timeline { display: flex; flex-direction: column; gap: 28px; }
+
+    .tl-item {
+      position: relative;
+      padding-left: 20px;
+      border-left: 1px solid var(--border);
+    }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -4px; top: 6px;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--navy);
+    }
+
+    .tl-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 5px;
+    }
+
+    .tl-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+
+    .tl-org {
+      font-size: 12px;
+      color: var(--accent2);
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .tl-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .tl-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .tl-meta span { color: var(--accent3); }
+
+    .tl-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 3px;
+      background: rgba(56,201,160,0.08);
+      color: var(--accent);
+      border: 1px solid rgba(56,201,160,0.2);
+    }
+
+    .tag.blue {
+      background: rgba(79,168,232,0.08);
+      color: var(--accent2);
+      border-color: rgba(79,168,232,0.2);
+    }
+
+    .tag.amber {
+      background: rgba(244,162,97,0.08);
+      color: var(--accent3);
+      border-color: rgba(244,162,97,0.2);
+    }
+
+    /* ── SKILLS LIST ── */
+    .skills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .skill-bar-item {}
+
+    .skill-bar-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .skill-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text);
+    }
+
+    .skill-pct {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+    }
+
+    .skill-track {
+      height: 3px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      animation: growBar 1s ease both;
+    }
+
+    @keyframes growBar {
+      from { transform: scaleX(0); transform-origin: left; }
+      to   { transform: scaleX(1); transform-origin: left; }
+    }
+
+    /* ── CERTS ── */
+    .cert-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .cert-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      padding: 14px 16px;
+      transition: border-color 0.2s;
+    }
+
+    .cert-item:hover { border-color: rgba(56,201,160,0.3); }
+
+    .cert-icon {
+      width: 30px; height: 30px;
+      border-radius: 6px;
+      background: rgba(56,201,160,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+
+    .cert-name {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* ── LANGUAGES ── */
+    .lang-list { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .lang-chip {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(79,168,232,0.08);
+      color: var(--accent2);
+      border: 1px solid rgba(79,168,232,0.2);
+    }
+
+    /* ── BLOBS ── */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(80px);
+      opacity: 0.05;
+    }
+    .blob-1 { width: 500px; height: 500px; background: var(--accent); top: -150px; left: -100px; }
+    .blob-2 { width: 400px; height: 400px; background: var(--accent2); bottom: 10%; right: -100px; }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up { animation: fadeUp 0.55s ease both; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.2s; }
+    .d3 { animation-delay: 0.3s; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 700px) {
+      nav {
+        height: auto;
+        min-height: 64px;
+        padding: 10px 18px;
+        gap: 14px;
+      }
+      .nav-links {
+        gap: 16px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        max-width: calc(100vw - 92px);
+        padding-bottom: 2px;
+      }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .page-wrap { padding: 0 20px; }
+      .resume-grid { grid-template-columns: 1fr; gap: 40px; }
+      .page-header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">GRP_</a>
+    <ul class="nav-links">
+      <li><a href="index.html">home</a></li>
+      <li><a href="about.html">about</a></li>
+      <li><a href="skills.html">skills</a></li>
+      <li><a href="experience.html">experience</a></li>
+      <li><a href="resume.html" class="active">resume</a></li>
+      <li><a href="projects.html">projects</a></li>
+      <li><a href="index.html#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-wrap">
+    <div class="page-header fade-up">
+      <div>
+        <div class="breadcrumb">
+          <a href="index.html">home</a>
+          <span>/</span>
+          <span>resume</span>
+        </div>
+        <h1>Resume</h1>
+      </div>
+      <a href="RESUME__3_.docx" download class="download-btn">↓ &nbsp;Download CV</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SUMMARY -->
+  <div class="page-wrap">
+    <div class="section-wrap fade-up d1">
+      <p class="section-label">00 &nbsp; SUMMARY</p>
+      <div class="summary-card">
+        <div class="summary-name">Giridhar Reddy Parlapalli</div>
+        <div class="summary-role">// Associate Software Engineer · ECE Graduate · Frontend & Embedded</div>
+        <p class="summary-text">
+          Graduate in Electronics and Communication Engineering with a robust foundation in embedded systems,
+          C programming, Python, and Internet of Things concepts. Practical experience with academic projects
+          including sign language to text conversion using Python and IoT-based home automation using a
+          three-tier architecture. Adept at designing systems, fixing problems, and picking up new technologies fast.
+          Seeking a position where I can apply technical expertise and contribute to innovative engineering ideas.
+        </p>
+        <div class="summary-contacts">
+          <div class="summary-contact-item">📧 <a href="mailto:giridhar.parlapalli1@gmail.com">giridhar.parlapalli1@gmail.com</a></div>
+          <div class="summary-contact-item">📞 +91 8179721034</div>
+          <div class="summary-contact-item">🔗 <a href="https://github.com/Giridhar113" target="_blank" rel="noopener">github.com/Giridhar113</a></div>
+          <div class="summary-contact-item">📍 India</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- MAIN RESUME GRID -->
+  <div class="page-wrap">
+    <div class="section-wrap">
+      <div class="resume-grid">
+
+        <!-- LEFT COLUMN -->
+        <div>
+
+          <!-- EDUCATION -->
+          <div class="fade-up d1" style="margin-bottom: 48px;">
+            <p class="resume-section-title">Education</p>
+            <div class="timeline">
+
+              <div class="tl-item">
+                <div class="tl-date">AUG 2019 — MAY 2023</div>
+                <div class="tl-title">B.Tech — Electronics & Communication Engineering</div>
+                <div class="tl-org">Jain University, Bangalore</div>
+                <div class="tl-meta">GPA: <span>7.0 / 10</span></div>
+              </div>
+
+              <div class="tl-item">
+                <div class="tl-date">APRIL 2017 — MAY 2019</div>
+                <div class="tl-title">XII — Mathematics, Physics & Chemistry</div>
+                <div class="tl-org">Ratnam Junior College, SPSR Nellore</div>
+                <div class="tl-meta">CGPA: <span>8.4</span></div>
+              </div>
+
+              <div class="tl-item">
+                <div class="tl-date">MARCH 2017</div>
+                <div class="tl-title">10th Standard</div>
+                <div class="tl-org">Ratnam High School, SPSR Nellore</div>
+                <div class="tl-meta">CGPA: <span>7.3</span></div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CERTIFICATIONS -->
+          <div class="fade-up d2" style="margin-bottom: 48px;">
+            <p class="resume-section-title">Certifications</p>
+            <div class="cert-list">
+              <div class="cert-item">
+                <div class="cert-icon">🐍</div>
+                <div class="cert-name">Python Programming Certification</div>
+              </div>
+              <div class="cert-item">
+                <div class="cert-icon">📡</div>
+                <div class="cert-name">Embedded Systems & Internet of Things (IoT)</div>
+              </div>
+              <div class="cert-item">
+                <div class="cert-icon">📊</div>
+                <div class="cert-name">MATLAB / Digital Signal Processing (Basics)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LANGUAGES -->
+          <div class="fade-up d3">
+            <p class="resume-section-title">Languages</p>
+            <div class="lang-list">
+              <div class="lang-chip">English</div>
+              <div class="lang-chip">Telugu</div>
+              <div class="lang-chip">Hindi</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div>
+
+          <!-- EXPERIENCE -->
+          <div class="fade-up d1" style="margin-bottom: 48px;">
+            <p class="resume-section-title">Experience</p>
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-date">CURRENT ROLE</div>
+                <div class="tl-title">Associate Software Engineer</div>
+                <div class="tl-org">Oppty TechHub Private Limited, India</div>
+                <p class="tl-desc">
+                  Contributing to frontend development tasks, designing responsive UI components using HTML and CSS,
+                  implementing interactive features using JavaScript, and ensuring cross-browser compatibility.
+                  Participating in agile team meetings, debugging issues, and optimizing performance.
+                </p>
+                <div class="tl-tags">
+                  <span class="tag">HTML5</span>
+                  <span class="tag">CSS3</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag blue">Agile</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROJECTS -->
+          <div class="fade-up d2" style="margin-bottom: 48px;">
+            <p class="resume-section-title">Projects</p>
+            <div class="timeline">
+
+              <div class="tl-item">
+                <div class="tl-date">JAN 2022 — MAY 2022</div>
+                <div class="tl-title">IoT-Based Home Automation (Three-Tier Architecture)</div>
+                <p class="tl-desc">
+                  Designed and implemented an IoT home automation system separating presentation, application,
+                  and data layers to improve scalability. Devices communicate through network protocols enabling
+                  centralized control and real-time monitoring of home appliances.
+                </p>
+                <div class="tl-tags">
+                  <span class="tag blue">IoT</span>
+                  <span class="tag amber">Embedded Systems</span>
+                  <span class="tag blue">Java</span>
+                  <span class="tag">Cisco Packet Tracer</span>
+                </div>
+              </div>
+
+              <div class="tl-item">
+                <div class="tl-date">JUN 2022 — AUG 2022</div>
+                <div class="tl-title">Embedded Systems Multi-Application Development</div>
+                <p class="tl-desc">
+                  Built an integrated multi-app program on the KL25Z ARM Cortex-M0+ board using Embedded C and MBED,
+                  featuring UART-based RGB control, touchpad LED animation, a seven-segment clock, and an
+                  FSM-driven turnstile controller.
+                </p>
+                <div class="tl-tags">
+                  <span class="tag amber">ARM Cortex-M0+</span>
+                  <span class="tag amber">Embedded C</span>
+                  <span class="tag amber">MBED</span>
+                  <span class="tag">UART</span>
+                </div>
+              </div>
+
+              <div class="tl-item">
+                <div class="tl-date">AUG 2022 — MAY 2023</div>
+                <div class="tl-title">Sign Language to Text Conversion System</div>
+                <p class="tl-desc">
+                  Developed a Python-based system to convert sign language gestures into readable text, assisting
+                  deaf and mute individuals. Applied gesture recognition using computational logic and basic
+                  machine learning concepts to improve communication accessibility.
+                </p>
+                <div class="tl-tags">
+                  <span class="tag blue">Python</span>
+                  <span class="tag blue">Machine Learning</span>
+                  <span class="tag blue">Image Processing</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- SKILLS -->
+          <div class="fade-up d3">
+            <p class="resume-section-title">Technical Skills</p>
+            <div class="skills-list">
+              <div class="skill-bar-item">
+                <div class="skill-bar-header"><span class="skill-name">HTML5 / CSS3</span><span class="skill-pct">90%</span></div>
+                <div class="skill-track"><div class="skill-fill" style="width:90%"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header"><span class="skill-name">JavaScript</span><span class="skill-pct">65%</span></div>
+                <div class="skill-track"><div class="skill-fill" style="width:65%; animation-delay:0.1s"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header"><span class="skill-name">Node.js Basics</span><span class="skill-pct">50%</span></div>
+                <div class="skill-track"><div class="skill-fill" style="width:50%; animation-delay:0.12s"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header"><span class="skill-name">Express.js Basics</span><span class="skill-pct">45%</span></div>
+                <div class="skill-track"><div class="skill-fill" style="width:45%; animation-delay:0.14s"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header"><span class="skill-name">Python</span><span class="skill-pct">70%</span></div>
+                <div class="skill-track"><div class="skill-fill" style="width:70%; animation-delay:0.15s"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header"><span class="skill-name">C / Embedded C</span><span class="skill-pct">75%</span></div>
+                <div class="skill-track"><div class="skill-fill" style="width:75%; animation-delay:0.2s"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header"><span class="skill-name">IoT & Sensor Integration</span><span class="skill-pct">72%</span></div>
+                <div class="skill-track"><div class="skill-fill" style="width:72%; animation-delay:0.25s"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header"><span class="skill-name">ARM Cortex-M0+</span><span class="skill-pct">68%</span></div>
+                <div class="skill-track"><div class="skill-fill" style="width:68%; animation-delay:0.3s"></div></div>
+              </div>
+              <div class="skill-bar-item">
+                <div class="skill-bar-header"><span class="skill-name">Git & GitHub</span><span class="skill-pct">68%</span></div>
+                <div class="skill-track"><div class="skill-fill" style="width:68%; animation-delay:0.35s"></div></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Portfolio v1.1 · 2026 Giridhar Reddy Parlapalli · All Rights Reserved
+  </footer>
+
+</body>
+</html>
