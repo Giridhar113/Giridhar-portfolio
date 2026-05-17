@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Embedded systems preview</title>
+  <desc id="desc">Stylized microcontroller board with circuits and LEDs.</desc>
+  <rect width="640" height="400" fill="#080c14"/>
+  <rect x="120" y="76" width="400" height="248" rx="18" fill="#101c31" stroke="#f4a261" stroke-opacity=".4"/>
+  <rect x="244" y="136" width="152" height="112" rx="12" fill="#38c9a0" fill-opacity=".2" stroke="#38c9a0" stroke-opacity=".6"/>
+  <circle cx="174" cy="130" r="16" fill="#4fa8e8"/>
+  <circle cx="466" cy="130" r="16" fill="#f4a261"/>
+  <circle cx="174" cy="270" r="16" fill="#38c9a0"/>
+  <circle cx="466" cy="270" r="16" fill="#4fa8e8"/>
+  <path d="M190 130 H244 M396 130 H450 M190 270 H244 M396 270 H450" stroke="#dce8f5" stroke-opacity=".5" stroke-width="5" stroke-linecap="round"/>
+</svg>
