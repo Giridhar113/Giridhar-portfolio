@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Portfolio website preview</title>
+  <desc id="desc">Stylized personal portfolio page with profile and project cards.</desc>
+  <rect width="640" height="400" fill="#0d1526"/>
+  <rect x="48" y="48" width="544" height="304" rx="18" fill="#101c31" stroke="#38c9a0" stroke-opacity=".35"/>
+  <circle cx="156" cy="164" r="58" fill="#38c9a0" fill-opacity=".75"/>
+  <rect x="250" y="112" width="250" height="20" rx="10" fill="#dce8f5" fill-opacity=".85"/>
+  <rect x="250" y="154" width="300" height="12" rx="6" fill="#8a9bb5" fill-opacity=".75"/>
+  <rect x="250" y="182" width="230" height="12" rx="6" fill="#8a9bb5" fill-opacity=".55"/>
+  <rect x="94" y="260" width="128" height="54" rx="10" fill="#4fa8e8" fill-opacity=".18"/>
+  <rect x="256" y="260" width="128" height="54" rx="10" fill="#38c9a0" fill-opacity=".18"/>
+  <rect x="418" y="260" width="128" height="54" rx="10" fill="#f4a261" fill-opacity=".18"/>
+</svg>
