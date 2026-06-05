@@ -63,6 +63,8 @@ This portfolio highlights my professional summary, technical skills, experience,
 
 ## Release Notes
 
+Full release history is available in [`RELEASE_NOTES.md`](RELEASE_NOTES.md).
+
 Portfolio v1.4 focuses on recruiter clarity, audit-score improvement, and a stronger developer brand.
 
 ### Added
