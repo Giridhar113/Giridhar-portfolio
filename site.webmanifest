@@ -1,0 +1,16 @@
+{
+  "name": "Giridhar Reddy Parlapalli Portfolio",
+  "short_name": "GRP Portfolio",
+  "description": "Job-ready portfolio for frontend development, embedded systems, and IoT projects.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#080c14",
+  "theme_color": "#38c9a0",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ]
+}

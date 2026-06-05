@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Travel website preview</title>
+  <desc id="desc">Stylized travel page with mountains, sun, and destination cards.</desc>
+  <rect width="640" height="400" fill="#080c14"/>
+  <rect x="48" y="48" width="544" height="304" rx="18" fill="#101c31" stroke="#f4a261" stroke-opacity=".35"/>
+  <circle cx="492" cy="118" r="42" fill="#f4a261"/>
+  <path d="M86 284 L214 146 L334 284 Z" fill="#4fa8e8" fill-opacity=".55"/>
+  <path d="M230 284 L380 118 L554 284 Z" fill="#38c9a0" fill-opacity=".45"/>
+  <rect x="92" y="306" width="140" height="20" rx="10" fill="#dce8f5" fill-opacity=".28"/>
+  <rect x="264" y="306" width="140" height="20" rx="10" fill="#dce8f5" fill-opacity=".2"/>
+  <rect x="436" y="306" width="112" height="20" rx="10" fill="#dce8f5" fill-opacity=".18"/>
+</svg>

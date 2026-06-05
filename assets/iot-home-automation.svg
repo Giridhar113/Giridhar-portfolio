@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">IoT home automation preview</title>
+  <desc id="desc">Stylized smart home network with connected devices.</desc>
+  <rect width="640" height="400" fill="#0d1526"/>
+  <rect x="64" y="82" width="512" height="236" rx="18" fill="#101c31" stroke="#38c9a0" stroke-opacity=".35"/>
+  <path d="M166 238 V168 L320 96 L474 168 V238" fill="none" stroke="#38c9a0" stroke-width="8" stroke-linejoin="round"/>
+  <circle cx="320" cy="206" r="42" fill="#4fa8e8" fill-opacity=".45"/>
+  <circle cx="166" cy="248" r="28" fill="#f4a261"/>
+  <circle cx="474" cy="248" r="28" fill="#38c9a0"/>
+  <path d="M194 248 H278 M362 248 H446" stroke="#dce8f5" stroke-opacity=".65" stroke-width="5" stroke-linecap="round"/>
+</svg>
