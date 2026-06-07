@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://giridhar-portfolio.vercel.app/sitemap.xml
