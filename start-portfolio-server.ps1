@@ -12,6 +12,8 @@ $types = @{
   '.jpeg' = 'image/jpeg'
   '.png' = 'image/png'
   '.svg' = 'image/svg+xml'
+  '.webp' = 'image/webp'
+  '.pdf' = 'application/pdf'
   '.docx' = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
   '.md' = 'text/markdown; charset=utf-8'
 }

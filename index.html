@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Giridhar Reddy Parlapalli | Frontend Developer Portfolio</title>
-  <meta name="description" content="Portfolio v1.4 for Giridhar Reddy Parlapalli, a frontend-focused Associate Software Engineer with resume, skills, experience timeline, featured projects, achievements, testimonials, and Web3Forms contact.">
+  <meta name="description" content="Portfolio v1.5 for Giridhar Reddy Parlapalli, a frontend-focused Associate Software Engineer with resume, skills, experience timeline, featured projects, achievements, testimonials, and Web3Forms contact.">
   <meta property="og:title" content="Giridhar Reddy Parlapalli | Frontend Developer Portfolio">
   <meta property="og:description" content="Recruiter-ready developer brand website with skills, projects, resume, experience timeline, achievements, testimonials, and contact form.">
   <meta property="og:type" content="website">
@@ -915,6 +915,29 @@
       background: rgba(56,201,160,0.06);
     }
 
+    .project-link-muted {
+      color: var(--muted);
+      border-color: var(--border2);
+      cursor: default;
+    }
+
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .trust-badges span {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 7px 10px;
+      background: rgba(56,201,160,0.07);
+    }
+
     .proof-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -1648,7 +1671,14 @@
         <div class="hero-cta">
           <a href="projects.html" class="btn-primary">View Projects</a>
           <a href="#contact" class="btn-ghost">Get in Touch</a>
-          <a href="RESUME.docx" download class="btn-ghost download-animate">Download Resume</a>
+          <a href="RESUME.pdf" download class="btn-ghost download-animate">Download PDF</a>
+          <a href="RESUME.docx" download class="btn-ghost download-animate">Download DOCX</a>
+        </div>
+        <div class="trust-badges" aria-label="Portfolio status badges">
+          <span>Version v1.5</span>
+          <span>Open to Work</span>
+          <span>PDF Resume</span>
+          <span>Last Updated Jul 2026</span>
         </div>
       </div>
       <div class="hero-photo-wrap">
@@ -1715,8 +1745,8 @@
       <div class="learning-card">
         <div class="learning-kicker">Learning right now</div>
         <p>
-          Strengthening JavaScript fundamentals, Node.js, Express.js, and deployment workflows so I can
-          move from static interfaces toward complete frontend-to-backend project delivery.
+          Currently strengthening React fundamentals, Node.js, Express.js, API thinking, and deployment workflows.
+          Next focus: MongoDB, TypeScript, and full-stack project delivery with real authentication and database-backed dashboards.
         </p>
       </div>
     </div>
@@ -2151,7 +2181,8 @@
         <a href="resume.html" class="btn-ghost" style="display:inline-flex; align-items:center; gap:8px;">
           View Full Resume &nbsp;→
         </a>
-        <a href="RESUME.docx" download class="btn-primary download-animate" style="display:inline-flex; align-items:center; gap:8px;">Download CV</a>
+        <a href="RESUME.pdf" download class="btn-primary download-animate" style="display:inline-flex; align-items:center; gap:8px;">Download PDF</a>
+        <a href="RESUME.docx" download class="btn-ghost download-animate" style="display:inline-flex; align-items:center; gap:8px;">Download DOCX</a>
       </div>
 
     </div>
@@ -2197,7 +2228,9 @@
             <span class="tag amber">Vercel</span>
           </div>
           <div class="project-actions">
-            <a href="https://github.com/Giridhar113" target="_blank" rel="noopener" class="project-link">GitHub</a>
+            <a href="https://github.com/Giridhar113/Giridhar-portfolio" target="_blank" rel="noopener" class="project-link">GitHub Repo</a>
+            <a href="https://giridhar-portfolio.vercel.app/" target="_blank" rel="noopener" class="project-link">Live Demo</a>
+            <a href="case-studies/portfolio-website.html" class="project-link">Case Study</a>
           </div>
         </div>
         <div class="project-card">
@@ -2214,7 +2247,8 @@
             <span class="tag amber">EmailJS</span>
           </div>
           <div class="project-actions">
-            <a href="https://github.com/Giridhar113" target="_blank" rel="noopener" class="project-link">GitHub</a>
+            <a href="case-studies/travel-website.html" class="project-link">Case Study</a>
+            <span class="project-link project-link-muted">Repo Soon</span>
           </div>
         </div>
         <div class="project-card">
@@ -2230,7 +2264,8 @@
             <span class="tag blue">LocalStorage</span>
           </div>
           <div class="project-actions">
-            <a href="https://github.com/Giridhar113" target="_blank" rel="noopener" class="project-link">GitHub</a>
+            <a href="case-studies/college-website-management-system.html" class="project-link">Case Study</a>
+            <span class="project-link project-link-muted">Repo Soon</span>
           </div>
         </div>
         <div class="project-card">
@@ -2248,7 +2283,8 @@
             <span class="tag amber">EmailJS</span>
           </div>
           <div class="project-actions">
-            <a href="https://github.com/Giridhar113" target="_blank" rel="noopener" class="project-link">GitHub</a>
+            <a href="case-studies/job-portal-system.html" class="project-link">Case Study</a>
+            <span class="project-link project-link-muted">Repo Soon</span>
           </div>
         </div>
         <div class="project-card">
@@ -2265,7 +2301,8 @@
             <span class="tag blue">LocalStorage</span>
           </div>
           <div class="project-actions">
-            <a href="https://github.com/Giridhar113" target="_blank" rel="noopener" class="project-link">GitHub</a>
+            <a href="case-studies/learning-management-system.html" class="project-link">Case Study</a>
+            <span class="project-link project-link-muted">Repo Soon</span>
           </div>
         </div>
       
@@ -2283,7 +2320,7 @@
       <div class="achievement-grid">
         <article class="achievement-card">
           <div class="achievement-kicker">Developer Brand</div>
-          <h3>Portfolio v1.4 release</h3>
+          <h3>Portfolio v1.5 release</h3>
           <p>
             Built a job-ready portfolio with resume download, project previews, skill visualization,
             experience timeline, theme toggle, Web3Forms contact, and mobile-first navigation.
@@ -2493,11 +2530,11 @@
               <div class="contact-item-value">Giridhar Reddy Parlapalli</div>
             </div>
           </a>
-          <a href="RESUME.docx" class="contact-item download-card">
+          <a href="RESUME.pdf" class="contact-item download-card">
             <div class="contact-item-icon">↓</div>
             <div>
               <div class="contact-item-label">RESUME</div>
-              <div class="contact-item-value">Download CV</div>
+              <div class="contact-item-value">Download PDF Resume</div>
             </div>
           </a>
         </div>
@@ -2506,7 +2543,7 @@
   </section>
 
   <footer>
-    Portfolio v1.4 · 2026 Giridhar Reddy Parlapalli · All Rights Reserved
+    Portfolio v1.5 · 2026 Giridhar Reddy Parlapalli · All Rights Reserved
   </footer>
 
   <button class="scroll-top" id="scrollTop" type="button" aria-label="Scroll to top">↑</button>

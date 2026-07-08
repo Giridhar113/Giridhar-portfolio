@@ -1,5 +1,30 @@
 # Release Notes
 
+## Portfolio v1.5
+
+Portfolio v1.5 focuses on proof, project case studies, PDF resume access, and recruiter trust.
+
+### Added
+
+- PDF resume download alongside the existing DOCX resume.
+- Project case-study pages for all five featured projects.
+- Real GitHub repository and live demo links for the Portfolio Website.
+- Honest Repo Soon status for projects without public repositories yet.
+- Trust badges for version, open-to-work status, resume availability, and last updated date.
+- Updated learning roadmap toward React, APIs, MongoDB, TypeScript, and full-stack dashboards.
+- Sitemap entries for all project case-study pages.
+
+### Improved
+
+- Project cards now point recruiters to deeper case-study content.
+- Resume page now offers both PDF and DOCX downloads.
+- Homepage hero makes portfolio status and availability easier to scan.
+
+### Notes
+
+- Live demo links are included only where a real deployed URL is available.
+- Additional project repository links should be added after each project receives its own public GitHub repo.
+
 ## Portfolio v1.4
 
 Portfolio v1.4 focuses on recruiter clarity, audit-score improvement, and a stronger developer brand website.

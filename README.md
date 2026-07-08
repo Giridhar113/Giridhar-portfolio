@@ -1,4 +1,4 @@
-# Portfolio v1.4
+# Portfolio v1.5
 
 Job-ready personal portfolio for Giridhar Reddy Parlapalli, built as a static HTML/CSS website.
 
@@ -65,7 +65,18 @@ This portfolio highlights my professional summary, technical skills, experience,
 
 Full release history is available in [`RELEASE_NOTES.md`](RELEASE_NOTES.md).
 
-Portfolio v1.4 focuses on recruiter clarity, audit-score improvement, and a stronger developer brand.
+Portfolio v1.5 focuses on proof, project case studies, PDF resume access, and recruiter trust.
+
+
+Portfolio v1.5 includes:
+
+- PDF and DOCX resume download options
+- Project case-study pages for all five featured projects
+- Real GitHub repository and live demo links for the Portfolio Website
+- Honest Repo Soon status for projects without public repositories yet
+- Trust badges for version, open-to-work status, resume availability, and last updated date
+- Updated learning roadmap toward React, APIs, MongoDB, TypeScript, and full-stack dashboards
+- Expanded sitemap coverage for project case-study pages
 
 ### Added
 
