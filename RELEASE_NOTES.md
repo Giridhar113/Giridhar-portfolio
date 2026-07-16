@@ -7,7 +7,7 @@ Portfolio v1.5 focuses on proof, project case studies, PDF resume access, and re
 ### Added
 
 - PDF resume download alongside the existing DOCX resume.
-- Project case-study pages for all five featured projects.
+- Case-study pages for selected featured projects.
 - Real GitHub repository and live demo links for the Portfolio Website.
 - Honest Repo Soon status for projects without public repositories yet.
 - Trust badges for version, open-to-work status, resume availability, and last updated date.
@@ -31,13 +31,15 @@ Portfolio v1.4 focuses on recruiter clarity, audit-score improvement, and a stro
 
 ### Added
 
-- Updated Featured Projects section with five focused projects:
+- Updated Featured Projects section with seven focused projects:
   - Portfolio Website
+  - Kaira Commerce Website
+  - Finance Website
   - Travel Website
-  - College Website Management System
-  - Job Portal System
-  - Learning Management System (LMS)
-- Coming Soon / Under Development status badges for Job Portal System and LMS.
+  - IoT Home Automation
+  - Embedded Systems
+  - Sign Language Converter
+- Repo Soon status is shown where public repositories are not available yet.
 - Achievement cards for portfolio progress, frontend execution, and product workflow thinking.
 - Testimonials section written from recruiter, team, and client perspectives.
 - Project statistics strip for fast 30-second scanning.

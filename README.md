@@ -37,23 +37,29 @@ This portfolio highlights my professional summary, technical skills, experience,
    - Personal developer portfolio showcasing skills, projects, learning journey, and professional growth as a Full-Stack Developer.
    - Technologies: HTML, CSS, JavaScript, EmailJS, Vercel.
 
-2. Travel Website
-   - Modern travel planning platform featuring destination exploration, trip planning, package browsing, reviews, budget tools, and travel assistance features.
-   - Technologies: HTML, CSS, JavaScript, LocalStorage, EmailJS.
+2. Kaira Commerce Website
+   - Responsive 6-page e-commerce UI with product grid, filters, and cart-focused layout.
+   - Technologies: HTML, CSS, JavaScript.
 
-3. College Website Management System
-   - Role-based educational portal with Admin, Teacher, and Student dashboards, attendance tracking, announcements, academic information, and management tools.
+3. Finance Website
+   - Trust-focused landing page with service cards, testimonials, and lead capture CTA.
+   - Technologies: HTML, CSS, JavaScript.
+
+4. Travel Website
+   - Destination discovery UI with hero video placeholder, card grid, and responsive booking CTA.
    - Technologies: HTML, CSS, JavaScript, LocalStorage.
 
-4. Job Portal System
-   - Recruitment platform where job seekers can browse opportunities, search jobs, apply for positions, and track applications while recruiters can manage listings.
-   - Technologies: HTML, CSS, JavaScript, LocalStorage, EmailJS.
-   - Status: Coming Soon / Under Development.
+5. IoT Home Automation
+   - 3-tier IoT system for remote appliance control, simulated in Cisco Packet Tracer with 6 devices.
+   - Technologies: IoT architecture, Cisco Packet Tracer, networking.
 
-5. Learning Management System (LMS)
-   - Online learning platform designed for course management, student progress tracking, quizzes, certifications, and learning analytics.
-   - Technologies: HTML, CSS, JavaScript, LocalStorage.
-   - Status: Coming Soon / Under Development.
+6. Embedded Systems
+   - 4 embedded apps on ARM Cortex-M0+ KL25Z board: UART control, LED FSM, 7-segment display, and MBED.
+   - Technologies: Embedded C, MBED, KL25Z.
+
+7. Sign Language Converter
+   - Python gesture recognition prototype converting 10 ASL signs to text using OpenCV and basic ML.
+   - Technologies: Python, OpenCV, basic ML.
 
 ## Contact
 
@@ -71,7 +77,7 @@ Portfolio v1.5 focuses on proof, project case studies, PDF resume access, and re
 Portfolio v1.5 includes:
 
 - PDF and DOCX resume download options
-- Project case-study pages for all five featured projects
+- Case-study pages for selected featured projects
 - Real GitHub repository and live demo links for the Portfolio Website
 - Honest Repo Soon status for projects without public repositories yet
 - Trust badges for version, open-to-work status, resume availability, and last updated date
@@ -82,7 +88,7 @@ Portfolio v1.5 includes:
 
 - Achievement cards that highlight portfolio progress, frontend execution, and product workflow thinking
 - Testimonials section written from recruiter, team, and client perspectives
-- Updated Featured Projects section with Portfolio, Travel, College Website Management, Job Portal, and LMS projects
+- Updated Featured Projects section with the 7-project set: Portfolio, Kaira Commerce, Finance Website, Travel Website, IoT Home Automation, Embedded Systems, and Sign Language Converter
 - SEO meta descriptions, Open Graph tags, and canonical URLs across all HTML pages
 - Optimized WebP profile image for faster page load
 
