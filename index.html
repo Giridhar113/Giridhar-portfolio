@@ -178,11 +178,12 @@
 
     /* ── Hero ── */
     #home {
-      min-height: 100vh;
+      min-height: calc(100vh - 60px);
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding-top: 64px;
+      padding-top: 86px;
+      padding-bottom: 42px;
       max-width: none;
       overflow: hidden;
       isolation: isolate;
@@ -215,10 +216,10 @@
 
     .hero-eyebrow {
       font-family: 'DM Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       color: var(--accent);
       letter-spacing: 0.14em;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -235,12 +236,12 @@
 
     .hero-name {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(42px, 7vw, 80px);
+      font-size: clamp(48px, 6.2vw, 78px);
       font-weight: 800;
-      line-height: 1.0;
-      letter-spacing: -0.02em;
+      line-height: 0.92;
+      letter-spacing: 0;
       color: var(--text);
-      margin-bottom: 12px;
+      margin-bottom: 20px;
     }
 
     .hero-name span {
@@ -254,16 +255,16 @@
       font-family: 'DM Mono', monospace;
       font-size: 15px;
       color: var(--muted);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       letter-spacing: 0.04em;
     }
 
     .hero-desc {
-      max-width: 560px;
+      max-width: 620px;
       font-size: 16px;
       color: var(--muted);
       line-height: 1.75;
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
 
     .open-badge {
@@ -303,9 +304,9 @@
 
     .hero-avatar-wrap {
       position: relative;
-      flex: 0 1 430px;
-      width: min(430px, 40vw);
-      min-height: 480px;
+      flex: 0 0 clamp(360px, 33vw, 430px);
+      width: clamp(360px, 33vw, 430px);
+      min-height: clamp(410px, 44vw, 468px);
       border: 1px solid var(--border);
       border-radius: 18px;
       overflow: hidden;
@@ -414,7 +415,7 @@
       font-family: 'DM Mono', monospace;
       font-size: 12px;
       letter-spacing: 0.08em;
-      padding: 14px 28px;
+      padding: 14px 24px;
       background: var(--accent);
       color: #04201a;
       text-decoration: none;
@@ -429,7 +430,7 @@
       font-family: 'DM Mono', monospace;
       font-size: 12px;
       letter-spacing: 0.08em;
-      padding: 14px 28px;
+      padding: 14px 24px;
       background: transparent;
       color: var(--accent);
       text-decoration: none;
@@ -1618,16 +1619,44 @@
 
     /* ── Hero layout ── */
     .hero-inner {
-      display: flex;
+      width: min(1270px, calc(100vw - 80px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) clamp(360px, 33vw, 430px);
       align-items: center;
-      justify-content: space-between;
-      gap: 60px;
+      gap: clamp(42px, 6vw, 86px);
     }
 
-    .hero-content { flex: 1; min-width: 0; }
+    .hero-content {
+      min-width: 0;
+      max-width: 700px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-inner {
+        width: min(980px, calc(100vw - 48px));
+        grid-template-columns: minmax(0, 1fr) 340px;
+        gap: 32px;
+      }
+
+      .hero-name {
+        font-size: clamp(44px, 6vw, 66px);
+      }
+
+      .hero-avatar-wrap {
+        width: 340px;
+        min-height: 390px;
+      }
+
+      .hero-cta {
+        gap: 12px;
+      }
+    }
 
     @media (max-width: 700px) {
       .hero-inner {
+        width: min(420px, calc(100vw - 40px));
+        display: flex;
         flex-direction: column-reverse;
         text-align: center;
         gap: 36px;
