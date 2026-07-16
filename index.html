@@ -345,147 +345,24 @@
       z-index: 1;
     }
 
-    .avatar-fallback {
+    #talkingAvatar canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .avatar-no-three {
       position: absolute;
       inset: 0;
-      z-index: 0;
-      display: grid;
+      z-index: 1;
+      display: none;
       place-items: center;
       padding: 32px;
       text-align: center;
+      color: var(--muted);
       background:
         radial-gradient(circle at 50% 48%, rgba(56,201,160,0.18), transparent 34%),
         radial-gradient(circle at 52% 65%, rgba(79,168,232,0.1), transparent 45%);
-      perspective: 900px;
-    }
-
-    .avatar-orbit {
-      position: absolute;
-      width: 250px;
-      height: 250px;
-      border: 1px dashed rgba(56,201,160,0.18);
-      border-radius: 50%;
-      animation: avatarOrbit 9s linear infinite;
-    }
-
-    .avatar-orbit::before,
-    .avatar-orbit::after {
-      content: '';
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 16px rgba(56,201,160,0.7);
-    }
-
-    .avatar-orbit::before { top: 18px; left: 42px; }
-    .avatar-orbit::after { right: 28px; bottom: 40px; background: var(--accent2); }
-
-    @keyframes avatarOrbit {
-      to { transform: rotate(360deg); }
-    }
-
-    .avatar-character {
-      --avatar-x: 0deg;
-      --avatar-y: 0deg;
-      position: relative;
-      display: grid;
-      place-items: center;
-      transform: rotateY(var(--avatar-x)) rotateX(var(--avatar-y));
-      transform-style: preserve-3d;
-      animation: avatarIdle 4.2s ease-in-out infinite;
-      transition: transform 0.18s ease;
-    }
-
-    @keyframes avatarIdle {
-      0%, 100% { translate: 0 0; }
-      50% { translate: 0 -8px; }
-    }
-
-    .avatar-face {
-      position: relative;
-      width: 190px;
-      height: 230px;
-      border: 1px solid rgba(56,201,160,0.22);
-      border-radius: 42% 42% 46% 46%;
-      background:
-        radial-gradient(circle at 36% 34%, rgba(56,201,160,0.22), transparent 18%),
-        linear-gradient(145deg, rgba(56,201,160,0.22), rgba(79,168,232,0.08));
-      box-shadow: inset 0 0 34px rgba(56,201,160,0.1), 0 24px 70px rgba(0,0,0,0.28);
-    }
-
-    .avatar-eye {
-      position: absolute;
-      top: 82px;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 18px rgba(56,201,160,0.55);
-      animation: avatarBlink 5s infinite;
-    }
-
-    .avatar-eye-left { left: 58px; }
-    .avatar-eye-right { right: 58px; animation-delay: 0.04s; }
-
-    @keyframes avatarBlink {
-      0%, 92%, 100% { transform: scaleY(1); }
-      95% { transform: scaleY(0.12); }
-    }
-
-    .avatar-mouth {
-      position: absolute;
-      left: 50%;
-      bottom: 62px;
-      width: 48px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent2);
-      transform: translateX(-50%);
-      box-shadow: 0 0 18px rgba(79,168,232,0.35);
-      transition: height 0.12s ease, width 0.12s ease, border-radius 0.12s ease;
-    }
-
-    .avatar-neck {
-      width: 54px;
-      height: 42px;
-      margin-top: -8px;
-      border: 1px solid rgba(56,201,160,0.16);
-      border-top: 0;
-      border-radius: 0 0 18px 18px;
-      background: linear-gradient(180deg, rgba(56,201,160,0.14), rgba(79,168,232,0.05));
-    }
-
-    .avatar-shoulders {
-      width: 230px;
-      height: 70px;
-      margin-top: -8px;
-      border: 1px solid rgba(56,201,160,0.16);
-      border-radius: 52px 52px 22px 22px;
-      background: linear-gradient(135deg, rgba(56,201,160,0.12), rgba(79,168,232,0.08));
-    }
-
-    .hero-avatar-wrap.is-speaking .avatar-character {
-      animation-duration: 1.4s;
-    }
-
-    .hero-avatar-wrap.is-speaking .avatar-mouth {
-      width: 54px;
-      height: 28px;
-      border-radius: 48%;
-      animation: avatarTalk 0.16s ease-in-out infinite alternate;
-    }
-
-    .hero-avatar-wrap.is-speaking .avatar-orbit {
-      animation-duration: 3.2s;
-      border-color: rgba(56,201,160,0.36);
-    }
-
-    @keyframes avatarTalk {
-      0% { transform: translateX(-50%) scaleY(0.45) scaleX(0.82); }
-      45% { transform: translateX(-50%) scaleY(1.05) scaleX(1.05); }
-      100% { transform: translateX(-50%) scaleY(1.35) scaleX(0.92); }
     }
 
     .avatar-loading,
@@ -1908,19 +1785,8 @@
       </div>
       <div class="hero-avatar-wrap" id="avatarHero" aria-label="3D talking avatar intro">
         <div id="talkingAvatar" aria-hidden="true"></div>
-        <div class="avatar-fallback" id="avatarFallback" aria-hidden="true">
-          <div class="avatar-orbit"></div>
-          <div class="avatar-character" id="avatarCharacter">
-            <div class="avatar-face">
-              <span class="avatar-eye avatar-eye-left"></span>
-              <span class="avatar-eye avatar-eye-right"></span>
-              <span class="avatar-mouth"></span>
-            </div>
-            <div class="avatar-neck"></div>
-            <div class="avatar-shoulders"></div>
-          </div>
-        </div>
-        <div class="avatar-loading" id="avatarLoading">Dynamic avatar ready</div>
+        <div class="avatar-no-three" id="avatarNoThree">Captions are ready even if 3D is unavailable.</div>
+        <div class="avatar-loading" id="avatarLoading">Self-contained 3D character ready</div>
         <div class="avatar-caption" id="avatarCaption">Click Play Intro to hear a short portfolio summary.</div>
         <button class="avatar-play-btn play-intro-trigger" type="button">Play Intro</button>
       </div>
@@ -2794,15 +2660,6 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js/+esm",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/",
-        "talkinghead": "https://cdn.jsdelivr.net/gh/met4citizen/TalkingHead@1.7/modules/talkinghead.mjs"
-      }
-    }
-  </script>
   <script>
     const progress = document.getElementById('scrollProgress');
     const scrollTopButton = document.getElementById('scrollTop');
@@ -2995,194 +2852,309 @@
 
     window.__avatarIntroText = "Hi, I'm Giridhar. I build full-stack products from frontend interfaces to practical dashboard workflows. My focus is clean user experience, strong project execution, and continuous learning.";
 
-    const avatarTriggers = document.querySelectorAll('.play-intro-trigger');
-    const avatarCharacter = document.getElementById('avatarCharacter');
+    (() => {
+      const avatarHero = document.getElementById('avatarHero');
+      const avatarNode = document.getElementById('talkingAvatar');
+      const avatarNoThree = document.getElementById('avatarNoThree');
+      const avatarStatus = document.getElementById('avatarLoading');
+      const avatarCaption = document.getElementById('avatarCaption');
+      const playIntroButtons = document.querySelectorAll('.play-intro-trigger');
 
-    const setFallbackButtons = (disabled, label = 'Play Intro') => {
-      avatarTriggers.forEach((button) => {
-        button.disabled = disabled;
-        button.textContent = label;
-      });
-    };
+      if (!avatarHero || !avatarNode) return;
 
-    document.getElementById('avatarHero')?.addEventListener('pointermove', (event) => {
-      if (!avatarCharacter) return;
-      const rect = event.currentTarget.getBoundingClientRect();
-      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 14;
-      const y = ((event.clientY - rect.top) / rect.height - 0.5) * -10;
-      avatarCharacter.style.setProperty('--avatar-x', `${x}deg`);
-      avatarCharacter.style.setProperty('--avatar-y', `${y}deg`);
-    }, { passive: true });
+      // Edit this text whenever you want the hero character to say something different.
+      const INTRO_TEXT = window.__avatarIntroText;
+      // Swap these colors to update the 3D character accent palette.
+      const ACCENT = 0x38c9a0;
+      const ACCENT_2 = 0x4fa8e8;
 
-    avatarTriggers.forEach((trigger) => trigger.addEventListener('click', () => {
-      if (window.__talkingAvatarModuleReady) return;
-      const caption = document.getElementById('avatarCaption');
-      const loading = document.getElementById('avatarLoading');
-      const avatar = document.getElementById('avatarHero');
-      const text = window.__avatarIntroText;
-      if (caption) caption.textContent = text;
-      if (loading) loading.textContent = 'Dynamic fallback speaking';
-      avatar?.classList.add('is-speaking');
+      let renderer = null;
+      let scene = null;
+      let camera = null;
+      let character = null;
+      let head = null;
+      let leftEye = null;
+      let rightEye = null;
+      let mouth = null;
+      let ring = null;
+      let frameId = null;
+      let isVisible = true;
+      let isSpeaking = false;
+      let mouthTimer = null;
+      let blinkTimer = null;
+      let targetRotationX = 0;
+      let targetRotationY = 0;
 
-      if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
-        if (loading) loading.textContent = 'Speech is not supported. Caption fallback active.';
-        window.setTimeout(() => avatar?.classList.remove('is-speaking'), 2200);
-        return;
-      }
-
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-IN';
-      utterance.rate = 0.94;
-      utterance.onend = () => {
-        avatar?.classList.remove('is-speaking');
-        setFallbackButtons(false);
-        if (loading) loading.textContent = 'Dynamic fallback idle';
+      const setStatus = (message) => {
+        if (avatarStatus) avatarStatus.textContent = message;
       };
-      utterance.onerror = () => {
-        avatar?.classList.remove('is-speaking');
-        setFallbackButtons(false);
-        if (loading) loading.textContent = 'Speech failed. Caption fallback active.';
+
+      const setCaption = (message) => {
+        if (avatarCaption) avatarCaption.textContent = message;
       };
-      setFallbackButtons(true, 'Speaking...');
-      window.speechSynthesis.speak(utterance);
-    }));
-  </script>
-  <script type="module">
-    import { TalkingHead } from 'talkinghead';
 
-    // Swap this with your own Ready Player Me .glb URL when you create a custom avatar.
-    const AVATAR_URL = 'https://models.readyplayer.me/64bfa15f0e72c63d7c3934a6.glb?morphTargets=ARKit,Oculus+Visemes,mouthOpen,mouthSmile,eyesClosed,eyesLookUp,eyesLookDown&textureSizeLimit=1024&textureFormat=png';
-
-    // Edit this text whenever you want the hero intro to say something different.
-    window.__talkingAvatarModuleReady = true;
-    const INTRO_TEXT = window.__avatarIntroText;
-
-    const avatarHero = document.getElementById('avatarHero');
-    const avatarNode = document.getElementById('talkingAvatar');
-    const avatarLoading = document.getElementById('avatarLoading');
-    const avatarCaption = document.getElementById('avatarCaption');
-    const playIntroButtons = document.querySelectorAll('.play-intro-trigger');
-
-    let talkingHead = null;
-    let avatarLoaded = false;
-    let avatarFailed = false;
-
-    const setAvatarStatus = (message) => {
-      if (avatarLoading) avatarLoading.textContent = message;
-    };
-
-    const setCaption = (message) => {
-      if (avatarCaption) avatarCaption.textContent = message;
-    };
-
-    const setSpeakingState = (speaking) => {
-      avatarHero?.classList.toggle('is-speaking', speaking);
-    };
-
-    const loadTalkingAvatar = async () => {
-      if (avatarLoaded || avatarFailed || !avatarNode || !avatarHero) return;
-
-      try {
-        setAvatarStatus('Loading avatar...');
-        talkingHead = new TalkingHead(avatarNode, {
-          lipsyncModules: ['en'],
-          cameraView: 'upper'
+      const setButtons = (disabled, label = 'Play Intro') => {
+        playIntroButtons.forEach((button) => {
+          button.disabled = disabled;
+          button.textContent = label;
         });
+      };
 
-        await talkingHead.showAvatar({
-          url: AVATAR_URL,
-          body: 'F',
-          avatarMood: 'neutral',
-          lipsyncLang: 'en'
-        }, (event) => {
-          if (event.lengthComputable) {
-            const progress = Math.min(100, Math.round((event.loaded / event.total) * 100));
-            setAvatarStatus(`Loading avatar ${progress}%`);
+      const setSpeaking = (speaking) => {
+        isSpeaking = speaking;
+        avatarHero.classList.toggle('is-speaking', speaking);
+      };
+
+      const resizeAvatar = () => {
+        if (!renderer || !camera) return;
+        const rect = avatarNode.getBoundingClientRect();
+        const width = Math.max(1, rect.width);
+        const height = Math.max(1, rect.height);
+        renderer.setSize(width, height, false);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      };
+
+      const createPrimitiveCharacter = () => {
+        if (!window.THREE) {
+          if (avatarNoThree) avatarNoThree.style.display = 'grid';
+          setStatus('3D unavailable. Caption mode ready.');
+          return false;
+        }
+
+        try {
+          scene = new THREE.Scene();
+          camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+          camera.position.set(0, 0.4, 7);
+
+          renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+          avatarNode.appendChild(renderer.domElement);
+
+          const ambient = new THREE.AmbientLight(0xffffff, 0.75);
+          const key = new THREE.DirectionalLight(0xffffff, 1.4);
+          key.position.set(3, 4, 5);
+          scene.add(ambient, key);
+
+          character = new THREE.Group();
+          scene.add(character);
+
+          const headMaterial = new THREE.MeshStandardMaterial({
+            color: ACCENT,
+            roughness: 0.42,
+            metalness: 0.12,
+            transparent: true,
+            opacity: 0.82,
+            flatShading: true
+          });
+          const bodyMaterial = new THREE.MeshStandardMaterial({
+            color: 0x142940,
+            roughness: 0.55,
+            metalness: 0.18,
+            transparent: true,
+            opacity: 0.9
+          });
+          const glowMaterial = new THREE.MeshBasicMaterial({ color: ACCENT });
+          const mouthMaterial = new THREE.MeshBasicMaterial({ color: ACCENT_2 });
+          const ringMaterial = new THREE.MeshBasicMaterial({
+            color: ACCENT,
+            transparent: true,
+            opacity: 0.28,
+            wireframe: true
+          });
+
+          head = new THREE.Mesh(new THREE.IcosahedronGeometry(1.25, 2), headMaterial);
+          head.position.y = 0.78;
+          head.scale.set(0.9, 1.12, 0.82);
+          character.add(head);
+
+          leftEye = new THREE.Mesh(new THREE.SphereGeometry(0.09, 16, 12), glowMaterial);
+          rightEye = leftEye.clone();
+          leftEye.position.set(-0.38, 1.08, 1.02);
+          rightEye.position.set(0.38, 1.08, 1.02);
+          character.add(leftEye, rightEye);
+
+          mouth = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.055, 0.045), mouthMaterial);
+          mouth.position.set(0, 0.55, 1.04);
+          character.add(mouth);
+
+          const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.28, 0.42, 16), bodyMaterial);
+          neck.position.y = -0.35;
+          character.add(neck);
+
+          const shoulders = new THREE.Mesh(new THREE.CylinderGeometry(1.25, 1.45, 0.62, 24), bodyMaterial);
+          shoulders.position.y = -0.9;
+          shoulders.scale.z = 0.38;
+          character.add(shoulders);
+
+          ring = new THREE.Mesh(new THREE.TorusGeometry(1.78, 0.012, 8, 72), ringMaterial);
+          ring.position.y = 0.55;
+          ring.rotation.x = Math.PI / 2;
+          character.add(ring);
+
+          resizeAvatar();
+          setStatus('Self-contained 3D character ready');
+          return true;
+        } catch (error) {
+          console.warn('3D character could not initialize:', error);
+          if (avatarNoThree) avatarNoThree.style.display = 'grid';
+          setStatus('3D unavailable. Caption mode ready.');
+          return false;
+        }
+      };
+
+      const scheduleBlink = () => {
+        window.clearTimeout(blinkTimer);
+        blinkTimer = window.setTimeout(() => {
+          if (!leftEye || !rightEye) return scheduleBlink();
+          leftEye.scale.y = 0.08;
+          rightEye.scale.y = 0.08;
+          window.setTimeout(() => {
+            if (leftEye && rightEye) {
+              leftEye.scale.y = 1;
+              rightEye.scale.y = 1;
+            }
+            scheduleBlink();
+          }, 120);
+        }, 3000 + Math.random() * 3000);
+      };
+
+      const stopMouthAnimation = () => {
+        window.clearTimeout(mouthTimer);
+        mouthTimer = null;
+        if (mouth) {
+          mouth.scale.set(1, 1, 1);
+          mouth.rotation.z = 0;
+        }
+      };
+
+      const animateMouth = () => {
+        if (!isSpeaking || !mouth) return;
+        mouth.scale.x = 0.7 + Math.random() * 0.72;
+        mouth.scale.y = 1 + Math.random() * 5.4;
+        mouth.rotation.z = (Math.random() - 0.5) * 0.05;
+        mouthTimer = window.setTimeout(animateMouth, 95 + Math.random() * 105);
+      };
+
+      const renderLoop = (time = 0) => {
+        if (!isVisible || !renderer || !scene || !camera) return;
+
+        const seconds = time * 0.001;
+        if (character) {
+          character.position.y = Math.sin(seconds * 1.35) * 0.08;
+          character.rotation.y += (targetRotationY - character.rotation.y) * 0.06;
+          character.rotation.x += (targetRotationX - character.rotation.x) * 0.06;
+        }
+        if (head) head.rotation.y = Math.sin(seconds * 0.8) * 0.08;
+        if (ring) {
+          ring.rotation.z += isSpeaking ? 0.025 : 0.008;
+          ring.scale.setScalar(isSpeaking ? 1.04 + Math.sin(seconds * 7) * 0.025 : 1);
+        }
+
+        renderer.render(scene, camera);
+        frameId = window.requestAnimationFrame(renderLoop);
+      };
+
+      const startRenderLoop = () => {
+        if (!frameId && renderer) frameId = window.requestAnimationFrame(renderLoop);
+      };
+
+      const stopRenderLoop = () => {
+        if (frameId) window.cancelAnimationFrame(frameId);
+        frameId = null;
+      };
+
+      const chooseVoice = () => {
+        const voices = window.speechSynthesis?.getVoices?.() || [];
+        return voices.find((voice) => /en-IN|en-US|en-GB/i.test(voice.lang)) || voices[0] || null;
+      };
+
+      const finishSpeech = (message = '3D character idle') => {
+        setSpeaking(false);
+        stopMouthAnimation();
+        setButtons(false);
+        setStatus(message);
+      };
+
+      const runCaptionOnlySpeech = () => {
+        setCaption(INTRO_TEXT);
+        setButtons(true, 'Playing...');
+        setStatus('Caption mode playing');
+        setSpeaking(true);
+        animateMouth();
+        window.setTimeout(() => finishSpeech('Caption mode ready'), 5200);
+      };
+
+      const playIntro = () => {
+        setCaption(INTRO_TEXT);
+
+        if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
+          runCaptionOnlySpeech();
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(INTRO_TEXT);
+        const selectedVoice = chooseVoice();
+        if (selectedVoice) utterance.voice = selectedVoice;
+        utterance.lang = selectedVoice?.lang || 'en-IN';
+        utterance.rate = 0.94;
+        utterance.pitch = 1;
+        setButtons(true, 'Preparing...');
+        setStatus('Preparing browser voice');
+
+        utterance.onstart = () => {
+          setButtons(true, 'Speaking...');
+          setStatus('Speaking with browser voice');
+          setSpeaking(true);
+          animateMouth();
+        };
+
+        utterance.onboundary = () => {
+          if (mouth) {
+            mouth.scale.x = 1.2;
+            mouth.scale.y = 5.8;
           }
-        });
+        };
 
-        avatarLoaded = true;
-        setAvatarStatus('Avatar loaded');
-        setCaption('Click Play Intro to hear a short portfolio summary.');
-      } catch (error) {
-        avatarFailed = true;
-        console.warn('TalkingHead avatar failed to load:', error);
-        setAvatarStatus('Dynamic fallback active');
-        setCaption('Avatar library/model could not load. Dynamic fallback, intro captions, and browser speech still work.');
-      }
-    };
+        utterance.onend = () => finishSpeech('3D character idle');
+        utterance.onerror = () => finishSpeech('Speech failed. Caption mode ready.');
 
-    if ('IntersectionObserver' in window && avatarHero) {
-      const avatarObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          loadTalkingAvatar();
-          observer.unobserve(entry.target);
-        });
-      }, { rootMargin: '160px' });
-
-      avatarObserver.observe(avatarHero);
-    } else {
-      loadTalkingAvatar();
-    }
-
-    const chooseVoice = () => {
-      const voices = window.speechSynthesis?.getVoices?.() || [];
-      return voices.find((voice) => /en-IN|en-US|en-GB/i.test(voice.lang)) || voices[0] || null;
-    };
-
-    const playIntro = async () => {
-      setCaption(INTRO_TEXT);
-
-      if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
-        setAvatarStatus('Speech is not supported in this browser');
-        setSpeakingState(false);
-        return;
-      }
-
-      await loadTalkingAvatar();
-
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(INTRO_TEXT);
-      const selectedVoice = chooseVoice();
-      if (selectedVoice) utterance.voice = selectedVoice;
-      utterance.lang = selectedVoice?.lang || 'en-IN';
-      utterance.rate = 0.94;
-      utterance.pitch = 1;
-
-      playIntroButtons.forEach((button) => { button.disabled = true; button.textContent = 'Speaking...'; });
-      setAvatarStatus(avatarLoaded ? 'Speaking with browser voice' : 'Speaking with fallback avatar');
-      setSpeakingState(true);
-
-      // Web Speech does not expose reliable viseme timestamps. This speaking state
-      // gives a graceful no-key lip-motion fallback while TalkingHead displays the avatar.
-      utterance.onend = () => {
-        setSpeakingState(false);
-        playIntroButtons.forEach((button) => { button.disabled = false; button.textContent = 'Play Intro'; });
-        setAvatarStatus(avatarLoaded ? 'Avatar idle' : 'Dynamic fallback idle');
+        window.speechSynthesis.speak(utterance);
       };
 
-      utterance.onerror = () => {
-        setSpeakingState(false);
-        playIntroButtons.forEach((button) => { button.disabled = false; button.textContent = 'Play Intro'; });
-        setAvatarStatus('Speech failed. Caption fallback active.');
-      };
-
-      window.speechSynthesis.speak(utterance);
-    };
-
-    playIntroButtons.forEach((button) => button.addEventListener('click', playIntro));
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        window.speechSynthesis?.cancel?.();
-        setSpeakingState(false);
-        talkingHead?.stop?.();
-      } else {
-        talkingHead?.start?.();
+      const ready = createPrimitiveCharacter();
+      if (ready) {
+        scheduleBlink();
+        startRenderLoop();
       }
-    });
+
+      avatarHero.addEventListener('pointermove', (event) => {
+        const rect = avatarHero.getBoundingClientRect();
+        targetRotationY = ((event.clientX - rect.left) / rect.width - 0.5) * 0.46;
+        targetRotationX = ((event.clientY - rect.top) / rect.height - 0.5) * -0.28;
+      }, { passive: true });
+
+      avatarHero.addEventListener('pointerleave', () => {
+        targetRotationX = 0;
+        targetRotationY = 0;
+      });
+
+      window.addEventListener('resize', resizeAvatar, { passive: true });
+      playIntroButtons.forEach((button) => button.addEventListener('click', playIntro));
+
+      document.addEventListener('visibilitychange', () => {
+        isVisible = !document.hidden;
+        if (document.hidden) {
+          window.speechSynthesis?.cancel?.();
+          finishSpeech('3D character paused');
+          stopRenderLoop();
+        } else {
+          setStatus('Self-contained 3D character ready');
+          startRenderLoop();
+        }
+      });
+    })();
   </script>
 
 </body>
