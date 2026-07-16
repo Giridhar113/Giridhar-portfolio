@@ -2876,7 +2876,6 @@
       let leftEye = null;
       let rightEye = null;
       let mouth = null;
-      let ring = null;
       let frameId = null;
       let isVisible = true;
       let isSpeaking = false;
@@ -2956,19 +2955,6 @@
           });
           const glowMaterial = new THREE.MeshBasicMaterial({ color: ACCENT });
           const mouthMaterial = new THREE.MeshBasicMaterial({ color: ACCENT_2 });
-          const ringMaterial = new THREE.MeshBasicMaterial({
-            color: ACCENT,
-            transparent: true,
-            opacity: 0.22,
-            wireframe: true
-          });
-
-          ring = new THREE.Mesh(new THREE.TorusGeometry(1.55, 0.012, 8, 80), ringMaterial);
-          ring.position.set(0, 0.72, -0.34);
-          ring.rotation.x = Math.PI / 2;
-          ring.scale.y = 0.82;
-          character.add(ring);
-
           head = new THREE.Mesh(new THREE.IcosahedronGeometry(1.1, 2), headMaterial);
           head.position.y = 0.82;
           head.scale.set(0.86, 1.06, 0.78);
@@ -3047,11 +3033,6 @@
           character.rotation.x += (targetRotationX - character.rotation.x) * 0.06;
         }
         if (head) head.rotation.y = Math.sin(seconds * 0.8) * 0.08;
-        if (ring) {
-          ring.rotation.z += isSpeaking ? 0.025 : 0.008;
-          ring.scale.setScalar(isSpeaking ? 1.04 + Math.sin(seconds * 7) * 0.025 : 1);
-        }
-
         renderer.render(scene, camera);
         frameId = window.requestAnimationFrame(renderLoop);
       };
