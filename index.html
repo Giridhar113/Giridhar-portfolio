@@ -327,7 +327,7 @@
     }
 
     .hero-avatar-wrap::after {
-      content: '3D AVATAR / WEB SPEECH';
+      content: 'VOICE INTRO / 3D ASSISTANT';
       position: absolute;
       left: 18px;
       bottom: 16px;
@@ -363,37 +363,6 @@
       background:
         radial-gradient(circle at 50% 48%, rgba(56,201,160,0.18), transparent 34%),
         radial-gradient(circle at 52% 65%, rgba(79,168,232,0.1), transparent 45%);
-    }
-
-    .avatar-profile-reference {
-      position: absolute;
-      top: 82px;
-      right: 22px;
-      z-index: 4;
-      width: 96px;
-      border: 1px solid rgba(56,201,160,0.22);
-      border-radius: 10px;
-      overflow: hidden;
-      background: rgba(8,12,20,0.68);
-      box-shadow: 0 18px 48px rgba(0,0,0,0.32), 0 0 28px rgba(56,201,160,0.12);
-      transform: translateZ(0);
-    }
-
-    .avatar-profile-reference img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 1 / 1.05;
-      object-fit: cover;
-    }
-
-    .avatar-profile-reference span {
-      display: block;
-      padding: 7px 8px;
-      font-family: 'DM Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      color: var(--accent);
-      background: rgba(8,12,20,0.82);
     }
 
     .avatar-loading,
@@ -1644,13 +1613,6 @@
         min-height: 380px;
         margin: 0 auto;
       }
-      .avatar-profile-reference {
-        top: 76px;
-        right: 18px;
-        width: 74px;
-        border-radius: 8px;
-      }
-      .avatar-profile-reference span { display: none; }
       .hero-eyebrow {
         justify-content: center;
         font-size: 10px;
@@ -1812,7 +1774,7 @@
           <a href="#contact" class="btn-ghost">Get in Touch</a>
           <a href="RESUME.pdf" download class="btn-ghost download-animate">Download PDF</a>
           <a href="RESUME.docx" download class="btn-ghost download-animate">Download DOCX</a>
-          <button class="btn-primary play-intro-btn play-intro-trigger" type="button" id="playAvatarIntro">Play Intro</button>
+          <button class="btn-primary play-intro-btn play-intro-trigger" type="button" id="playAvatarIntro">Hear Intro</button>
         </div>
         <div class="trust-badges" aria-label="Portfolio status badges">
           <span>Version v1.5</span>
@@ -1824,13 +1786,9 @@
       <div class="hero-avatar-wrap" id="avatarHero" aria-label="3D talking avatar intro">
         <div id="talkingAvatar" aria-hidden="true"></div>
         <div class="avatar-no-three" id="avatarNoThree">Captions are ready even if 3D is unavailable.</div>
-        <div class="avatar-profile-reference">
-          <img src="assets/giridhar-profile-mosaic.png" alt="Giridhar Reddy profile portraits" loading="eager" decoding="async">
-          <span>PROFILE</span>
-        </div>
-        <div class="avatar-loading" id="avatarLoading">Self-contained 3D character ready</div>
-        <div class="avatar-caption" id="avatarCaption">Click Play Intro to hear a short portfolio summary.</div>
-        <button class="avatar-play-btn play-intro-trigger" type="button">Play Intro</button>
+        <div class="avatar-loading" id="avatarLoading">Voice intro ready</div>
+        <div class="avatar-caption" id="avatarCaption">Click Hear Intro to listen to a short portfolio summary.</div>
+        <button class="avatar-play-btn play-intro-trigger" type="button">Hear Intro</button>
       </div>
     </div>
   </section>
@@ -2935,7 +2893,7 @@
         if (avatarCaption) avatarCaption.textContent = message;
       };
 
-      const setButtons = (disabled, label = 'Play Intro') => {
+      const setButtons = (disabled, label = 'Hear Intro') => {
         playIntroButtons.forEach((button) => {
           button.disabled = disabled;
           button.textContent = label;
@@ -2968,7 +2926,7 @@
         try {
           scene = new THREE.Scene();
           camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-          camera.position.set(0, 0.4, 7);
+          camera.position.set(0, 0.42, 7.4);
 
           renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
           avatarNode.appendChild(renderer.domElement);
@@ -2986,7 +2944,7 @@
             roughness: 0.42,
             metalness: 0.12,
             transparent: true,
-            opacity: 0.82,
+            opacity: 0.78,
             flatShading: true
           });
           const bodyMaterial = new THREE.MeshStandardMaterial({
@@ -3001,41 +2959,42 @@
           const ringMaterial = new THREE.MeshBasicMaterial({
             color: ACCENT,
             transparent: true,
-            opacity: 0.28,
+            opacity: 0.22,
             wireframe: true
           });
 
-          head = new THREE.Mesh(new THREE.IcosahedronGeometry(1.25, 2), headMaterial);
-          head.position.y = 0.78;
-          head.scale.set(0.9, 1.12, 0.82);
+          ring = new THREE.Mesh(new THREE.TorusGeometry(1.55, 0.012, 8, 80), ringMaterial);
+          ring.position.set(0, 0.72, -0.34);
+          ring.rotation.x = Math.PI / 2;
+          ring.scale.y = 0.82;
+          character.add(ring);
+
+          head = new THREE.Mesh(new THREE.IcosahedronGeometry(1.1, 2), headMaterial);
+          head.position.y = 0.82;
+          head.scale.set(0.86, 1.06, 0.78);
           character.add(head);
 
-          leftEye = new THREE.Mesh(new THREE.SphereGeometry(0.09, 16, 12), glowMaterial);
+          leftEye = new THREE.Mesh(new THREE.SphereGeometry(0.075, 16, 12), glowMaterial);
           rightEye = leftEye.clone();
-          leftEye.position.set(-0.38, 1.08, 1.02);
-          rightEye.position.set(0.38, 1.08, 1.02);
+          leftEye.position.set(-0.34, 1.05, 0.9);
+          rightEye.position.set(0.34, 1.05, 0.9);
           character.add(leftEye, rightEye);
 
-          mouth = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.055, 0.045), mouthMaterial);
-          mouth.position.set(0, 0.55, 1.04);
+          mouth = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.075, 0.055), mouthMaterial);
+          mouth.position.set(0, 0.58, 0.92);
           character.add(mouth);
 
           const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.28, 0.42, 16), bodyMaterial);
-          neck.position.y = -0.35;
+          neck.position.y = -0.28;
           character.add(neck);
 
-          const shoulders = new THREE.Mesh(new THREE.CylinderGeometry(1.25, 1.45, 0.62, 24), bodyMaterial);
-          shoulders.position.y = -0.9;
-          shoulders.scale.z = 0.38;
+          const shoulders = new THREE.Mesh(new THREE.CylinderGeometry(1.05, 1.25, 0.48, 24), bodyMaterial);
+          shoulders.position.y = -0.76;
+          shoulders.scale.z = 0.34;
           character.add(shoulders);
 
-          ring = new THREE.Mesh(new THREE.TorusGeometry(1.78, 0.012, 8, 72), ringMaterial);
-          ring.position.y = 0.55;
-          ring.rotation.x = Math.PI / 2;
-          character.add(ring);
-
           resizeAvatar();
-          setStatus('Self-contained 3D character ready');
+          setStatus('Voice intro ready');
           return true;
         } catch (error) {
           console.warn('3D character could not initialize:', error);
@@ -3111,7 +3070,7 @@
         return voices.find((voice) => /en-IN|en-US|en-GB/i.test(voice.lang)) || voices[0] || null;
       };
 
-      const finishSpeech = (message = '3D character idle') => {
+      const finishSpeech = (message = 'Voice intro ready') => {
         setSpeaking(false);
         stopMouthAnimation();
         setButtons(false);
@@ -3159,7 +3118,7 @@
           }
         };
 
-        utterance.onend = () => finishSpeech('3D character idle');
+        utterance.onend = () => finishSpeech('Voice intro ready');
         utterance.onerror = () => finishSpeech('Speech failed. Caption mode ready.');
 
         window.speechSynthesis.speak(utterance);
@@ -3192,7 +3151,7 @@
           finishSpeech('3D character paused');
           stopRenderLoop();
         } else {
-          setStatus('Self-contained 3D character ready');
+          setStatus('Voice intro ready');
           startRenderLoop();
         }
       });
