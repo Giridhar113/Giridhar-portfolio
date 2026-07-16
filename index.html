@@ -301,35 +301,37 @@
       flex-wrap: wrap;
     }
 
-    .hero-3d-wrap {
+    .hero-avatar-wrap {
       position: relative;
-      flex: 0 1 420px;
-      width: min(420px, 40vw);
-      aspect-ratio: 1;
+      flex: 0 1 430px;
+      width: min(430px, 40vw);
+      min-height: 480px;
       border: 1px solid var(--border);
       border-radius: 18px;
       overflow: hidden;
       background:
-        radial-gradient(circle at 50% 50%, rgba(56,201,160,0.13), transparent 58%),
-        linear-gradient(135deg, rgba(15,26,46,0.78), rgba(8,12,20,0.38));
+        radial-gradient(circle at 50% 20%, rgba(56,201,160,0.18), transparent 32%),
+        linear-gradient(135deg, rgba(15,26,46,0.88), rgba(8,12,20,0.5));
       box-shadow: 0 28px 90px rgba(0,0,0,0.3);
       animation: fadeUp 0.7s 0.5s ease both;
     }
 
-    .hero-3d-wrap::before {
+    .hero-avatar-wrap::before {
       content: '';
       position: absolute;
       inset: 16px;
+      z-index: 3;
       border: 1px solid rgba(56,201,160,0.12);
       border-radius: 14px;
       pointer-events: none;
     }
 
-    .hero-3d-wrap::after {
-      content: 'THREE.JS / THREAD MESH';
+    .hero-avatar-wrap::after {
+      content: '3D AVATAR / WEB SPEECH';
       position: absolute;
       left: 18px;
       bottom: 16px;
+      z-index: 4;
       font-family: 'DM Mono', monospace;
       font-size: 10px;
       color: var(--muted);
@@ -337,10 +339,94 @@
       pointer-events: none;
     }
 
-    #threadHeroCanvas {
-      width: 100%;
-      height: 100%;
-      display: block;
+    #talkingAvatar {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .avatar-fallback {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      text-align: center;
+      background: radial-gradient(circle, rgba(79,168,232,0.1), transparent 58%);
+    }
+
+    .avatar-face {
+      position: relative;
+      width: 190px;
+      height: 230px;
+      border: 1px solid var(--border);
+      border-radius: 42% 42% 46% 46%;
+      background: linear-gradient(145deg, rgba(56,201,160,0.2), rgba(79,168,232,0.08));
+      box-shadow: inset 0 0 34px rgba(56,201,160,0.1), 0 24px 70px rgba(0,0,0,0.28);
+    }
+
+    .avatar-face::before,
+    .avatar-face::after {
+      content: '';
+      position: absolute;
+      top: 82px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(56,201,160,0.55);
+    }
+
+    .avatar-face::before { left: 58px; }
+    .avatar-face::after { right: 58px; }
+
+    .avatar-mouth {
+      position: absolute;
+      left: 50%;
+      bottom: 62px;
+      width: 48px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent2);
+      transform: translateX(-50%);
+      transition: height 0.12s ease, border-radius 0.12s ease;
+    }
+
+    .hero-avatar-wrap.is-speaking .avatar-mouth {
+      height: 24px;
+      border-radius: 45%;
+      animation: avatarTalk 0.22s ease-in-out infinite alternate;
+    }
+
+    @keyframes avatarTalk {
+      from { transform: translateX(-50%) scaleY(0.55); }
+      to { transform: translateX(-50%) scaleY(1.25); }
+    }
+
+    .avatar-loading,
+    .avatar-caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      z-index: 5;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      line-height: 1.6;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(8,12,20,0.72);
+      backdrop-filter: blur(12px);
+      padding: 10px 12px;
+    }
+
+    .avatar-loading { top: 18px; }
+    .avatar-caption { bottom: 52px; }
+
+    .play-intro-btn[disabled] {
+      opacity: 0.62;
+      cursor: wait;
     }
 
     .btn-primary {
@@ -1541,8 +1627,9 @@
         text-align: center;
         gap: 36px;
       }
-      .hero-3d-wrap {
-        width: min(300px, 86vw);
+      .hero-avatar-wrap {
+        width: min(320px, 86vw);
+        min-height: 380px;
         margin: 0 auto;
       }
       .hero-eyebrow {
@@ -1706,6 +1793,7 @@
           <a href="#contact" class="btn-ghost">Get in Touch</a>
           <a href="RESUME.pdf" download class="btn-ghost download-animate">Download PDF</a>
           <a href="RESUME.docx" download class="btn-ghost download-animate">Download DOCX</a>
+          <button class="btn-primary play-intro-btn" type="button" id="playAvatarIntro">Play Intro</button>
         </div>
         <div class="trust-badges" aria-label="Portfolio status badges">
           <span>Version v1.5</span>
@@ -1714,8 +1802,13 @@
           <span>Last Updated Jul 2026</span>
         </div>
       </div>
-      <div class="hero-3d-wrap" aria-hidden="true">
-        <canvas id="threadHeroCanvas"></canvas>
+      <div class="hero-avatar-wrap" id="avatarHero" aria-label="3D talking avatar intro">
+        <div id="talkingAvatar" aria-hidden="true"></div>
+        <div class="avatar-fallback" id="avatarFallback" aria-hidden="true">
+          <div class="avatar-face"><span class="avatar-mouth"></span></div>
+        </div>
+        <div class="avatar-loading" id="avatarLoading">Avatar ready to load</div>
+        <div class="avatar-caption" id="avatarCaption">Click Play Intro to hear a short portfolio summary.</div>
       </div>
     </div>
   </section>
@@ -2587,6 +2680,15 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js/+esm",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/",
+        "talkinghead": "https://cdn.jsdelivr.net/gh/met4citizen/TalkingHead@1.7/modules/talkinghead.mjs"
+      }
+    }
+  </script>
   <script>
     const progress = document.getElementById('scrollProgress');
     const scrollTopButton = document.getElementById('scrollTop');
@@ -2776,157 +2878,173 @@
       });
     }
 
-    const initThreadHero = () => {
-      const threadCanvas = document.getElementById('threadHeroCanvas');
-      const heroSection = document.getElementById('home');
 
-      if (!threadCanvas || !heroSection || typeof THREE === 'undefined') return;
+    window.__avatarIntroText = "Hi, I'm Giridhar. I build full-stack products from frontend interfaces to practical dashboard workflows. My focus is clean user experience, strong project execution, and continuous learning.";
 
-      const threadScene = new THREE.Scene();
-      const threadCamera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-      threadCamera.position.set(0, 0.25, 8);
+    const fallbackIntroButton = document.getElementById('playAvatarIntro');
+    fallbackIntroButton?.addEventListener('click', () => {
+      if (window.__talkingAvatarModuleReady) return;
+      const caption = document.getElementById('avatarCaption');
+      const loading = document.getElementById('avatarLoading');
+      const avatar = document.getElementById('avatarHero');
+      const text = window.__avatarIntroText;
+      if (caption) caption.textContent = text;
+      if (loading) loading.textContent = 'Static avatar fallback active';
+      avatar?.classList.add('is-speaking');
 
-      const threadRenderer = new THREE.WebGLRenderer({
-        canvas: threadCanvas,
-        alpha: true,
-        antialias: true
-      });
-      threadRenderer.setClearColor(0x000000, 0);
-      threadRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-
-      const threadPointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
-      let threadRaf = null;
-      let threadVisible = true;
-      let threadScroll = 0;
-
-      const clothGeometry = new THREE.PlaneGeometry(5.8, 3.8, 34, 22);
-      const basePositions = clothGeometry.attributes.position.array.slice();
-      const clothMaterial = new THREE.MeshBasicMaterial({
-        color: 0x38c9a0,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.74
-      });
-      const clothMesh = new THREE.Mesh(clothGeometry, clothMaterial);
-      clothMesh.rotation.x = -0.45;
-      clothMesh.rotation.y = 0.22;
-      threadScene.add(clothMesh);
-
-      const particleCount = 120;
-      const particleGeometry = new THREE.BufferGeometry();
-      const particlePositions = new Float32Array(particleCount * 3);
-
-      for (let i = 0; i < particleCount; i += 1) {
-        const idx = i * 3;
-        particlePositions[idx] = (Math.random() - 0.5) * 7.5;
-        particlePositions[idx + 1] = (Math.random() - 0.5) * 4.8;
-        particlePositions[idx + 2] = (Math.random() - 0.5) * 2.2;
+      if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
+        if (loading) loading.textContent = 'Speech is not supported. Caption fallback active.';
+        window.setTimeout(() => avatar?.classList.remove('is-speaking'), 1800);
+        return;
       }
 
-      particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-      const particleMaterial = new THREE.PointsMaterial({
-        color: 0x4fa8e8,
-        size: 0.02,
-        transparent: true,
-        opacity: 0.62
-      });
-      const threadParticles = new THREE.Points(particleGeometry, particleMaterial);
-      threadScene.add(threadParticles);
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-IN';
+      utterance.rate = 0.94;
+      utterance.onend = () => avatar?.classList.remove('is-speaking');
+      utterance.onerror = () => avatar?.classList.remove('is-speaking');
+      window.speechSynthesis.speak(utterance);
+    });
+  </script>
+  <script type="module">
+    import { TalkingHead } from 'talkinghead';
 
-      const updateThreadSize = () => {
-        const { width, height } = threadCanvas.getBoundingClientRect();
-        threadRenderer.setSize(width, height, false);
-        threadRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-        threadCamera.aspect = width / Math.max(height, 1);
-        threadCamera.updateProjectionMatrix();
-        const mobile = width < 360;
-        clothMesh.scale.setScalar(mobile ? 0.82 : 1);
-      };
+    // Swap this with your own Ready Player Me .glb URL when you create a custom avatar.
+    const AVATAR_URL = 'https://models.readyplayer.me/64bfa15f0e72c63d7c3934a6.glb?morphTargets=ARKit,Oculus+Visemes,mouthOpen,mouthSmile,eyesClosed,eyesLookUp,eyesLookDown&textureSizeLimit=1024&textureFormat=png';
 
-      const updateThreadScroll = () => {
-        const rect = heroSection.getBoundingClientRect();
-        threadScroll = Math.min(Math.max(-rect.top / Math.max(rect.height, 1), 0), 1);
-      };
+    // Edit this text whenever you want the hero intro to say something different.
+    window.__talkingAvatarModuleReady = true;
+    const INTRO_TEXT = window.__avatarIntroText;
 
-      const updateThreadPointer = (event) => {
-        threadPointer.targetX = (event.clientX / window.innerWidth - 0.5) * 2;
-        threadPointer.targetY = (event.clientY / window.innerHeight - 0.5) * 2;
-      };
+    const avatarHero = document.getElementById('avatarHero');
+    const avatarNode = document.getElementById('talkingAvatar');
+    const avatarLoading = document.getElementById('avatarLoading');
+    const avatarCaption = document.getElementById('avatarCaption');
+    const playIntroButton = document.getElementById('playAvatarIntro');
 
-      const deformThreadCloth = (time) => {
-        const positions = clothGeometry.attributes.position.array;
-        for (let i = 0; i < positions.length; i += 3) {
-          const x = basePositions[i];
-          const y = basePositions[i + 1];
-          positions[i] = x;
-          positions[i + 1] = y;
-          positions[i + 2] =
-            Math.sin(x * 1.8 + time * 0.9) * 0.16 +
-            Math.cos(y * 2.4 + time * 0.7) * 0.1;
-        }
-        clothGeometry.attributes.position.needsUpdate = true;
-      };
+    let talkingHead = null;
+    let avatarLoaded = false;
+    let avatarFailed = false;
 
-      const animateThreadHero = (timeMs = 0) => {
-        if (!threadVisible) return;
-
-        const time = timeMs * 0.001;
-        threadPointer.x += (threadPointer.targetX - threadPointer.x) * 0.06;
-        threadPointer.y += (threadPointer.targetY - threadPointer.y) * 0.06;
-
-        deformThreadCloth(time);
-
-        const fade = 1 - threadScroll * 0.72;
-        const scale = 1 - threadScroll * 0.18;
-
-        clothMesh.rotation.z = time * 0.08;
-        clothMesh.rotation.y = 0.22 + threadPointer.x * 0.18 + Math.sin(time * 0.35) * 0.08;
-        clothMesh.rotation.x = -0.45 - threadPointer.y * 0.12;
-        clothMesh.scale.setScalar(scale);
-        clothMesh.material.opacity = fade * 0.74;
-
-        threadParticles.rotation.y = time * 0.05 + threadPointer.x * 0.08;
-        threadParticles.rotation.x = threadPointer.y * 0.05;
-        threadParticles.material.opacity = fade * 0.62;
-
-        threadCamera.position.x += (threadPointer.x * 0.32 - threadCamera.position.x) * 0.045;
-        threadCamera.position.y += (-threadPointer.y * 0.22 + 0.25 - threadCamera.position.y) * 0.045;
-        threadCamera.lookAt(0, 0, 0);
-
-        threadRenderer.render(threadScene, threadCamera);
-        threadRaf = requestAnimationFrame(animateThreadHero);
-      };
-
-      const startThreadHero = () => {
-        if (!threadRaf) {
-          threadVisible = true;
-          threadRaf = requestAnimationFrame(animateThreadHero);
-        }
-      };
-
-      const stopThreadHero = () => {
-        threadVisible = false;
-        if (threadRaf) {
-          cancelAnimationFrame(threadRaf);
-          threadRaf = null;
-        }
-      };
-
-      window.addEventListener('resize', updateThreadSize);
-      window.addEventListener('mousemove', updateThreadPointer, { passive: true });
-      window.addEventListener('scroll', updateThreadScroll, { passive: true });
-
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) stopThreadHero();
-        else startThreadHero();
-      });
-
-      updateThreadSize();
-      updateThreadScroll();
-      startThreadHero();
+    const setAvatarStatus = (message) => {
+      if (avatarLoading) avatarLoading.textContent = message;
     };
 
-    initThreadHero();
+    const setCaption = (message) => {
+      if (avatarCaption) avatarCaption.textContent = message;
+    };
+
+    const setSpeakingState = (speaking) => {
+      avatarHero?.classList.toggle('is-speaking', speaking);
+    };
+
+    const loadTalkingAvatar = async () => {
+      if (avatarLoaded || avatarFailed || !avatarNode || !avatarHero) return;
+
+      try {
+        setAvatarStatus('Loading avatar...');
+        talkingHead = new TalkingHead(avatarNode, {
+          lipsyncModules: ['en'],
+          cameraView: 'upper'
+        });
+
+        await talkingHead.showAvatar({
+          url: AVATAR_URL,
+          body: 'F',
+          avatarMood: 'neutral',
+          lipsyncLang: 'en'
+        }, (event) => {
+          if (event.lengthComputable) {
+            const progress = Math.min(100, Math.round((event.loaded / event.total) * 100));
+            setAvatarStatus(`Loading avatar ${progress}%`);
+          }
+        });
+
+        avatarLoaded = true;
+        setAvatarStatus('Avatar loaded');
+        setCaption('Click Play Intro to hear a short portfolio summary.');
+      } catch (error) {
+        avatarFailed = true;
+        console.warn('TalkingHead avatar failed to load:', error);
+        setAvatarStatus('Static avatar fallback active');
+        setCaption('Avatar library/model could not load. Intro captions and browser speech still work.');
+      }
+    };
+
+    if ('IntersectionObserver' in window && avatarHero) {
+      const avatarObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          loadTalkingAvatar();
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: '160px' });
+
+      avatarObserver.observe(avatarHero);
+    } else {
+      loadTalkingAvatar();
+    }
+
+    const chooseVoice = () => {
+      const voices = window.speechSynthesis?.getVoices?.() || [];
+      return voices.find((voice) => /en-IN|en-US|en-GB/i.test(voice.lang)) || voices[0] || null;
+    };
+
+    const playIntro = async () => {
+      setCaption(INTRO_TEXT);
+
+      if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
+        setAvatarStatus('Speech is not supported in this browser');
+        setSpeakingState(false);
+        return;
+      }
+
+      await loadTalkingAvatar();
+
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(INTRO_TEXT);
+      const selectedVoice = chooseVoice();
+      if (selectedVoice) utterance.voice = selectedVoice;
+      utterance.lang = selectedVoice?.lang || 'en-IN';
+      utterance.rate = 0.94;
+      utterance.pitch = 1;
+
+      playIntroButton.disabled = true;
+      playIntroButton.textContent = 'Speaking...';
+      setAvatarStatus(avatarLoaded ? 'Speaking with browser voice' : 'Speaking with fallback avatar');
+      setSpeakingState(true);
+
+      // Web Speech does not expose reliable viseme timestamps. This speaking state
+      // gives a graceful no-key lip-motion fallback while TalkingHead displays the avatar.
+      utterance.onend = () => {
+        setSpeakingState(false);
+        playIntroButton.disabled = false;
+        playIntroButton.textContent = 'Play Intro';
+        setAvatarStatus(avatarLoaded ? 'Avatar idle' : 'Static avatar fallback active');
+      };
+
+      utterance.onerror = () => {
+        setSpeakingState(false);
+        playIntroButton.disabled = false;
+        playIntroButton.textContent = 'Play Intro';
+        setAvatarStatus('Speech failed. Caption fallback active.');
+      };
+
+      window.speechSynthesis.speak(utterance);
+    };
+
+    playIntroButton?.addEventListener('click', playIntro);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        window.speechSynthesis?.cancel?.();
+        setSpeakingState(false);
+        talkingHead?.stop?.();
+      } else {
+        talkingHead?.start?.();
+      }
+    });
   </script>
 
 </body>
