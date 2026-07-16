@@ -1030,6 +1030,18 @@
       text-transform: uppercase;
     }
 
+    .project-status.completed {
+      color: var(--accent);
+      border-color: rgba(56,201,160,0.28);
+      background: rgba(56,201,160,0.08);
+    }
+
+    .project-status.case-study {
+      color: var(--accent2);
+      border-color: rgba(79,168,232,0.3);
+      background: rgba(79,168,232,0.08);
+    }
+
     .project-actions {
       display: flex;
       flex-wrap: wrap;
@@ -1131,6 +1143,36 @@
       letter-spacing: 0.06em;
       color: var(--muted);
       min-height: 18px;
+    }
+
+    .project-filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: -10px 0 18px;
+    }
+
+    .project-filter-tab {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(15,26,46,0.72);
+      padding: 9px 12px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+
+    .project-filter-tab:hover,
+    .project-filter-tab:focus-visible,
+    .project-filter-tab.active {
+      color: var(--accent);
+      border-color: rgba(56,201,160,0.4);
+      background: rgba(56,201,160,0.08);
+      transform: translateY(-1px);
+      outline: none;
     }
 
     .project-card.is-hidden {
@@ -1279,6 +1321,28 @@
       font-size: 15px;
       color: var(--muted);
       line-height: 1.8;
+    }
+
+    .contact-direct {
+      margin: 18px 0 18px;
+      padding: 14px 16px;
+      border: 1px solid rgba(56,201,160,0.22);
+      border-radius: 8px;
+      background: rgba(56,201,160,0.07);
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .contact-direct a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(56,201,160,0.42);
+    }
+
+    .contact-direct a:hover {
+      color: var(--accent2);
+      border-color: var(--accent2);
     }
 
     .contact-links { display: flex; flex-direction: column; gap: 12px; }
@@ -2371,11 +2435,19 @@
         </article>
       </div>
       <div class="project-filter-status" id="projectFilterStatus" aria-live="polite">Showing all 10 projects.</div>
+      <div class="project-filter-tabs" aria-label="Project category filters">
+        <button class="project-filter-tab active" type="button" data-project-filter="all" aria-pressed="true">All</button>
+        <button class="project-filter-tab" type="button" data-project-filter="frontend" aria-pressed="false">Frontend</button>
+        <button class="project-filter-tab" type="button" data-project-filter="systems" aria-pressed="false">ECE / IoT</button>
+        <button class="project-filter-tab" type="button" data-project-filter="ml" aria-pressed="false">ML</button>
+        <button class="project-filter-tab" type="button" data-project-filter="soon" aria-pressed="false">Coming Soon</button>
+      </div>
       <div class="projects-grid">
-        <div class="project-card" data-project-type="frontend">
+        <div class="project-card" data-project-type="frontend" data-project-status="completed">
           <div class="project-num">01</div>
           <div class="project-preview preview-portfolio" aria-label="Portfolio Website preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div><div class="preview-label">Portfolio</div><div class="preview-line" style="width:70%; margin-top:8px"></div><div class="preview-line" style="width:48%; margin-top:8px"></div></div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div></div></div>
           <div class="project-title">Portfolio Website</div>
+          <div class="project-status case-study">Case Study Available</div>
           <p class="project-desc">A personal developer portfolio showcasing my skills, projects, learning journey, and professional growth as a Full-Stack Developer.</p>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
@@ -2391,10 +2463,11 @@
             <a href="case-studies/portfolio-website.html" class="project-link">Case Study</a>
           </div>
         </div>
-        <div class="project-card" data-project-type="frontend">
+        <div class="project-card" data-project-type="frontend" data-project-status="completed">
           <div class="project-num">02</div>
           <div class="project-preview preview-shop" aria-label="Kaira Commerce Website preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">Kaira Commerce</div><div class="preview-block"></div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div></div></div>
           <div class="project-title">Kaira Commerce Website</div>
+          <div class="project-status completed">Completed</div>
           <p class="project-desc">Built a 6-page responsive e-commerce UI with product grid, filters, and cart — fully mobile-optimized.</p>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
@@ -2407,10 +2480,11 @@
             <span class="project-link project-link-muted">GitHub Soon</span>
           </div>
         </div>
-        <div class="project-card" data-project-type="frontend">
+        <div class="project-card" data-project-type="frontend" data-project-status="completed">
           <div class="project-num">03</div>
           <div class="project-preview preview-finance" aria-label="Finance Website preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">Finance Website</div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-line" style="width:82%"></div><div class="preview-line" style="width:54%"></div></div></div>
           <div class="project-title">Finance Website</div>
+          <div class="project-status completed">Completed</div>
           <p class="project-desc">Designed a trust-focused 5-section landing page with service cards, testimonials, and lead capture CTA.</p>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
@@ -2423,10 +2497,11 @@
             <span class="project-link project-link-muted">GitHub Soon</span>
           </div>
         </div>
-        <div class="project-card" data-project-type="frontend">
+        <div class="project-card" data-project-type="frontend" data-project-status="completed">
           <div class="project-num">04</div>
           <div class="project-preview preview-travel" aria-label="Travel Website preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">Travel Planner</div><div class="preview-block"></div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div></div></div>
           <div class="project-title">Travel Website</div>
+          <div class="project-status case-study">Case Study Available</div>
           <p class="project-desc">Created a destination discovery UI with hero video placeholder, card grid, and responsive booking CTA.</p>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
@@ -2440,10 +2515,11 @@
             <span class="project-link project-link-muted">Repo Soon</span>
           </div>
         </div>
-        <div class="project-card" data-project-type="systems">
+        <div class="project-card" data-project-type="systems" data-project-status="completed">
           <div class="project-num">05</div>
           <div class="project-preview preview-iot" aria-label="IoT Home Automation preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">IoT Control</div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-line" style="width:68%"></div></div></div>
           <div class="project-title">IoT Home Automation</div>
+          <div class="project-status completed">Completed</div>
           <p class="project-desc">Architected a 3-tier IoT system for remote appliance control — simulated in Cisco Packet Tracer with 6 devices.</p>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
@@ -2455,10 +2531,11 @@
             <span class="project-link project-link-muted">GitHub Soon</span>
           </div>
         </div>
-        <div class="project-card" data-project-type="systems">
+        <div class="project-card" data-project-type="systems" data-project-status="completed">
           <div class="project-num">06</div>
           <div class="project-preview preview-embedded" aria-label="Embedded Systems preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">Embedded Apps</div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-line" style="width:74%"></div></div></div>
           <div class="project-title">Embedded Systems</div>
+          <div class="project-status completed">Completed</div>
           <p class="project-desc">Developed 4 embedded apps on ARM Cortex-M0+ KL25Z board — UART control, LED FSM, 7-segment display, MBED.</p>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
@@ -2470,10 +2547,11 @@
             <span class="project-link project-link-muted">GitHub Soon</span>
           </div>
         </div>
-        <div class="project-card" data-project-type="ml">
+        <div class="project-card" data-project-type="ml" data-project-status="completed">
           <div class="project-num">07</div>
           <div class="project-preview preview-sign" aria-label="Sign Language Converter preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">Gesture AI</div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-line" style="width:64%"></div></div></div>
           <div class="project-title">Sign Language Converter</div>
+          <div class="project-status completed">Prototype</div>
           <p class="project-desc">Built a Python gesture recognition prototype converting 10 ASL signs to text using OpenCV and basic ML.</p>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
@@ -2485,10 +2563,11 @@
             <span class="project-link project-link-muted">GitHub Soon</span>
           </div>
         </div>
-        <div class="project-card" data-project-type="frontend">
+        <div class="project-card" data-project-type="frontend" data-project-status="completed">
           <div class="project-num">08</div>
           <div class="project-preview preview-college" aria-label="College Website Management System preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">College Portal</div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-line" style="width:82%"></div><div class="preview-line" style="width:54%"></div></div></div>
           <div class="project-title">College Website Management System</div>
+          <div class="project-status case-study">Case Study Available</div>
           <p class="project-desc">A role-based educational portal with Admin, Teacher, and Student dashboards, attendance tracking, announcements, academic information, and management tools.</p>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
@@ -2502,7 +2581,7 @@
             <span class="project-link project-link-muted">Repo Soon</span>
           </div>
         </div>
-        <div class="project-card" data-project-type="frontend">
+        <div class="project-card" data-project-type="frontend" data-project-status="soon">
           <div class="project-num">09</div>
           <div class="project-preview preview-job" aria-label="Job Portal System preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">Job Portal</div><div class="preview-line" style="width:76%"></div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-block"></div></div></div>
           <div class="project-title">Job Portal System</div>
@@ -2521,7 +2600,7 @@
             <span class="project-link project-link-muted">Repo Soon</span>
           </div>
         </div>
-        <div class="project-card" data-project-type="frontend">
+        <div class="project-card" data-project-type="frontend" data-project-status="soon">
           <div class="project-num">10</div>
           <div class="project-preview preview-lms" aria-label="Learning Management System preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">LMS Dashboard</div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-line" style="width:68%"></div></div></div>
           <div class="project-title">Learning Management System (LMS)</div>
@@ -2714,6 +2793,10 @@
             For job openings, project discussions, or professional conversations, send a message
             using the form or email link below.
           </p>
+          <div class="contact-direct">
+            Best way to reach me:
+            <a href="mailto:giridhar.parlapalli1@gmail.com">giridhar.parlapalli1@gmail.com</a>
+          </div>
           <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="627e3948-7329-474b-8e02-8b862e4f4207">
             <input type="hidden" name="from_name" value="Giridhar Portfolio Contact Form">
@@ -2883,7 +2966,8 @@
       all: 'Showing all 10 projects.',
       frontend: 'Showing 7 frontend builds.',
       systems: 'Showing 2 ECE / IoT builds.',
-      ml: 'Showing 1 ML prototype.'
+      ml: 'Showing 1 ML prototype.',
+      soon: 'Showing 2 coming soon projects.'
     };
 
     const applyProjectFilter = (filter) => {
@@ -2894,7 +2978,7 @@
       });
 
       projectCards.forEach((card) => {
-        const matches = filter === 'all' || card.dataset.projectType === filter;
+        const matches = filter === 'all' || card.dataset.projectType === filter || card.dataset.projectStatus === filter;
         card.classList.toggle('is-hidden', !matches);
       });
 
