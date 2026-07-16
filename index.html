@@ -353,22 +353,69 @@
       place-items: center;
       padding: 32px;
       text-align: center;
-      background: radial-gradient(circle, rgba(79,168,232,0.1), transparent 58%);
+      background:
+        radial-gradient(circle at 50% 48%, rgba(56,201,160,0.18), transparent 34%),
+        radial-gradient(circle at 52% 65%, rgba(79,168,232,0.1), transparent 45%);
+      perspective: 900px;
+    }
+
+    .avatar-orbit {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border: 1px dashed rgba(56,201,160,0.18);
+      border-radius: 50%;
+      animation: avatarOrbit 9s linear infinite;
+    }
+
+    .avatar-orbit::before,
+    .avatar-orbit::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 16px rgba(56,201,160,0.7);
+    }
+
+    .avatar-orbit::before { top: 18px; left: 42px; }
+    .avatar-orbit::after { right: 28px; bottom: 40px; background: var(--accent2); }
+
+    @keyframes avatarOrbit {
+      to { transform: rotate(360deg); }
+    }
+
+    .avatar-character {
+      --avatar-x: 0deg;
+      --avatar-y: 0deg;
+      position: relative;
+      display: grid;
+      place-items: center;
+      transform: rotateY(var(--avatar-x)) rotateX(var(--avatar-y));
+      transform-style: preserve-3d;
+      animation: avatarIdle 4.2s ease-in-out infinite;
+      transition: transform 0.18s ease;
+    }
+
+    @keyframes avatarIdle {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -8px; }
     }
 
     .avatar-face {
       position: relative;
       width: 190px;
       height: 230px;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(56,201,160,0.22);
       border-radius: 42% 42% 46% 46%;
-      background: linear-gradient(145deg, rgba(56,201,160,0.2), rgba(79,168,232,0.08));
+      background:
+        radial-gradient(circle at 36% 34%, rgba(56,201,160,0.22), transparent 18%),
+        linear-gradient(145deg, rgba(56,201,160,0.22), rgba(79,168,232,0.08));
       box-shadow: inset 0 0 34px rgba(56,201,160,0.1), 0 24px 70px rgba(0,0,0,0.28);
     }
 
-    .avatar-face::before,
-    .avatar-face::after {
-      content: '';
+    .avatar-eye {
       position: absolute;
       top: 82px;
       width: 16px;
@@ -376,10 +423,16 @@
       border-radius: 50%;
       background: var(--accent);
       box-shadow: 0 0 18px rgba(56,201,160,0.55);
+      animation: avatarBlink 5s infinite;
     }
 
-    .avatar-face::before { left: 58px; }
-    .avatar-face::after { right: 58px; }
+    .avatar-eye-left { left: 58px; }
+    .avatar-eye-right { right: 58px; animation-delay: 0.04s; }
+
+    @keyframes avatarBlink {
+      0%, 92%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(0.12); }
+    }
 
     .avatar-mouth {
       position: absolute;
@@ -390,18 +443,49 @@
       border-radius: 999px;
       background: var(--accent2);
       transform: translateX(-50%);
-      transition: height 0.12s ease, border-radius 0.12s ease;
+      box-shadow: 0 0 18px rgba(79,168,232,0.35);
+      transition: height 0.12s ease, width 0.12s ease, border-radius 0.12s ease;
+    }
+
+    .avatar-neck {
+      width: 54px;
+      height: 42px;
+      margin-top: -8px;
+      border: 1px solid rgba(56,201,160,0.16);
+      border-top: 0;
+      border-radius: 0 0 18px 18px;
+      background: linear-gradient(180deg, rgba(56,201,160,0.14), rgba(79,168,232,0.05));
+    }
+
+    .avatar-shoulders {
+      width: 230px;
+      height: 70px;
+      margin-top: -8px;
+      border: 1px solid rgba(56,201,160,0.16);
+      border-radius: 52px 52px 22px 22px;
+      background: linear-gradient(135deg, rgba(56,201,160,0.12), rgba(79,168,232,0.08));
+    }
+
+    .hero-avatar-wrap.is-speaking .avatar-character {
+      animation-duration: 1.4s;
     }
 
     .hero-avatar-wrap.is-speaking .avatar-mouth {
-      height: 24px;
-      border-radius: 45%;
-      animation: avatarTalk 0.22s ease-in-out infinite alternate;
+      width: 54px;
+      height: 28px;
+      border-radius: 48%;
+      animation: avatarTalk 0.16s ease-in-out infinite alternate;
+    }
+
+    .hero-avatar-wrap.is-speaking .avatar-orbit {
+      animation-duration: 3.2s;
+      border-color: rgba(56,201,160,0.36);
     }
 
     @keyframes avatarTalk {
-      from { transform: translateX(-50%) scaleY(0.55); }
-      to { transform: translateX(-50%) scaleY(1.25); }
+      0% { transform: translateX(-50%) scaleY(0.45) scaleX(0.82); }
+      45% { transform: translateX(-50%) scaleY(1.05) scaleX(1.05); }
+      100% { transform: translateX(-50%) scaleY(1.35) scaleX(0.92); }
     }
 
     .avatar-loading,
@@ -422,9 +506,29 @@
     }
 
     .avatar-loading { top: 18px; }
-    .avatar-caption { bottom: 52px; }
+    .avatar-caption { bottom: 76px; }
 
-    .play-intro-btn[disabled] {
+    .avatar-play-btn {
+      position: absolute;
+      right: 18px;
+      bottom: 30px;
+      z-index: 6;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: #04201a;
+      background: var(--accent);
+      border: 0;
+      border-radius: 999px;
+      padding: 9px 12px;
+      cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .avatar-play-btn:hover { transform: translateY(-2px); }
+
+    .play-intro-btn[disabled],
+    .avatar-play-btn[disabled] {
       opacity: 0.62;
       cursor: wait;
     }
@@ -1793,7 +1897,7 @@
           <a href="#contact" class="btn-ghost">Get in Touch</a>
           <a href="RESUME.pdf" download class="btn-ghost download-animate">Download PDF</a>
           <a href="RESUME.docx" download class="btn-ghost download-animate">Download DOCX</a>
-          <button class="btn-primary play-intro-btn" type="button" id="playAvatarIntro">Play Intro</button>
+          <button class="btn-primary play-intro-btn play-intro-trigger" type="button" id="playAvatarIntro">Play Intro</button>
         </div>
         <div class="trust-badges" aria-label="Portfolio status badges">
           <span>Version v1.5</span>
@@ -1805,10 +1909,20 @@
       <div class="hero-avatar-wrap" id="avatarHero" aria-label="3D talking avatar intro">
         <div id="talkingAvatar" aria-hidden="true"></div>
         <div class="avatar-fallback" id="avatarFallback" aria-hidden="true">
-          <div class="avatar-face"><span class="avatar-mouth"></span></div>
+          <div class="avatar-orbit"></div>
+          <div class="avatar-character" id="avatarCharacter">
+            <div class="avatar-face">
+              <span class="avatar-eye avatar-eye-left"></span>
+              <span class="avatar-eye avatar-eye-right"></span>
+              <span class="avatar-mouth"></span>
+            </div>
+            <div class="avatar-neck"></div>
+            <div class="avatar-shoulders"></div>
+          </div>
         </div>
-        <div class="avatar-loading" id="avatarLoading">Avatar ready to load</div>
+        <div class="avatar-loading" id="avatarLoading">Dynamic avatar ready</div>
         <div class="avatar-caption" id="avatarCaption">Click Play Intro to hear a short portfolio summary.</div>
+        <button class="avatar-play-btn play-intro-trigger" type="button">Play Intro</button>
       </div>
     </div>
   </section>
@@ -2881,20 +2995,38 @@
 
     window.__avatarIntroText = "Hi, I'm Giridhar. I build full-stack products from frontend interfaces to practical dashboard workflows. My focus is clean user experience, strong project execution, and continuous learning.";
 
-    const fallbackIntroButton = document.getElementById('playAvatarIntro');
-    fallbackIntroButton?.addEventListener('click', () => {
+    const avatarTriggers = document.querySelectorAll('.play-intro-trigger');
+    const avatarCharacter = document.getElementById('avatarCharacter');
+
+    const setFallbackButtons = (disabled, label = 'Play Intro') => {
+      avatarTriggers.forEach((button) => {
+        button.disabled = disabled;
+        button.textContent = label;
+      });
+    };
+
+    document.getElementById('avatarHero')?.addEventListener('pointermove', (event) => {
+      if (!avatarCharacter) return;
+      const rect = event.currentTarget.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 14;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * -10;
+      avatarCharacter.style.setProperty('--avatar-x', `${x}deg`);
+      avatarCharacter.style.setProperty('--avatar-y', `${y}deg`);
+    }, { passive: true });
+
+    avatarTriggers.forEach((trigger) => trigger.addEventListener('click', () => {
       if (window.__talkingAvatarModuleReady) return;
       const caption = document.getElementById('avatarCaption');
       const loading = document.getElementById('avatarLoading');
       const avatar = document.getElementById('avatarHero');
       const text = window.__avatarIntroText;
       if (caption) caption.textContent = text;
-      if (loading) loading.textContent = 'Static avatar fallback active';
+      if (loading) loading.textContent = 'Dynamic fallback speaking';
       avatar?.classList.add('is-speaking');
 
       if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
         if (loading) loading.textContent = 'Speech is not supported. Caption fallback active.';
-        window.setTimeout(() => avatar?.classList.remove('is-speaking'), 1800);
+        window.setTimeout(() => avatar?.classList.remove('is-speaking'), 2200);
         return;
       }
 
@@ -2902,10 +3034,19 @@
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'en-IN';
       utterance.rate = 0.94;
-      utterance.onend = () => avatar?.classList.remove('is-speaking');
-      utterance.onerror = () => avatar?.classList.remove('is-speaking');
+      utterance.onend = () => {
+        avatar?.classList.remove('is-speaking');
+        setFallbackButtons(false);
+        if (loading) loading.textContent = 'Dynamic fallback idle';
+      };
+      utterance.onerror = () => {
+        avatar?.classList.remove('is-speaking');
+        setFallbackButtons(false);
+        if (loading) loading.textContent = 'Speech failed. Caption fallback active.';
+      };
+      setFallbackButtons(true, 'Speaking...');
       window.speechSynthesis.speak(utterance);
-    });
+    }));
   </script>
   <script type="module">
     import { TalkingHead } from 'talkinghead';
@@ -2921,7 +3062,7 @@
     const avatarNode = document.getElementById('talkingAvatar');
     const avatarLoading = document.getElementById('avatarLoading');
     const avatarCaption = document.getElementById('avatarCaption');
-    const playIntroButton = document.getElementById('playAvatarIntro');
+    const playIntroButtons = document.querySelectorAll('.play-intro-trigger');
 
     let talkingHead = null;
     let avatarLoaded = false;
@@ -2967,8 +3108,8 @@
       } catch (error) {
         avatarFailed = true;
         console.warn('TalkingHead avatar failed to load:', error);
-        setAvatarStatus('Static avatar fallback active');
-        setCaption('Avatar library/model could not load. Intro captions and browser speech still work.');
+        setAvatarStatus('Dynamic fallback active');
+        setCaption('Avatar library/model could not load. Dynamic fallback, intro captions, and browser speech still work.');
       }
     };
 
@@ -3010,8 +3151,7 @@
       utterance.rate = 0.94;
       utterance.pitch = 1;
 
-      playIntroButton.disabled = true;
-      playIntroButton.textContent = 'Speaking...';
+      playIntroButtons.forEach((button) => { button.disabled = true; button.textContent = 'Speaking...'; });
       setAvatarStatus(avatarLoaded ? 'Speaking with browser voice' : 'Speaking with fallback avatar');
       setSpeakingState(true);
 
@@ -3019,22 +3159,20 @@
       // gives a graceful no-key lip-motion fallback while TalkingHead displays the avatar.
       utterance.onend = () => {
         setSpeakingState(false);
-        playIntroButton.disabled = false;
-        playIntroButton.textContent = 'Play Intro';
-        setAvatarStatus(avatarLoaded ? 'Avatar idle' : 'Static avatar fallback active');
+        playIntroButtons.forEach((button) => { button.disabled = false; button.textContent = 'Play Intro'; });
+        setAvatarStatus(avatarLoaded ? 'Avatar idle' : 'Dynamic fallback idle');
       };
 
       utterance.onerror = () => {
         setSpeakingState(false);
-        playIntroButton.disabled = false;
-        playIntroButton.textContent = 'Play Intro';
+        playIntroButtons.forEach((button) => { button.disabled = false; button.textContent = 'Play Intro'; });
         setAvatarStatus('Speech failed. Caption fallback active.');
       };
 
       window.speechSynthesis.speak(utterance);
     };
 
-    playIntroButton?.addEventListener('click', playIntro);
+    playIntroButtons.forEach((button) => button.addEventListener('click', playIntro));
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
