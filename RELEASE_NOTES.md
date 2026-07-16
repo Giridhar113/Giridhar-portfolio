@@ -31,7 +31,7 @@ Portfolio v1.4 focuses on recruiter clarity, audit-score improvement, and a stro
 
 ### Added
 
-- Updated Featured Projects section with seven focused projects:
+- Updated Featured Projects section with all 10 portfolio projects:
   - Portfolio Website
   - Kaira Commerce Website
   - Finance Website
@@ -39,6 +39,9 @@ Portfolio v1.4 focuses on recruiter clarity, audit-score improvement, and a stro
   - IoT Home Automation
   - Embedded Systems
   - Sign Language Converter
+  - College Website Management System
+  - Job Portal System
+  - Learning Management System (LMS)
 - Repo Soon status is shown where public repositories are not available yet.
 - Achievement cards for portfolio progress, frontend execution, and product workflow thinking.
 - Testimonials section written from recruiter, team, and client perspectives.

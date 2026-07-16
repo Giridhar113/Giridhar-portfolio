@@ -61,6 +61,20 @@ This portfolio highlights my professional summary, technical skills, experience,
    - Python gesture recognition prototype converting 10 ASL signs to text using OpenCV and basic ML.
    - Technologies: Python, OpenCV, basic ML.
 
+8. College Website Management System
+   - Role-based educational portal with Admin, Teacher, and Student dashboards, attendance tracking, announcements, academic information, and management tools.
+   - Technologies: HTML, CSS, JavaScript, LocalStorage.
+
+9. Job Portal System
+   - Recruitment platform where job seekers can browse opportunities, search jobs, apply for positions, and track applications while recruiters can manage listings.
+   - Technologies: HTML, CSS, JavaScript, LocalStorage, EmailJS.
+   - Status: Coming Soon / Under Development.
+
+10. Learning Management System (LMS)
+   - Online learning platform designed for course management, student progress tracking, quizzes, certifications, and learning analytics.
+   - Technologies: HTML, CSS, JavaScript, LocalStorage.
+   - Status: Coming Soon / Under Development.
+
 ## Contact
 
 - Email: giridhar.parlapalli1@gmail.com
@@ -88,7 +102,7 @@ Portfolio v1.5 includes:
 
 - Achievement cards that highlight portfolio progress, frontend execution, and product workflow thinking
 - Testimonials section written from recruiter, team, and client perspectives
-- Updated Featured Projects section with the 7-project set: Portfolio, Kaira Commerce, Finance Website, Travel Website, IoT Home Automation, Embedded Systems, and Sign Language Converter
+- Updated Featured Projects section with all 10 projects: Portfolio, Kaira Commerce, Finance Website, Travel Website, IoT Home Automation, Embedded Systems, Sign Language Converter, College Website Management, Job Portal, and LMS
 - SEO meta descriptions, Open Graph tags, and canonical URLs across all HTML pages
 - Optimized WebP profile image for faster page load
 
