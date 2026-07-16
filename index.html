@@ -365,6 +365,37 @@
         radial-gradient(circle at 52% 65%, rgba(79,168,232,0.1), transparent 45%);
     }
 
+    .avatar-profile-reference {
+      position: absolute;
+      top: 82px;
+      right: 22px;
+      z-index: 4;
+      width: 96px;
+      border: 1px solid rgba(56,201,160,0.22);
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(8,12,20,0.68);
+      box-shadow: 0 18px 48px rgba(0,0,0,0.32), 0 0 28px rgba(56,201,160,0.12);
+      transform: translateZ(0);
+    }
+
+    .avatar-profile-reference img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1.05;
+      object-fit: cover;
+    }
+
+    .avatar-profile-reference span {
+      display: block;
+      padding: 7px 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      background: rgba(8,12,20,0.82);
+    }
+
     .avatar-loading,
     .avatar-caption {
       position: absolute;
@@ -1613,6 +1644,13 @@
         min-height: 380px;
         margin: 0 auto;
       }
+      .avatar-profile-reference {
+        top: 76px;
+        right: 18px;
+        width: 74px;
+        border-radius: 8px;
+      }
+      .avatar-profile-reference span { display: none; }
       .hero-eyebrow {
         justify-content: center;
         font-size: 10px;
@@ -1786,6 +1824,10 @@
       <div class="hero-avatar-wrap" id="avatarHero" aria-label="3D talking avatar intro">
         <div id="talkingAvatar" aria-hidden="true"></div>
         <div class="avatar-no-three" id="avatarNoThree">Captions are ready even if 3D is unavailable.</div>
+        <div class="avatar-profile-reference">
+          <img src="assets/giridhar-profile-mosaic.png" alt="Giridhar Reddy profile portraits" loading="eager" decoding="async">
+          <span>PROFILE</span>
+        </div>
         <div class="avatar-loading" id="avatarLoading">Self-contained 3D character ready</div>
         <div class="avatar-caption" id="avatarCaption">Click Play Intro to hear a short portfolio summary.</div>
         <button class="avatar-play-btn play-intro-trigger" type="button">Play Intro</button>
