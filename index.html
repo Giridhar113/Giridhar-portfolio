@@ -1009,6 +1009,24 @@
       flex: 1;
     }
 
+    .project-outcomes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .project-outcomes span {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      line-height: 1.4;
+      color: var(--text);
+      border: 1px solid rgba(79,168,232,0.16);
+      border-radius: 999px;
+      background: rgba(79,168,232,0.06);
+      padding: 6px 9px;
+    }
+
     .project-stack-title {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
@@ -1228,14 +1246,18 @@
     }
 
     .story-grid,
-    .quiz-grid {
+    .quiz-grid,
+    .learning-grid,
+    .hire-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
 
     .story-card,
-    .quiz-card {
+    .quiz-card,
+    .learning-card,
+    .hire-card {
       background: var(--card);
       border: 1px solid var(--border2);
       border-radius: 8px;
@@ -1244,13 +1266,17 @@
     }
 
     .story-card:hover,
-    .quiz-card:hover {
+    .quiz-card:hover,
+    .learning-card:hover,
+    .hire-card:hover {
       border-color: rgba(56,201,160,0.32);
       transform: translateY(-2px);
     }
 
     .story-time,
-    .quiz-label {
+    .quiz-label,
+    .learning-label,
+    .hire-label {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
       color: var(--accent);
@@ -1260,7 +1286,9 @@
     }
 
     .story-card h3,
-    .quiz-card h3 {
+    .quiz-card h3,
+    .learning-card h3,
+    .hire-card h3 {
       font-family: 'Syne', sans-serif;
       font-size: 16px;
       color: var(--text);
@@ -1270,10 +1298,25 @@
 
     .story-card p,
     .quiz-card p,
+    .learning-card p,
+    .hire-card p,
     .quiz-result {
       font-size: 13px;
       color: var(--muted);
       line-height: 1.75;
+    }
+
+    .learning-panel {
+      margin-top: 28px;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(15,26,46,0.72);
+    }
+
+    .learning-panel .section-title {
+      font-size: clamp(22px, 3vw, 28px);
+      margin-bottom: 22px;
     }
 
     .quiz-panel {
@@ -1360,6 +1403,32 @@
     }
 
     .contact-item:hover { border-color: var(--accent); }
+
+    .contact-item-panel {
+      align-items: flex-start;
+      cursor: default;
+    }
+
+    .contact-item-panel:hover {
+      transform: none;
+    }
+
+    .contact-mini-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 9px;
+    }
+
+    .contact-mini-list span {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text);
+      border: 1px solid rgba(56,201,160,0.16);
+      border-radius: 999px;
+      padding: 5px 8px;
+      background: rgba(56,201,160,0.06);
+    }
 
     .download-card .contact-item-icon {
       display: inline-flex;
@@ -1807,6 +1876,8 @@
     .testimonial-card,
     .story-card,
     .quiz-card,
+    .learning-card,
+    .hire-card,
     .proof-card,
     .contact-form,
     .contact-item,
@@ -1899,6 +1970,8 @@
       .story-grid,
       .achievement-grid,
       .testimonial-grid,
+      .learning-grid,
+      .hire-grid,
       .quiz-grid,
       .quiz-controls { grid-template-columns: 1fr; }
       .proof-grid { grid-template-columns: 1fr 1fr; }
@@ -1906,6 +1979,8 @@
       .project-card,
       .achievement-card,
       .testimonial-card,
+      .learning-card,
+      .hire-card,
       .proof-card,
       .contact-form,
       .stat-card { padding: 22px 18px; }
@@ -2325,6 +2400,28 @@
         </ul>
       </div>
 
+      <div class="learning-panel">
+        <p class="section-label">LEARNING &nbsp; NOW</p>
+        <h3 class="section-title">Currently Learning</h3>
+        <div class="learning-grid">
+          <article class="learning-card">
+            <div class="learning-label">Frontend Upgrade</div>
+            <h3>React + TypeScript</h3>
+            <p>Building stronger component thinking, typed props, reusable UI patterns, and cleaner state handling.</p>
+          </article>
+          <article class="learning-card">
+            <div class="learning-label">Backend Basics</div>
+            <h3>Node.js + APIs</h3>
+            <p>Practicing REST API structure, Express routes, request handling, and simple backend workflows.</p>
+          </article>
+          <article class="learning-card">
+            <div class="learning-label">Full-Stack Path</div>
+            <h3>MongoDB + Deployment</h3>
+            <p>Preparing for database-backed dashboards, authentication flows, and production-ready deployments.</p>
+          </article>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -2525,11 +2622,11 @@
       </div>
       <div class="project-filter-status" id="projectFilterStatus" aria-live="polite">Showing all 10 projects.</div>
       <div class="project-filter-tabs" aria-label="Project category filters">
-        <button class="project-filter-tab active" type="button" data-project-filter="all" aria-pressed="true">All</button>
-        <button class="project-filter-tab" type="button" data-project-filter="frontend" aria-pressed="false">Frontend</button>
-        <button class="project-filter-tab" type="button" data-project-filter="systems" aria-pressed="false">ECE / IoT</button>
-        <button class="project-filter-tab" type="button" data-project-filter="ml" aria-pressed="false">ML</button>
-        <button class="project-filter-tab" type="button" data-project-filter="soon" aria-pressed="false">Coming Soon</button>
+        <button class="project-filter-tab active" type="button" data-project-filter="all" aria-pressed="true">All (10)</button>
+        <button class="project-filter-tab" type="button" data-project-filter="frontend" aria-pressed="false">Frontend (7)</button>
+        <button class="project-filter-tab" type="button" data-project-filter="systems" aria-pressed="false">ECE / IoT (2)</button>
+        <button class="project-filter-tab" type="button" data-project-filter="ml" aria-pressed="false">ML (1)</button>
+        <button class="project-filter-tab" type="button" data-project-filter="soon" aria-pressed="false">Coming Soon (2)</button>
       </div>
       <div class="projects-grid">
         <div class="project-card" data-project-type="frontend" data-project-status="completed">
@@ -2538,6 +2635,7 @@
           <div class="project-title">Portfolio Website</div>
           <div class="project-status case-study">Case Study Available</div>
           <p class="project-desc">A personal developer portfolio showcasing my skills, projects, learning journey, and professional growth as a Full-Stack Developer.</p>
+          <div class="project-outcomes"><span>Recruiter-ready</span><span>Scroll animations</span><span>Web3Forms contact</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
             <span class="tag">HTML</span>
@@ -2558,6 +2656,7 @@
           <div class="project-title">Kaira Commerce Website</div>
           <div class="project-status completed">Completed</div>
           <p class="project-desc">Built a 6-page responsive e-commerce UI with product grid, filters, and cart — fully mobile-optimized.</p>
+          <div class="project-outcomes"><span>6-page UI</span><span>Product grid</span><span>Cart flow</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
             <span class="tag">HTML</span>
@@ -2575,6 +2674,7 @@
           <div class="project-title">Finance Website</div>
           <div class="project-status completed">Completed</div>
           <p class="project-desc">Designed a trust-focused 5-section landing page with service cards, testimonials, and lead capture CTA.</p>
+          <div class="project-outcomes"><span>5 sections</span><span>Lead CTA</span><span>Trust layout</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
             <span class="tag">HTML</span>
@@ -2592,6 +2692,7 @@
           <div class="project-title">Travel Website</div>
           <div class="project-status case-study">Case Study Available</div>
           <p class="project-desc">Created a destination discovery UI with hero video placeholder, card grid, and responsive booking CTA.</p>
+          <div class="project-outcomes"><span>Booking CTA</span><span>Destination cards</span><span>Mobile layout</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
             <span class="tag">HTML</span>
@@ -2610,6 +2711,7 @@
           <div class="project-title">IoT Home Automation</div>
           <div class="project-status completed">Completed</div>
           <p class="project-desc">Architected a 3-tier IoT system for remote appliance control — simulated in Cisco Packet Tracer with 6 devices.</p>
+          <div class="project-outcomes"><span>3-tier system</span><span>6 devices</span><span>Remote control</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
             <span class="tag">IoT</span>
@@ -2626,6 +2728,7 @@
           <div class="project-title">Embedded Systems</div>
           <div class="project-status completed">Completed</div>
           <p class="project-desc">Developed 4 embedded apps on ARM Cortex-M0+ KL25Z board — UART control, LED FSM, 7-segment display, MBED.</p>
+          <div class="project-outcomes"><span>4 apps</span><span>UART control</span><span>KL25Z board</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
             <span class="tag">Embedded C</span>
@@ -2642,6 +2745,7 @@
           <div class="project-title">Sign Language Converter</div>
           <div class="project-status completed">Prototype</div>
           <p class="project-desc">Built a Python gesture recognition prototype converting 10 ASL signs to text using OpenCV and basic ML.</p>
+          <div class="project-outcomes"><span>10 ASL signs</span><span>OpenCV</span><span>Text output</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
             <span class="tag">Python</span>
@@ -2658,6 +2762,7 @@
           <div class="project-title">College Website Management System</div>
           <div class="project-status case-study">Case Study Available</div>
           <p class="project-desc">A role-based educational portal with Admin, Teacher, and Student dashboards, attendance tracking, announcements, academic information, and management tools.</p>
+          <div class="project-outcomes"><span>Role dashboards</span><span>Attendance</span><span>Announcements</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
             <span class="tag">HTML</span>
@@ -2675,6 +2780,7 @@
           <div class="project-preview preview-job" aria-label="Job Portal System preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">Job Portal</div><div class="preview-line" style="width:76%"></div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-block"></div></div></div>
           <div class="project-title">Job Portal System</div>
           <p class="project-desc">A recruitment platform where job seekers can browse opportunities, search jobs, apply for positions, and track applications while recruiters can manage listings.</p>
+          <div class="project-outcomes"><span>Job search</span><span>Applications</span><span>Recruiter tools</span></div>
           <div class="project-status">Coming Soon / Under Development</div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
@@ -2694,6 +2800,7 @@
           <div class="project-preview preview-lms" aria-label="Learning Management System preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">LMS Dashboard</div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-line" style="width:68%"></div></div></div>
           <div class="project-title">Learning Management System (LMS)</div>
           <p class="project-desc">An online learning platform designed for course management, student progress tracking, quizzes, certifications, and learning analytics.</p>
+          <div class="project-outcomes"><span>Course flow</span><span>Quizzes</span><span>Progress tracking</span></div>
           <div class="project-status">Coming Soon / Under Development</div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="skill-tags">
@@ -2870,10 +2977,37 @@
 
   <div class="divider"></div>
 
+  <!-- WHY HIRE ME -->
+  <section id="why-hire">
+    <div class="section-wrap">
+      <p class="section-label">10 &nbsp; WHY HIRE ME</p>
+      <h2 class="section-title">Why I Am a Strong Fit</h2>
+      <div class="hire-grid">
+        <article class="hire-card">
+          <div class="hire-label">Execution</div>
+          <h3>Fast learner</h3>
+          <p>I move quickly from feedback to implementation, keep changes organized, and improve the portfolio through clear release goals.</p>
+        </article>
+        <article class="hire-card">
+          <div class="hire-label">Frontend</div>
+          <h3>UI delivery mindset</h3>
+          <p>I focus on responsive layouts, readable spacing, recruiter-friendly project proof, and practical user flows.</p>
+        </article>
+        <article class="hire-card">
+          <div class="hire-label">Engineering</div>
+          <h3>ECE problem solving</h3>
+          <p>My electronics background helps me debug carefully, understand systems, and approach frontend work with structure.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- CONTACT -->
   <section id="contact">
     <div class="section-wrap">
-      <p class="section-label">10 &nbsp; CONTACT</p>
+      <p class="section-label">11 &nbsp; CONTACT</p>
       <h2 class="section-title">Let's Connect</h2>
       <div class="contact-grid">
         <div class="contact-intro">
@@ -2901,6 +3035,29 @@
           </form>
         </div>
         <div class="contact-links">
+          <article class="contact-item contact-item-panel">
+            <div class="contact-item-icon">OK</div>
+            <div>
+              <div class="contact-item-label">AVAILABILITY</div>
+              <div class="contact-item-value">Open to frontend and associate software engineer roles</div>
+              <div class="contact-mini-list">
+                <span>Hyderabad</span>
+                <span>Remote ready</span>
+                <span>Interview ready</span>
+              </div>
+            </div>
+          </article>
+          <article class="contact-item contact-item-panel">
+            <div class="contact-item-icon">GH</div>
+            <div>
+              <div class="contact-item-label">GITHUB PREVIEW</div>
+              <div class="contact-item-value">Public portfolio repo and project work available</div>
+              <div class="contact-mini-list">
+                <span>github.com/Giridhar113</span>
+                <span>Portfolio repo live</span>
+              </div>
+            </div>
+          </article>
           <a href="mailto:giridhar.parlapalli1@gmail.com" class="contact-item" data-copy="giridhar.parlapalli1@gmail.com">
             <div class="contact-item-icon">✉</div>
             <div>
@@ -3008,7 +3165,7 @@
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('section .section-wrap, .project-card, .achievement-card, .testimonial-card, .proof-card, .contact-item').forEach((el) => {
+    document.querySelectorAll('section .section-wrap, .project-card, .achievement-card, .testimonial-card, .learning-card, .hire-card, .proof-card, .contact-item').forEach((el) => {
       el.classList.add('reveal');
       revealObserver.observe(el);
     });
