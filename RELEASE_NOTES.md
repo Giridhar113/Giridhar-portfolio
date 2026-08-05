@@ -1,5 +1,26 @@
 # Release Notes
 
+## Portfolio v1.6
+
+Portfolio v1.6 focuses on complete project proof and a more recruiter-friendly Projects page.
+
+### Added
+
+- Case-study pages for Kaira Commerce Website, Finance Website, IoT Home Automation, Embedded Systems, and Sign Language Converter.
+- Project category filters on `projects.html`: All, Frontend, ECE / IoT, ML, and Coming Soon.
+- Outcome chips on Projects page cards for faster recruiter scanning.
+- Sitemap entries for every case-study page.
+
+### Improved
+
+- Homepage project cards now link to the new case studies.
+- Project status labels now show Case Study Available where deeper proof exists.
+- Footer and visible release text now reflect Portfolio v1.6.
+
+### Notes
+
+- Individual GitHub repository buttons remain marked as Repo Soon/GitHub Soon until real public repositories are available.
+
 ## Portfolio v1.5
 
 Portfolio v1.5 focuses on proof, project case studies, PDF resume access, and recruiter trust.

@@ -178,6 +178,43 @@
       line-height: 1.15;
     }
 
+    .project-filter-status {
+      margin: -20px 0 22px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    .project-filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .project-filter-tab {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      background: rgba(15,26,46,0.86);
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+
+    .project-filter-tab:hover,
+    .project-filter-tab:focus-visible,
+    .project-filter-tab.active {
+      color: var(--accent);
+      border-color: rgba(56,201,160,0.4);
+      background: rgba(56,201,160,0.08);
+      transform: translateY(-1px);
+    }
+
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -272,6 +309,24 @@
       color: var(--muted);
       line-height: 1.7;
       flex: 1;
+    }
+
+    .project-outcomes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .project-outcomes span {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      line-height: 1.4;
+      color: var(--text);
+      border: 1px solid rgba(56,201,160,0.18);
+      background: rgba(56,201,160,0.06);
+      border-radius: 999px;
+      padding: 5px 8px;
     }
 
     .project-stack-title {
@@ -418,6 +473,7 @@
     .delay-1 { animation-delay: 0.1s; }
     .delay-2 { animation-delay: 0.2s; }
     .delay-3 { animation-delay: 0.3s; }
+    .is-hidden { display: none; }
 
     @media (max-width: 760px) {
       nav {
@@ -437,6 +493,13 @@
       .nav-links::-webkit-scrollbar { display: none; }
       .page-wrap { padding: 0 20px; }
       .projects-grid { grid-template-columns: 1fr; }
+      .project-filter-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+      .project-filter-tabs::-webkit-scrollbar { display: none; }
+      .project-filter-tab { flex: 0 0 auto; }
       .project-card { min-height: auto; }
       .project-actions { flex-direction: column; }
       .project-link { text-align: center; }
@@ -480,9 +543,17 @@
     <section class="section-wrap">
       <p class="section-label fade-up">01 &nbsp; SELECTED WORK</p>
       <h2 class="section-title fade-up delay-1">Featured Projects</h2>
+      <div class="project-filter-status" id="projectFilterStatus" aria-live="polite">Showing all 10 projects.</div>
+      <div class="project-filter-tabs" aria-label="Project category filters">
+        <button class="project-filter-tab active" type="button" data-project-filter="all" aria-pressed="true">All (10)</button>
+        <button class="project-filter-tab" type="button" data-project-filter="frontend" aria-pressed="false">Frontend (7)</button>
+        <button class="project-filter-tab" type="button" data-project-filter="systems" aria-pressed="false">ECE / IoT (2)</button>
+        <button class="project-filter-tab" type="button" data-project-filter="ml" aria-pressed="false">ML (1)</button>
+        <button class="project-filter-tab" type="button" data-project-filter="soon" aria-pressed="false">Coming Soon (2)</button>
+      </div>
 
       <div class="projects-grid">
-        <article class="project-card fade-up delay-1">
+        <article class="project-card fade-up delay-1" data-project-type="frontend" data-project-status="completed">
           <div class="project-num">01</div>
           <div class="project-preview preview-portfolio" aria-label="Portfolio Website preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div><div class="preview-label">Portfolio</div><div class="preview-line" style="width:70%; margin-top:8px"></div><div class="preview-line" style="width:48%; margin-top:8px"></div></div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div></div></div>
           <h3 class="project-title">Portfolio Website</h3>
@@ -492,6 +563,7 @@
             <li>Uses smooth animations, theme switching, mobile navigation, and SEO-focused structure.</li>
             <li>Built as a professional developer brand website for recruiter review.</li>
           </ul>
+          <div class="project-outcomes"><span>Recruiter-ready</span><span>Scroll animations</span><span>Web3Forms contact</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="tag-row">
             <span class="tag">HTML</span>
@@ -507,7 +579,7 @@
           </div>
         </article>
 
-        <article class="project-card fade-up delay-2">
+        <article class="project-card fade-up delay-2" data-project-type="frontend" data-project-status="completed">
           <div class="project-num">02</div>
           <div class="project-preview preview-shop" aria-label="Kaira Commerce Website preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">Kaira Commerce</div><div class="preview-block"></div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div></div></div>
           <h3 class="project-title">Kaira Commerce Website</h3>
@@ -517,6 +589,7 @@
             <li>Designed responsive grid sections for product discovery, filtering, and cart-focused flows.</li>
             <li>Focused on clean mobile spacing and conversion-friendly e-commerce UI patterns.</li>
           </ul>
+          <div class="project-outcomes"><span>6-page UI</span><span>Product grid</span><span>Cart flow</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="tag-row">
             <span class="tag">HTML</span>
@@ -526,10 +599,11 @@
           </div>
           <div class="project-actions">
             <span class="project-link project-link-muted">GitHub Soon</span>
+            <a href="case-studies/kaira-commerce-website.html" class="project-link">Case Study</a>
           </div>
         </article>
 
-        <article class="project-card fade-up delay-3">
+        <article class="project-card fade-up delay-3" data-project-type="frontend" data-project-status="completed">
           <div class="project-num">03</div>
           <div class="project-preview preview-finance" aria-label="Finance Website preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">Finance Website</div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-line" style="width:82%"></div><div class="preview-line" style="width:54%"></div></div></div>
           <h3 class="project-title">Finance Website</h3>
@@ -539,6 +613,7 @@
             <li>Used clear hierarchy and CTA placement to make the page feel business-ready.</li>
             <li>Focused on professional copy structure, card layout, and responsive spacing.</li>
           </ul>
+          <div class="project-outcomes"><span>5 sections</span><span>Lead CTA</span><span>Trust layout</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="tag-row">
             <span class="tag">HTML</span>
@@ -548,10 +623,11 @@
           </div>
           <div class="project-actions">
             <span class="project-link project-link-muted">GitHub Soon</span>
+            <a href="case-studies/finance-website.html" class="project-link">Case Study</a>
           </div>
         </article>
 
-        <article class="project-card fade-up delay-3">
+        <article class="project-card fade-up delay-3" data-project-type="frontend" data-project-status="completed">
           <div class="project-num">04</div>
           <div class="project-preview preview-travel" aria-label="Travel Website preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">Travel Planner</div><div class="preview-block"></div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div></div></div>
           <h3 class="project-title">Travel Website</h3>
@@ -561,6 +637,7 @@
             <li>Used LocalStorage for client-side travel preferences, saved items, or planning data.</li>
             <li>Designed for modern travel discovery with clear calls to action and mobile-friendly browsing.</li>
           </ul>
+          <div class="project-outcomes"><span>Booking CTA</span><span>Destination cards</span><span>Mobile layout</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="tag-row">
             <span class="tag">HTML</span>
@@ -574,7 +651,7 @@
           </div>
         </article>
 
-        <article class="project-card fade-up delay-3">
+        <article class="project-card fade-up delay-3" data-project-type="systems" data-project-status="completed">
           <div class="project-num">05</div>
           <div class="project-preview preview-iot" aria-label="IoT Home Automation preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">IoT Control</div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-line" style="width:68%"></div></div></div>
           <h3 class="project-title">IoT Home Automation</h3>
@@ -584,6 +661,7 @@
             <li>Simulated a 6-device IoT environment using Cisco Packet Tracer.</li>
             <li>Shows ECE/system-thinking strength alongside frontend development skills.</li>
           </ul>
+          <div class="project-outcomes"><span>3-tier system</span><span>6 devices</span><span>Remote control</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="tag-row">
             <span class="tag">IoT</span>
@@ -592,10 +670,11 @@
           </div>
           <div class="project-actions">
             <span class="project-link project-link-muted">GitHub Soon</span>
+            <a href="case-studies/iot-home-automation.html" class="project-link">Case Study</a>
           </div>
         </article>
 
-        <article class="project-card fade-up delay-3">
+        <article class="project-card fade-up delay-3" data-project-type="systems" data-project-status="completed">
           <div class="project-num">06</div>
           <div class="project-preview preview-embedded" aria-label="Embedded Systems preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">Embedded Apps</div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-line" style="width:74%"></div></div></div>
           <h3 class="project-title">Embedded Systems</h3>
@@ -605,6 +684,7 @@
             <li>Worked with ARM Cortex-M0+ KL25Z board workflows and embedded C logic.</li>
             <li>Strengthens low-level debugging, hardware control, and systems fundamentals.</li>
           </ul>
+          <div class="project-outcomes"><span>4 apps</span><span>UART control</span><span>KL25Z board</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="tag-row">
             <span class="tag">Embedded C</span>
@@ -613,10 +693,11 @@
           </div>
           <div class="project-actions">
             <span class="project-link project-link-muted">GitHub Soon</span>
+            <a href="case-studies/embedded-systems.html" class="project-link">Case Study</a>
           </div>
         </article>
 
-        <article class="project-card fade-up delay-3">
+        <article class="project-card fade-up delay-3" data-project-type="ml" data-project-status="completed">
           <div class="project-num">07</div>
           <div class="project-preview preview-sign" aria-label="Sign Language Converter preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">Gesture AI</div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-line" style="width:64%"></div></div></div>
           <h3 class="project-title">Sign Language Converter</h3>
@@ -626,6 +707,7 @@
             <li>Used OpenCV and basic ML concepts to convert detected hand signs into text output.</li>
             <li>Shows willingness to explore practical AI/ML and accessibility-focused ideas.</li>
           </ul>
+          <div class="project-outcomes"><span>10 ASL signs</span><span>OpenCV</span><span>Text output</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="tag-row">
             <span class="tag">Python</span>
@@ -634,10 +716,11 @@
           </div>
           <div class="project-actions">
             <span class="project-link project-link-muted">GitHub Soon</span>
+            <a href="case-studies/sign-language-converter.html" class="project-link">Case Study</a>
           </div>
         </article>
 
-        <article class="project-card fade-up delay-3">
+        <article class="project-card fade-up delay-3" data-project-type="frontend" data-project-status="completed">
           <div class="project-num">08</div>
           <div class="project-preview preview-college" aria-label="College Website Management System preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">College Portal</div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-line" style="width:82%"></div><div class="preview-line" style="width:54%"></div></div></div>
           <h3 class="project-title">College Website Management System</h3>
@@ -647,6 +730,7 @@
             <li>Covers attendance, announcements, academic information, and management tools.</li>
             <li>Uses LocalStorage to simulate dashboard data and keep the project frontend-focused.</li>
           </ul>
+          <div class="project-outcomes"><span>Role dashboards</span><span>Attendance</span><span>Announcements</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="tag-row">
             <span class="tag">HTML</span>
@@ -660,7 +744,7 @@
           </div>
         </article>
 
-        <article class="project-card fade-up delay-3">
+        <article class="project-card fade-up delay-3" data-project-type="frontend" data-project-status="soon">
           <div class="project-num">09</div>
           <div class="project-preview preview-job" aria-label="Job Portal System preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">Job Portal</div><div class="preview-line" style="width:76%"></div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-block"></div></div></div>
           <h3 class="project-title">Job Portal System</h3>
@@ -671,6 +755,7 @@
             <li>Planned EmailJS flow can support inquiry or application notification behavior.</li>
             <li>Status is clearly marked as under development to keep expectations honest.</li>
           </ul>
+          <div class="project-outcomes"><span>Job search</span><span>Applications</span><span>Recruiter tools</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="tag-row">
             <span class="tag">HTML</span>
@@ -685,7 +770,7 @@
           </div>
         </article>
 
-        <article class="project-card fade-up delay-3">
+        <article class="project-card fade-up delay-3" data-project-type="frontend" data-project-status="soon">
           <div class="project-num">10</div>
           <div class="project-preview preview-lms" aria-label="Learning Management System preview"><div class="preview-bar"><span class="preview-dot"></span><span class="preview-dot"></span><span class="preview-dot"></span></div><div class="preview-body"><div class="preview-label">LMS Dashboard</div><div class="preview-grid"><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span><span class="preview-card-mini"></span></div><div class="preview-line" style="width:68%"></div></div></div>
           <h3 class="project-title">Learning Management System (LMS)</h3>
@@ -696,6 +781,7 @@
             <li>Uses LocalStorage for simulated student progress and learning-state persistence.</li>
             <li>Status is clearly marked as under development while the platform flow is being built.</li>
           </ul>
+          <div class="project-outcomes"><span>Course flow</span><span>Quizzes</span><span>Progress tracking</span></div>
           <div class="project-stack-title">TECH STACK</div>
           <div class="tag-row">
             <span class="tag">HTML</span>
@@ -714,7 +800,42 @@
   </main>
 
   <footer>
-    <p>Portfolio v1.5 · 2026 Giridhar Reddy Parlapalli · All Rights Reserved</p>
+    <p>Portfolio v1.6 - 2026 Giridhar Reddy Parlapalli - All Rights Reserved</p>
   </footer>
+  <script>
+    const projectFilterButtons = document.querySelectorAll('[data-project-filter]');
+    const projectCards = document.querySelectorAll('.project-card[data-project-type]');
+    const projectFilterStatus = document.getElementById('projectFilterStatus');
+    const projectFilterLabels = {
+      all: 'Showing all 10 projects.',
+      frontend: 'Showing 7 frontend projects.',
+      systems: 'Showing 2 ECE / IoT projects.',
+      ml: 'Showing 1 ML prototype.',
+      soon: 'Showing 2 coming-soon projects.'
+    };
+
+    const applyProjectFilter = (filter) => {
+      projectCards.forEach((card) => {
+        const matchesType = card.dataset.projectType === filter;
+        const matchesStatus = filter === 'soon' && card.dataset.projectStatus === 'soon';
+        const visible = filter === 'all' || matchesType || matchesStatus;
+        card.classList.toggle('is-hidden', !visible);
+      });
+
+      projectFilterButtons.forEach((button) => {
+        const active = button.dataset.projectFilter === filter;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+
+      if (projectFilterStatus) {
+        projectFilterStatus.textContent = projectFilterLabels[filter] || projectFilterLabels.all;
+      }
+    };
+
+    projectFilterButtons.forEach((button) => {
+      button.addEventListener('click', () => applyProjectFilter(button.dataset.projectFilter));
+    });
+  </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-# Portfolio v1.5
+# Portfolio v1.6
 
 Job-ready personal portfolio for Giridhar Reddy Parlapalli, built as a static HTML/CSS website.
 
@@ -85,8 +85,15 @@ This portfolio highlights my professional summary, technical skills, experience,
 
 Full release history is available in [`RELEASE_NOTES.md`](RELEASE_NOTES.md).
 
-Portfolio v1.5 focuses on proof, project case studies, PDF resume access, and recruiter trust.
+Portfolio v1.6 focuses on complete project proof, synced filtering, sitemap coverage, and recruiter-ready project case studies.
 
+Portfolio v1.6 includes:
+
+- Project filters on the dedicated Projects page: All, Frontend, ECE / IoT, ML, and Coming Soon.
+- Case-study pages for all 10 listed projects.
+- Outcome chips on project cards so recruiters can scan proof faster.
+- Updated sitemap entries for every case-study page.
+- Honest GitHub/Profile links where individual public repositories are not available yet.
 
 Portfolio v1.5 includes:
 
