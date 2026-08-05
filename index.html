@@ -944,6 +944,67 @@
       transform: translateY(-3px);
     }
 
+    .project-roadmap-card {
+      grid-column: span 2;
+      min-height: 300px;
+      display: grid;
+      align-content: center;
+      gap: 18px;
+      padding: 34px;
+      border: 1px solid rgba(56,201,160,0.18);
+      border-radius: 8px;
+      background:
+        linear-gradient(rgba(79,168,232,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,168,232,0.04) 1px, transparent 1px),
+        radial-gradient(circle at 82% 22%, rgba(56,201,160,0.12), transparent 30%),
+        rgba(15,26,46,0.62);
+      background-size: 26px 26px, 26px 26px, auto, auto;
+    }
+
+    .roadmap-kicker {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .roadmap-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.12;
+      color: var(--text);
+      max-width: 620px;
+    }
+
+    .roadmap-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .roadmap-item {
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      padding: 14px;
+      background: rgba(8,12,20,0.42);
+    }
+
+    .roadmap-item strong {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+
+    .roadmap-item span {
+      display: block;
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
     .project-media {
       width: 100%;
       aspect-ratio: 16 / 10;
@@ -2001,6 +2062,7 @@
     }
 
     .project-card,
+    .project-roadmap-card,
     .achievement-card,
     .testimonial-card,
     .story-card,
@@ -2018,6 +2080,11 @@
     }
 
     .project-card {
+      min-height: 100%;
+    }
+
+    .project-roadmap-card {
+      grid-column: span 2;
       min-height: 100%;
     }
 
@@ -2106,6 +2173,7 @@
       .proof-grid { grid-template-columns: 1fr 1fr; }
       .section-wrap { padding: 72px 0 48px; }
       .project-card,
+      .project-roadmap-card,
       .achievement-card,
       .testimonial-card,
       .learning-card,
@@ -2113,6 +2181,8 @@
       .proof-card,
       .contact-form,
       .stat-card { padding: 22px 18px; }
+      .project-roadmap-card { grid-column: 1 / -1; }
+      .roadmap-list { grid-template-columns: 1fr; }
       .mobile-bottom-nav {
         position: fixed;
         left: 12px;
@@ -2951,6 +3021,28 @@
             <span class="project-link project-link-muted">Repo Soon</span>
           </div>
         </div>
+        <aside class="project-roadmap-card" aria-label="Project roadmap">
+          <div class="roadmap-kicker">Project Roadmap</div>
+          <h3 class="roadmap-title">Next polish: turn every project card into recruiter proof.</h3>
+          <div class="roadmap-list">
+            <div class="roadmap-item">
+              <strong>01 Repos</strong>
+              <span>Create clean public GitHub repositories for Kaira, Finance, Travel, Job Portal, and LMS.</span>
+            </div>
+            <div class="roadmap-item">
+              <strong>02 Demos</strong>
+              <span>Deploy completed frontend builds and replace Repo Soon labels with real links.</span>
+            </div>
+            <div class="roadmap-item">
+              <strong>03 Screens</strong>
+              <span>Add real screenshots inside case studies so recruiters can inspect the actual UI.</span>
+            </div>
+          </div>
+          <div class="project-actions">
+            <a href="projects.html" class="project-link">Open Projects Page</a>
+            <a href="#contact" class="project-link">Discuss a Role</a>
+          </div>
+        </aside>
       
       </div>
     </div>
@@ -3328,7 +3420,7 @@
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('section .section-wrap, .project-card, .achievement-card, .testimonial-card, .learning-card, .hire-card, .proof-card, .contact-item').forEach((el) => {
+    document.querySelectorAll('section .section-wrap, .project-card, .project-roadmap-card, .achievement-card, .testimonial-card, .learning-card, .hire-card, .proof-card, .contact-item').forEach((el) => {
       el.classList.add('reveal');
       revealObserver.observe(el);
     });
@@ -3370,6 +3462,7 @@
 
     const projectFilterButtons = document.querySelectorAll('[data-project-filter]');
     const projectCards = document.querySelectorAll('#projects .project-card');
+    const projectRoadmapCards = document.querySelectorAll('#projects .project-roadmap-card');
     const projectFilterStatus = document.getElementById('projectFilterStatus');
     const projectFilterLabels = {
       all: 'Showing all 10 projects.',
@@ -3389,6 +3482,10 @@
       projectCards.forEach((card) => {
         const matches = filter === 'all' || card.dataset.projectType === filter || card.dataset.projectStatus === filter;
         card.classList.toggle('is-hidden', !matches);
+      });
+
+      projectRoadmapCards.forEach((card) => {
+        card.classList.toggle('is-hidden', filter !== 'all');
       });
 
       if (projectFilterStatus) {

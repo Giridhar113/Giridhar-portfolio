@@ -238,6 +238,67 @@
       transform: translateY(-3px);
     }
 
+    .project-roadmap-card {
+      grid-column: span 2;
+      min-height: 310px;
+      display: grid;
+      align-content: center;
+      gap: 18px;
+      padding: 32px;
+      border: 1px solid rgba(56,201,160,0.18);
+      border-radius: 8px;
+      background:
+        linear-gradient(rgba(79,168,232,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,168,232,0.04) 1px, transparent 1px),
+        radial-gradient(circle at 82% 22%, rgba(56,201,160,0.12), transparent 30%),
+        rgba(15,26,46,0.62);
+      background-size: 26px 26px, 26px 26px, auto, auto;
+    }
+
+    .roadmap-kicker {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .roadmap-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.12;
+      color: var(--text);
+      max-width: 620px;
+    }
+
+    .roadmap-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .roadmap-item {
+      border: 1px solid var(--border2);
+      border-radius: 6px;
+      padding: 14px;
+      background: rgba(8,12,20,0.42);
+    }
+
+    .roadmap-item strong {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+
+    .roadmap-item span {
+      display: block;
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
     .project-media {
       width: 100%;
       aspect-ratio: 16 / 10;
@@ -493,6 +554,8 @@
       .nav-links::-webkit-scrollbar { display: none; }
       .page-wrap { padding: 0 20px; }
       .projects-grid { grid-template-columns: 1fr; }
+      .project-roadmap-card { grid-column: 1 / -1; padding: 22px 18px; }
+      .roadmap-list { grid-template-columns: 1fr; }
       .project-filter-tabs {
         flex-wrap: nowrap;
         overflow-x: auto;
@@ -794,6 +857,28 @@
             <span class="project-link project-link-muted">Repo Soon</span>
           </div>
         </article>
+        <aside class="project-roadmap-card" aria-label="Project roadmap">
+          <div class="roadmap-kicker">Project Roadmap</div>
+          <h3 class="roadmap-title">Next polish: turn every project card into recruiter proof.</h3>
+          <div class="roadmap-list">
+            <div class="roadmap-item">
+              <strong>01 Repos</strong>
+              <span>Create clean public GitHub repositories for each completed frontend build.</span>
+            </div>
+            <div class="roadmap-item">
+              <strong>02 Demos</strong>
+              <span>Deploy completed projects and replace Repo Soon labels with real links.</span>
+            </div>
+            <div class="roadmap-item">
+              <strong>03 Screens</strong>
+              <span>Add real screenshots inside case studies so recruiters can inspect the UI.</span>
+            </div>
+          </div>
+          <div class="project-actions">
+            <a href="index.html#contact" class="project-link">Contact Me</a>
+            <a href="https://github.com/Giridhar113" target="_blank" rel="noopener" class="project-link">GitHub Profile</a>
+          </div>
+        </aside>
       
       </div>
     </section>
@@ -805,6 +890,7 @@
   <script>
     const projectFilterButtons = document.querySelectorAll('[data-project-filter]');
     const projectCards = document.querySelectorAll('.project-card[data-project-type]');
+    const projectRoadmapCards = document.querySelectorAll('.project-roadmap-card');
     const projectFilterStatus = document.getElementById('projectFilterStatus');
     const projectFilterLabels = {
       all: 'Showing all 10 projects.',
@@ -820,6 +906,10 @@
         const matchesStatus = filter === 'soon' && card.dataset.projectStatus === 'soon';
         const visible = filter === 'all' || matchesType || matchesStatus;
         card.classList.toggle('is-hidden', !visible);
+      });
+
+      projectRoadmapCards.forEach((card) => {
+        card.classList.toggle('is-hidden', filter !== 'all');
       });
 
       projectFilterButtons.forEach((button) => {
