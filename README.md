@@ -1,4 +1,4 @@
-# Portfolio v1.6
+# Portfolio v1.7
 
 Job-ready personal portfolio for Giridhar Reddy Parlapalli, built as a static HTML/CSS website.
 
@@ -84,6 +84,16 @@ This portfolio highlights my professional summary, technical skills, experience,
 ## Release Notes
 
 Full release history is available in [`RELEASE_NOTES.md`](RELEASE_NOTES.md).
+
+Portfolio v1.7 focuses on recruiter conversion polish: resume preview, better contact form validation, clearer GitHub proof, and stronger UI states.
+
+Portfolio v1.7 includes:
+
+- Resume preview modal with direct PDF/DOCX download actions.
+- Web3Forms contact form loading state, validation, and clearer success/error feedback.
+- Message-length helper for cleaner recruiter inquiries.
+- Stronger GitHub/contact proof card with case-study count.
+- Version and footer sync across the portfolio.
 
 Portfolio v1.6 focuses on complete project proof, synced filtering, sitemap coverage, and recruiter-ready project case studies.
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Giridhar Reddy Parlapalli | Frontend Developer Portfolio</title>
-  <meta name="description" content="Portfolio v1.6 for Giridhar Reddy Parlapalli, a frontend-focused Associate Software Engineer with resume, skills, experience timeline, featured projects, achievements, testimonials, and Web3Forms contact.">
+  <meta name="description" content="Portfolio v1.7 for Giridhar Reddy Parlapalli, a frontend-focused Associate Software Engineer with resume preview, skills, experience timeline, featured projects, achievements, testimonials, and Web3Forms contact.">
   <meta property="og:title" content="Giridhar Reddy Parlapalli | Frontend Developer Portfolio">
   <meta property="og:description" content="Recruiter-ready developer brand website with skills, projects, resume, experience timeline, achievements, testimonials, and contact form.">
   <meta property="og:type" content="website">
@@ -1410,6 +1410,13 @@
       transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
 
+    button.contact-item {
+      width: 100%;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+
     .contact-item:hover { border-color: var(--accent); }
 
     .contact-item-panel {
@@ -1523,6 +1530,26 @@
       border: 0;
       cursor: pointer;
     }
+
+    .contact-form button.is-loading {
+      position: relative;
+      color: transparent;
+      pointer-events: none;
+    }
+
+    .contact-form button.is-loading::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      inset: 50% auto auto 50%;
+      margin: -8px 0 0 -8px;
+      border: 2px solid rgba(4,32,26,0.28);
+      border-top-color: #04201a;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
     .form-status {
       min-height: 20px;
       font-family: 'DM Mono', monospace;
@@ -1531,8 +1558,29 @@
       letter-spacing: 0.04em;
     }
 
-    .form-status.success { color: var(--accent); }
-    .form-status.error { color: var(--accent3); }
+    .form-status.success,
+    .form-status.error,
+    .form-status.info {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 9px 10px;
+      background: rgba(8,12,20,0.5);
+    }
+
+    .form-status.success { color: var(--accent); border-color: rgba(56,201,160,0.28); }
+    .form-status.error { color: var(--accent3); border-color: rgba(244,162,97,0.28); }
+    .form-status.info { color: var(--accent2); border-color: rgba(79,168,232,0.24); }
+
+    .field-hint {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: -5px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
 
     /* ── Resume Section ── */
     .resume-cols {
@@ -1700,8 +1748,81 @@
       flex-wrap: wrap;
     }
 
+    .resume-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(8,12,20,0.82);
+      backdrop-filter: blur(14px);
+    }
+
+    .resume-modal.open { display: flex; }
+
+    .resume-modal-panel {
+      width: min(940px, 100%);
+      max-height: min(760px, calc(100vh - 48px));
+      display: grid;
+      grid-template-rows: auto minmax(360px, 1fr);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 28px 90px rgba(0,0,0,0.46);
+      overflow: hidden;
+    }
+
+    .resume-modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .resume-modal-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .resume-modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .resume-modal iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 540px;
+      border: 0;
+      background: #111827;
+    }
+
+    .modal-close {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--accent);
+      border-radius: 4px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+    }
+
     @media (max-width: 700px) {
       .resume-cols { grid-template-columns: 1fr; gap: 36px; }
+      .resume-modal { padding: 12px; }
+      .resume-modal-panel { grid-template-rows: auto minmax(420px, 1fr); }
+      .resume-modal-head { align-items: flex-start; flex-direction: column; }
+      .resume-modal iframe { min-height: 520px; }
     }
 
     /* ── Footer ── */
@@ -2066,10 +2187,10 @@
           <button class="btn-primary play-intro-btn play-intro-trigger" type="button" id="playAvatarIntro">Hear Intro</button>
         </div>
         <div class="trust-badges" aria-label="Portfolio status badges">
-          <span>Version v1.6</span>
+          <span>Version v1.7</span>
           <span>Open to Work</span>
           <span>PDF Resume</span>
-          <span>Last Updated Jul 2026</span>
+          <span>Last Updated Aug 2026</span>
         </div>
       </div>
       <div class="hero-avatar-wrap" id="avatarHero" aria-label="3D talking avatar intro">
@@ -2596,6 +2717,9 @@
         <a href="resume.html" class="btn-ghost" style="display:inline-flex; align-items:center; gap:8px;">
           View Full Resume &nbsp;→
         </a>
+        <button type="button" class="btn-ghost" id="openResumePreview" style="display:inline-flex; align-items:center; gap:8px;">
+          Preview Resume
+        </button>
         <a href="RESUME.pdf" download class="btn-primary download-animate" style="display:inline-flex; align-items:center; gap:8px;">Download PDF</a>
         <a href="RESUME.docx" download class="btn-ghost download-animate" style="display:inline-flex; align-items:center; gap:8px;">Download DOCX</a>
       </div>
@@ -2842,7 +2966,7 @@
       <div class="achievement-grid">
         <article class="achievement-card">
           <div class="achievement-kicker">Developer Brand</div>
-          <h3>Portfolio v1.6 release</h3>
+          <h3>Portfolio v1.7 release</h3>
           <p>
             Expanded the portfolio with complete project case studies, category filters,
             project proof chips, resume downloads, Web3Forms contact, and mobile-first navigation.
@@ -3036,13 +3160,15 @@
           <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="627e3948-7329-474b-8e02-8b862e4f4207">
             <input type="hidden" name="from_name" value="Giridhar Portfolio Contact Form">
+            <input type="hidden" name="redirect" value="https://giridhar-portfolio.vercel.app/#contact">
             <input type="checkbox" name="botcheck" class="hidden" style="display:none">
             <div class="form-row">
               <input type="text" name="name" placeholder="Your name" aria-label="Your name" autocomplete="name" required>
               <input type="email" name="email" placeholder="Your email" aria-label="Your email" autocomplete="email" required>
             </div>
             <input type="text" name="subject" placeholder="Subject" aria-label="Message subject" required>
-            <textarea name="message" placeholder="Message" aria-label="Message" required></textarea>
+            <textarea name="message" id="messageField" placeholder="Message" aria-label="Message" minlength="20" maxlength="700" required></textarea>
+            <div class="field-hint" id="messageHint">Minimum 20 characters. Keep it short and clear.</div>
             <button type="submit" class="btn-primary">Send Message</button>
             <div class="form-status" id="formStatus" aria-live="polite"></div>
           </form>
@@ -3064,10 +3190,11 @@
             <div class="contact-item-icon">GH</div>
             <div>
               <div class="contact-item-label">GITHUB PREVIEW</div>
-              <div class="contact-item-value">Public portfolio repo and project work available</div>
+              <div class="contact-item-value">Public portfolio repo, release history, and case-study proof available</div>
               <div class="contact-mini-list">
                 <span>github.com/Giridhar113</span>
                 <span>Portfolio repo live</span>
+                <span>10 case studies</span>
               </div>
             </div>
           </article>
@@ -3106,20 +3233,37 @@
               <div class="contact-item-value">Giridhar Reddy Parlapalli</div>
             </div>
           </a>
-          <a href="RESUME.pdf" class="contact-item download-card">
+          <button type="button" class="contact-item download-card" id="openResumePreviewContact">
             <div class="contact-item-icon">↓</div>
             <div>
               <div class="contact-item-label">RESUME</div>
-              <div class="contact-item-value">Download PDF Resume</div>
+              <div class="contact-item-value">Preview PDF Resume</div>
             </div>
-          </a>
+          </button>
         </div>
       </div>
     </div>
   </section>
 
+  <div class="resume-modal" id="resumePreviewModal" aria-hidden="true" role="dialog" aria-label="Resume preview">
+    <div class="resume-modal-panel">
+      <div class="resume-modal-head">
+        <div>
+          <div class="resume-modal-title">Resume Preview</div>
+          <div class="contact-item-value">Giridhar Reddy Parlapalli - PDF Resume</div>
+        </div>
+        <div class="resume-modal-actions">
+          <a href="RESUME.pdf" download class="project-link">Download PDF</a>
+          <a href="RESUME.docx" download class="project-link">Download DOCX</a>
+          <button type="button" class="modal-close" id="closeResumePreview">Close</button>
+        </div>
+      </div>
+      <iframe src="RESUME.pdf#toolbar=0" title="Giridhar Reddy Parlapalli resume PDF preview"></iframe>
+    </div>
+  </div>
+
   <footer>
-    Portfolio v1.6 - 2026 Giridhar Reddy Parlapalli - All Rights Reserved
+    Portfolio v1.7 - 2026 Giridhar Reddy Parlapalli - All Rights Reserved
   </footer>
 
   <button class="scroll-top" id="scrollTop" type="button" aria-label="Scroll to top">↑</button>
@@ -3138,6 +3282,12 @@
     const themeToggle = document.getElementById('themeToggle');
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
+    const messageField = document.getElementById('messageField');
+    const messageHint = document.getElementById('messageHint');
+    const resumePreviewModal = document.getElementById('resumePreviewModal');
+    const openResumePreview = document.getElementById('openResumePreview');
+    const openResumePreviewContact = document.getElementById('openResumePreviewContact');
+    const closeResumePreview = document.getElementById('closeResumePreview');
     const cursorGlow = document.getElementById('cursorGlow');
     const quizButton = document.getElementById('quizButton');
     const quizResult = document.getElementById('quizResult');
@@ -3323,6 +3473,46 @@
       });
     });
 
+    const openResumeModal = () => {
+      if (!resumePreviewModal) return;
+      resumePreviewModal.classList.add('open');
+      resumePreviewModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      closeResumePreview?.focus();
+    };
+
+    const closeResumeModal = () => {
+      if (!resumePreviewModal) return;
+      resumePreviewModal.classList.remove('open');
+      resumePreviewModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    openResumePreview?.addEventListener('click', openResumeModal);
+    openResumePreviewContact?.addEventListener('click', openResumeModal);
+    closeResumePreview?.addEventListener('click', closeResumeModal);
+    resumePreviewModal?.addEventListener('click', (event) => {
+      if (event.target === resumePreviewModal) closeResumeModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && resumePreviewModal?.classList.contains('open')) {
+        closeResumeModal();
+      }
+    });
+
+    const updateMessageHint = () => {
+      if (!messageField || !messageHint) return;
+      const length = messageField.value.trim().length;
+      const remaining = Math.max(20 - length, 0);
+      messageHint.textContent = remaining
+        ? `${remaining} more characters needed.`
+        : `${length}/700 characters. Ready to send.`;
+    };
+
+    messageField?.addEventListener('input', updateMessageHint);
+    updateMessageHint();
+
     const setFormStatus = (message, type = '') => {
       if (!formStatus) return;
       formStatus.textContent = message;
@@ -3334,16 +3524,25 @@
         event.preventDefault();
         const submitButton = contactForm.querySelector('button[type="submit"]');
         const data = new FormData(contactForm);
+        const name = String(data.get('name') || '').trim();
+        const email = String(data.get('email') || '').trim();
+        const subject = String(data.get('subject') || '').trim();
+        const message = String(data.get('message') || '').trim();
 
         if (data.get('access_key') === 'YOUR_WEB3FORMS_ACCESS_KEY') {
           setFormStatus('Add your Web3Forms access key before sending.', 'error');
           return;
         }
 
+        if (name.length < 2 || subject.length < 3 || message.length < 20 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          setFormStatus('Please enter a valid name, email, subject, and a message of at least 20 characters.', 'error');
+          return;
+        }
+
         try {
           submitButton.disabled = true;
-          submitButton.textContent = 'Sending...';
-          setFormStatus('Sending message...', '');
+          submitButton.classList.add('is-loading');
+          setFormStatus('Sending message...', 'info');
 
           const response = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
@@ -3356,12 +3555,13 @@
           }
 
           contactForm.reset();
+          updateMessageHint();
           setFormStatus('Message sent successfully. I will reply soon.', 'success');
         } catch (error) {
           setFormStatus('Message could not be sent. Please use email or WhatsApp.', 'error');
         } finally {
           submitButton.disabled = false;
-          submitButton.textContent = 'Send Message';
+          submitButton.classList.remove('is-loading');
         }
       });
     }

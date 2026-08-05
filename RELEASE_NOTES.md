@@ -1,5 +1,27 @@
 # Release Notes
 
+## Portfolio v1.7
+
+Portfolio v1.7 focuses on recruiter conversion polish and contact reliability.
+
+### Added
+
+- Resume preview modal on the homepage.
+- Direct PDF and DOCX download actions inside the resume preview.
+- Web3Forms message validation before submission.
+- Contact form loading spinner and clearer info/success/error states.
+- Message-length helper for cleaner form submissions.
+
+### Improved
+
+- Contact proof card now highlights the public GitHub profile, live portfolio repo, and 10 case studies.
+- Homepage trust badges now show v1.7 and August 2026 freshness.
+- Footer version text is synced across all pages.
+
+### Notes
+
+- Project-specific GitHub buttons still remain honest as Repo Soon/GitHub Soon until those repositories are public.
+
 ## Portfolio v1.6
 
 Portfolio v1.6 focuses on complete project proof and a more recruiter-friendly Projects page.
