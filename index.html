@@ -304,17 +304,25 @@
 
     .hero-avatar-wrap {
       position: relative;
-      flex: 0 0 clamp(360px, 33vw, 430px);
-      width: clamp(360px, 33vw, 430px);
-      min-height: clamp(410px, 44vw, 468px);
+      flex: 0 0 clamp(330px, 31vw, 400px);
+      width: clamp(330px, 31vw, 400px);
+      min-height: clamp(390px, 42vw, 440px);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 12px;
       overflow: hidden;
       background:
-        radial-gradient(circle at 50% 20%, rgba(56,201,160,0.18), transparent 32%),
+        linear-gradient(rgba(79,168,232,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,168,232,0.035) 1px, transparent 1px),
+        radial-gradient(circle at 52% 26%, rgba(56,201,160,0.13), transparent 34%),
         linear-gradient(135deg, rgba(15,26,46,0.88), rgba(8,12,20,0.5));
+      background-size: 28px 28px, 28px 28px, auto, auto;
       box-shadow: 0 28px 90px rgba(0,0,0,0.3);
       animation: fadeUp 0.7s 0.5s ease both;
+    }
+
+    .hero-avatar-wrap.is-speaking {
+      border-color: rgba(56,201,160,0.34);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.34), 0 0 40px rgba(56,201,160,0.08);
     }
 
     .hero-avatar-wrap::before {
@@ -323,7 +331,7 @@
       inset: 16px;
       z-index: 3;
       border: 1px solid rgba(56,201,160,0.12);
-      border-radius: 14px;
+      border-radius: 10px;
       pointer-events: none;
     }
 
@@ -377,8 +385,8 @@
       line-height: 1.6;
       color: var(--muted);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      background: rgba(8,12,20,0.72);
+      border-radius: 6px;
+      background: rgba(8,12,20,0.78);
       backdrop-filter: blur(12px);
       padding: 10px 12px;
     }
@@ -397,7 +405,7 @@
       color: #04201a;
       background: var(--accent);
       border: 0;
-      border-radius: 999px;
+      border-radius: 6px;
       padding: 9px 12px;
       cursor: pointer;
       transition: transform 0.18s ease, opacity 0.18s ease;
@@ -1777,8 +1785,8 @@
       }
 
       .hero-avatar-wrap {
-        width: 340px;
-        min-height: 390px;
+        width: 320px;
+        min-height: 370px;
       }
 
       .hero-cta {
@@ -1795,8 +1803,8 @@
         gap: 36px;
       }
       .hero-avatar-wrap {
-        width: min(320px, 86vw);
-        min-height: 380px;
+        width: min(310px, 86vw);
+        min-height: 360px;
         margin: 0 auto;
       }
       .hero-eyebrow {
@@ -3434,59 +3442,92 @@
         try {
           scene = new THREE.Scene();
           camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-          camera.position.set(0, 0.42, 7.4);
+          camera.position.set(0, 0.36, 8.15);
 
           renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
           avatarNode.appendChild(renderer.domElement);
 
-          const ambient = new THREE.AmbientLight(0xffffff, 0.75);
-          const key = new THREE.DirectionalLight(0xffffff, 1.4);
-          key.position.set(3, 4, 5);
-          scene.add(ambient, key);
+          const ambient = new THREE.AmbientLight(0x7fd9ff, 0.56);
+          const key = new THREE.DirectionalLight(0xbef8ea, 0.82);
+          const rim = new THREE.DirectionalLight(0x4fa8e8, 0.44);
+          key.position.set(2.2, 3.2, 4.8);
+          rim.position.set(-3.5, 1.4, -2.5);
+          scene.add(ambient, key, rim);
 
           character = new THREE.Group();
+          character.scale.set(0.82, 0.82, 0.82);
+          character.position.y = -0.02;
           scene.add(character);
 
           const headMaterial = new THREE.MeshStandardMaterial({
-            color: ACCENT,
-            roughness: 0.42,
-            metalness: 0.12,
+            color: 0x249b91,
+            roughness: 0.88,
+            metalness: 0.02,
             transparent: true,
-            opacity: 0.78,
+            opacity: 0.88,
             flatShading: true
           });
           const bodyMaterial = new THREE.MeshStandardMaterial({
-            color: 0x142940,
-            roughness: 0.55,
+            color: 0x10263b,
+            roughness: 0.72,
             metalness: 0.18,
             transparent: true,
             opacity: 0.9
           });
-          const glowMaterial = new THREE.MeshBasicMaterial({ color: ACCENT });
-          const mouthMaterial = new THREE.MeshBasicMaterial({ color: ACCENT_2 });
-          head = new THREE.Mesh(new THREE.IcosahedronGeometry(1.1, 2), headMaterial);
+          const facePlateMaterial = new THREE.MeshBasicMaterial({
+            color: 0x9ff7e7,
+            transparent: true,
+            opacity: 0.13,
+            side: THREE.DoubleSide
+          });
+          const glowMaterial = new THREE.MeshBasicMaterial({ color: 0x38c9a0 });
+          const mouthMaterial = new THREE.MeshBasicMaterial({ color: 0x4fa8e8 });
+          const accentLineMaterial = new THREE.MeshBasicMaterial({
+            color: 0x38c9a0,
+            transparent: true,
+            opacity: 0.42
+          });
+
+          head = new THREE.Mesh(new THREE.IcosahedronGeometry(1.02, 2), headMaterial);
           head.position.y = 0.82;
-          head.scale.set(0.86, 1.06, 0.78);
+          head.scale.set(0.84, 1.02, 0.72);
           character.add(head);
 
-          leftEye = new THREE.Mesh(new THREE.SphereGeometry(0.075, 16, 12), glowMaterial);
+          const facePlate = new THREE.Mesh(new THREE.PlaneGeometry(0.94, 0.52), facePlateMaterial);
+          facePlate.position.set(0, 0.86, 0.77);
+          facePlate.rotation.z = -0.02;
+          character.add(facePlate);
+
+          leftEye = new THREE.Mesh(new THREE.SphereGeometry(0.06, 16, 12), glowMaterial);
           rightEye = leftEye.clone();
-          leftEye.position.set(-0.34, 1.05, 0.9);
-          rightEye.position.set(0.34, 1.05, 0.9);
+          leftEye.position.set(-0.26, 1.03, 0.84);
+          rightEye.position.set(0.26, 1.03, 0.84);
           character.add(leftEye, rightEye);
 
-          mouth = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.075, 0.055), mouthMaterial);
-          mouth.position.set(0, 0.58, 0.92);
+          const brow = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.025, 0.035), accentLineMaterial);
+          brow.position.set(0, 1.22, 0.8);
+          character.add(brow);
+
+          mouth = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.055, 0.045), mouthMaterial);
+          mouth.position.set(0, 0.65, 0.86);
           character.add(mouth);
 
-          const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.28, 0.42, 16), bodyMaterial);
-          neck.position.y = -0.28;
+          const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.24, 0.36, 18), bodyMaterial);
+          neck.position.y = -0.18;
           character.add(neck);
 
-          const shoulders = new THREE.Mesh(new THREE.CylinderGeometry(1.05, 1.25, 0.48, 24), bodyMaterial);
-          shoulders.position.y = -0.76;
-          shoulders.scale.z = 0.34;
+          const shoulders = new THREE.Mesh(new THREE.CylinderGeometry(0.88, 1.14, 0.42, 32), bodyMaterial);
+          shoulders.position.y = -0.68;
+          shoulders.scale.z = 0.28;
           character.add(shoulders);
+
+          const baseGlow = new THREE.Mesh(
+            new THREE.CylinderGeometry(1.18, 1.18, 0.025, 48),
+            new THREE.MeshBasicMaterial({ color: 0x4fa8e8, transparent: true, opacity: 0.12 })
+          );
+          baseGlow.position.y = -0.94;
+          baseGlow.scale.z = 0.34;
+          character.add(baseGlow);
 
           resizeAvatar();
           setStatus('Voice intro ready');
@@ -3526,10 +3567,10 @@
 
       const animateMouth = () => {
         if (!isSpeaking || !mouth) return;
-        mouth.scale.x = 0.7 + Math.random() * 0.72;
-        mouth.scale.y = 1 + Math.random() * 5.4;
-        mouth.rotation.z = (Math.random() - 0.5) * 0.05;
-        mouthTimer = window.setTimeout(animateMouth, 95 + Math.random() * 105);
+        mouth.scale.x = 0.86 + Math.random() * 0.44;
+        mouth.scale.y = 1 + Math.random() * 3.2;
+        mouth.rotation.z = (Math.random() - 0.5) * 0.025;
+        mouthTimer = window.setTimeout(animateMouth, 110 + Math.random() * 120);
       };
 
       const renderLoop = (time = 0) => {
@@ -3603,8 +3644,8 @@
 
         utterance.onboundary = () => {
           if (mouth) {
-            mouth.scale.x = 1.2;
-            mouth.scale.y = 5.8;
+            mouth.scale.x = 1.12;
+            mouth.scale.y = 3.8;
           }
         };
 
