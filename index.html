@@ -1005,20 +1005,6 @@
       color: var(--muted);
     }
 
-    .project-media {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      border-radius: 6px;
-      border: 1px solid var(--border2);
-      object-fit: cover;
-      background: var(--navy2);
-      transition: transform 0.25s, border-color 0.25s;
-    }
-
-    .project-card:hover .project-media {
-      transform: scale(1.015);
-      border-color: rgba(56,201,160,0.35);
-    }
     .project-preview {
       width: 100%;
       aspect-ratio: 16 / 10;
@@ -1998,27 +1984,6 @@
     }
 
     /* ── Glow blobs ── */
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-      filter: blur(80px);
-      opacity: 0.06;
-    }
-
-    .blob-1 {
-      width: 500px; height: 500px;
-      background: var(--accent);
-      top: -150px; left: -100px;
-    }
-
-    .blob-2 {
-      width: 400px; height: 400px;
-      background: var(--accent2);
-      bottom: 10%; right: -100px;
-    }
-
     /* ── Divider ── */
     .divider {
       height: 1px;
@@ -2218,10 +2183,6 @@
 <body>
   <div class="scroll-progress" id="scrollProgress"></div>
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
-
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-
   <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-logo">GRP_</a>
@@ -3625,11 +3586,6 @@
         const email = String(data.get('email') || '').trim();
         const subject = String(data.get('subject') || '').trim();
         const message = String(data.get('message') || '').trim();
-
-        if (data.get('access_key') === 'YOUR_WEB3FORMS_ACCESS_KEY') {
-          setFormStatus('Add your Web3Forms access key before sending.', 'error');
-          return;
-        }
 
         if (name.length < 2 || subject.length < 3 || message.length < 20 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
           setFormStatus('Please enter a valid name, email, subject, and a message of at least 20 characters.', 'error');

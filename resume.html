@@ -521,19 +521,6 @@
       color: var(--accent2);
       border: 1px solid rgba(79,168,232,0.2);
     }
-
-    /* ── BLOBS ── */
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-      filter: blur(80px);
-      opacity: 0.05;
-    }
-    .blob-1 { width: 500px; height: 500px; background: var(--accent); top: -150px; left: -100px; }
-    .blob-2 { width: 400px; height: 400px; background: var(--accent2); bottom: 10%; right: -100px; }
-
     /* ── FOOTER ── */
     footer {
       position: relative;
@@ -585,7 +572,6 @@
       }
 
       nav,
-      .blob,
       footer {
         display: none;
       }
@@ -616,10 +602,6 @@
   </style>
 </head>
 <body>
-
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-
   <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-logo">GRP_</a>
