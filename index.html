@@ -241,102 +241,6 @@
       background: linear-gradient(90deg, var(--navy) 0%, rgba(8,12,20,0.88) 42%, rgba(8,12,20,0.2) 100%);
     }
 
-    .hero-ribbon {
-      position: absolute;
-      inset: 64px 0 auto;
-      height: min(58vw, 520px);
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-      opacity: 0.68;
-      filter: drop-shadow(0 0 24px rgba(56,201,160,0.12));
-    }
-
-    .hero-ribbon svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
-    .ribbon-line {
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-dasharray: 14 28;
-      animation: ribbonFlow 10s linear infinite, ribbonFloat 7s ease-in-out infinite;
-      transform-origin: center;
-    }
-
-    .ribbon-line.main {
-      stroke: rgba(56,201,160,0.72);
-      stroke-width: 2.2;
-    }
-
-    .ribbon-line.blue {
-      stroke: rgba(79,168,232,0.46);
-      stroke-width: 1.4;
-      animation-duration: 12s, 8s;
-      animation-delay: -2s, -1s;
-    }
-
-    .ribbon-line.soft {
-      stroke: rgba(244,162,97,0.28);
-      stroke-width: 1.1;
-      animation-duration: 15s, 9s;
-      animation-delay: -4s, -2s;
-    }
-
-    .ribbon-orbit {
-      position: absolute;
-      right: clamp(240px, 21vw, 360px);
-      top: clamp(80px, 10vw, 140px);
-      width: clamp(120px, 15vw, 210px);
-      aspect-ratio: 1;
-      border: 1px solid rgba(56,201,160,0.12);
-      border-radius: 50%;
-      animation: ribbonOrbit 14s linear infinite;
-    }
-
-    .ribbon-orbit::before,
-    .ribbon-orbit::after {
-      content: '';
-      position: absolute;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 20px rgba(56,201,160,0.54);
-    }
-
-    .ribbon-orbit::before {
-      top: 18%;
-      left: 12%;
-    }
-
-    .ribbon-orbit::after {
-      right: 18%;
-      bottom: 16%;
-      background: var(--accent2);
-      box-shadow: 0 0 20px rgba(79,168,232,0.46);
-    }
-
-    @keyframes ribbonFlow {
-      from { stroke-dashoffset: 0; }
-      to { stroke-dashoffset: -168; }
-    }
-
-    @keyframes ribbonFloat {
-      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-      50% { transform: translate3d(0, 12px, 0) scale(1.015); }
-    }
-
-    @keyframes ribbonOrbit {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
     .hero-eyebrow {
       font-family: 'DM Mono', monospace;
       font-size: 11px;
@@ -2266,16 +2170,6 @@
         min-height: 360px;
         margin: 0 auto;
       }
-      .hero-ribbon {
-        inset: 76px -160px auto;
-        height: 440px;
-        opacity: 0.42;
-      }
-      .ribbon-orbit {
-        right: 210px;
-        top: 78px;
-        width: 120px;
-      }
       .recruiter-summary,
       .project-tools {
         grid-template-columns: 1fr;
@@ -2420,23 +2314,6 @@
         linear-gradient(90deg, rgba(247,251,255,0.96) 0%, rgba(247,251,255,0.82) 46%, rgba(247,251,255,0.2) 100%);
     }
 
-    body.light-mode .hero-ribbon {
-      opacity: 0.48;
-      filter: drop-shadow(0 0 20px rgba(56,201,160,0.1));
-    }
-
-    body.light-mode .ribbon-line.main {
-      stroke: rgba(20,130,104,0.5);
-    }
-
-    body.light-mode .ribbon-line.blue {
-      stroke: rgba(36,112,172,0.34);
-    }
-
-    body.light-mode .ribbon-line.soft {
-      stroke: rgba(196,109,54,0.22);
-    }
-
     body.light-mode .hero-title,
     body.light-mode .hero-desc,
     body.light-mode .summary-pill,
@@ -2480,16 +2357,6 @@
       min-height: 760px;
       padding-top: 92px;
       padding-bottom: 64px;
-    }
-
-    .hero-ribbon {
-      opacity: 0.28;
-      inset: 92px -120px auto;
-      height: min(44vw, 430px);
-    }
-
-    .ribbon-orbit {
-      display: none;
     }
 
     .hero-inner {
@@ -2651,6 +2518,222 @@
       background: rgba(255,255,255,0.68);
     }
 
+    /* Final hero redesign: clean recruiter-first header */
+    #home {
+      min-height: min(860px, 100vh);
+      padding-top: 96px;
+      padding-bottom: 72px;
+      background:
+        radial-gradient(circle at 82% 30%, rgba(56,201,160,0.13), transparent 28%),
+        radial-gradient(circle at 20% 80%, rgba(79,168,232,0.08), transparent 30%),
+        linear-gradient(180deg, var(--navy) 0%, #090f1b 100%);
+    }
+
+    #home::before {
+      opacity: 0.72;
+      background-size: 72px 72px;
+    }
+
+    #home::after {
+      background:
+        linear-gradient(90deg, rgba(8,12,20,0.98) 0%, rgba(8,12,20,0.84) 52%, rgba(8,12,20,0.52) 100%);
+    }
+
+    .hero-inner {
+      width: min(1180px, calc(100vw - 80px));
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+      align-items: center;
+      gap: clamp(42px, 6vw, 78px);
+    }
+
+    .hero-content {
+      max-width: 720px;
+    }
+
+    .hero-topline {
+      margin-bottom: 18px;
+    }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      color: var(--accent);
+    }
+
+    .hero-eyebrow::before {
+      width: 28px;
+    }
+
+    .open-badge {
+      padding: 7px 10px;
+      margin-bottom: 0;
+      font-size: 10px;
+    }
+
+    .hero-name {
+      max-width: 720px;
+      font-size: clamp(56px, 8.2vw, 96px);
+      line-height: 0.96;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      max-width: 700px;
+      font-size: clamp(24px, 3.2vw, 38px);
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+
+    .hero-desc {
+      max-width: 640px;
+      font-size: 16px;
+      margin-bottom: 28px;
+    }
+
+    .hero-cta {
+      margin-bottom: 24px;
+    }
+
+    .hero-cta .btn-primary,
+    .hero-cta .btn-ghost {
+      min-width: 164px;
+    }
+
+    .hero-proof-strip {
+      max-width: 620px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      background: rgba(15,26,46,0.62);
+    }
+
+    .trust-badges {
+      display: none;
+    }
+
+    .recruiter-summary {
+      display: none;
+    }
+
+    .hero-avatar-wrap {
+      width: min(360px, 100%);
+      min-height: auto;
+      justify-self: end;
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      overflow: visible;
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(15,26,46,0.84), rgba(11,18,31,0.74));
+      box-shadow: 0 24px 72px rgba(0,0,0,0.28);
+    }
+
+    .hero-avatar-wrap::before {
+      inset: -1px;
+      border-radius: inherit;
+      border-color: rgba(56,201,160,0.18);
+    }
+
+    .hero-avatar-wrap::after {
+      content: 'Hyderabad, Telangana';
+      left: 18px;
+      bottom: 18px;
+      font-size: 9px;
+    }
+
+    #talkingAvatar {
+      position: relative;
+      inset: auto;
+      min-height: 330px;
+      padding: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 52% 20%, rgba(56,201,160,0.13), transparent 34%),
+        linear-gradient(180deg, rgba(8,12,20,0.28), rgba(8,12,20,0.66));
+    }
+
+    .avatar-portrait-frame {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: auto;
+      border: 0;
+      border-radius: 14px;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    .avatar-portrait-frame::after {
+      background: linear-gradient(180deg, transparent 56%, rgba(8,12,20,0.46));
+    }
+
+    .avatar-portrait {
+      transform: scale(1.01);
+      object-position: 50% 16%;
+    }
+
+    .avatar-wave {
+      bottom: 20px;
+    }
+
+    .avatar-loading,
+    .avatar-caption,
+    .avatar-actions {
+      position: relative;
+      inset: auto;
+      left: auto;
+      right: auto;
+      bottom: auto;
+      top: auto;
+    }
+
+    .avatar-loading {
+      order: -1;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--accent);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .avatar-caption {
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(8,12,20,0.42);
+      font-size: 11px;
+    }
+
+    .avatar-actions {
+      justify-content: flex-end;
+      padding-bottom: 24px;
+    }
+
+    .avatar-play-btn,
+    .avatar-stop-btn {
+      border-radius: 8px;
+    }
+
+    body.light-mode #home {
+      background:
+        radial-gradient(circle at 82% 30%, rgba(56,201,160,0.16), transparent 28%),
+        radial-gradient(circle at 20% 80%, rgba(79,168,232,0.1), transparent 30%),
+        linear-gradient(180deg, #f8fbff 0%, #edf4f9 100%);
+    }
+
+    body.light-mode #home::after {
+      background: linear-gradient(90deg, rgba(248,251,255,0.98) 0%, rgba(248,251,255,0.82) 56%, rgba(248,251,255,0.38) 100%);
+    }
+
+    body.light-mode .hero-avatar-wrap,
+    body.light-mode #talkingAvatar {
+      background: rgba(255,255,255,0.72);
+      box-shadow: 0 24px 72px rgba(18,32,51,0.12);
+    }
+
+    body.light-mode .avatar-caption {
+      background: rgba(255,255,255,0.78);
+    }
+
     /* ── Mobile ── */
     @media (max-width: 700px) {
       nav {
@@ -2674,9 +2757,6 @@
         min-height: auto;
         padding-top: 92px;
         padding-bottom: 56px;
-      }
-      .hero-ribbon {
-        opacity: 0.18;
       }
       .hero-topline {
         justify-content: center;
@@ -2715,6 +2795,35 @@
       }
       #talkingAvatar {
         padding: 66px 28px 124px;
+      }
+      .hero-inner {
+        width: min(420px, calc(100vw - 40px));
+        gap: 30px;
+      }
+      .hero-content {
+        max-width: 100%;
+      }
+      .hero-name {
+        font-size: clamp(42px, 13vw, 56px);
+      }
+      .hero-title {
+        font-size: clamp(21px, 7vw, 28px);
+      }
+      .hero-proof-strip {
+        max-width: 100%;
+      }
+      .hero-avatar-wrap {
+        width: min(320px, 92vw);
+        min-height: auto;
+        padding: 14px;
+      }
+      #talkingAvatar {
+        min-height: 300px;
+        padding: 0;
+      }
+      .avatar-actions {
+        justify-content: center;
+        padding-bottom: 24px;
       }
       .skills-bars-grid { grid-template-columns: 1fr; padding: 24px 20px; }
       .skills-cats { grid-template-columns: 1fr; }
@@ -2809,47 +2918,26 @@
 
   <!-- HERO -->
   <section id="home">
-    <div class="hero-ribbon" aria-hidden="true">
-      <svg viewBox="0 0 1440 520" preserveAspectRatio="none">
-        <path class="ribbon-line main" d="M-70 332 C 172 188, 318 450, 548 286 S 902 118, 1118 264 S 1322 412, 1510 206"></path>
-        <path class="ribbon-line blue" d="M-80 248 C 190 390, 370 108, 596 246 S 924 430, 1166 188 S 1360 92, 1515 236"></path>
-        <path class="ribbon-line soft" d="M-90 386 C 168 308, 286 212, 510 350 S 852 206, 1050 340 S 1300 452, 1518 316"></path>
-      </svg>
-      <span class="ribbon-orbit"></span>
-    </div>
     <div class="hero-inner">
       <div class="hero-content">
         <div class="hero-topline">
-          <p class="hero-eyebrow">Associate Software Engineer - Oppty TechHub</p>
-          <div class="open-badge"><span class="open-dot"></span>Available for opportunities</div>
+          <p class="hero-eyebrow">Frontend Developer / Associate Software Engineer</p>
+          <div class="open-badge"><span class="open-dot"></span>Available</div>
         </div>
-        <h1 class="hero-name">Giridhar<br><span>Reddy</span></h1>
-        <p class="hero-title">Frontend Developer focused on clean, responsive web experiences.</p>
+        <h1 class="hero-name">Giridhar <span>Reddy</span></h1>
+        <p class="hero-title">I build clean, responsive portfolio and dashboard-style web experiences.</p>
         <p class="hero-desc">
-          I build recruiter-ready interfaces with HTML, CSS, JavaScript, Node.js basics,
-          and an Electronics & Communication Engineering mindset for structured problem-solving.
+          I combine HTML, CSS, JavaScript, Node.js basics, and an ECE background to create
+          practical interfaces that are easy to scan, use, and present to recruiters.
         </p>
         <div class="hero-cta">
           <a href="projects.html" class="btn-primary">View Projects</a>
           <a href="RESUME.pdf" download class="btn-ghost download-animate">Download PDF</a>
-          <a href="#contact" class="btn-ghost">Contact Me</a>
         </div>
         <div class="hero-proof-strip" aria-label="Quick portfolio proof">
           <span><strong>10+</strong> Projects</span>
           <span><strong>7</strong> Frontend Builds</span>
           <span><strong>Feb 2026</strong> Current Role</span>
-        </div>
-        <div class="trust-badges" aria-label="Portfolio status badges">
-          <span>Version v1.8</span>
-          <span>Open to Work</span>
-          <span>PDF Resume</span>
-          <span>Last Updated Aug 2026</span>
-        </div>
-        <div class="recruiter-summary" aria-label="Recruiter quick summary">
-          <div class="summary-pill"><strong>Role Target</strong>Frontend Developer / Associate Software Engineer</div>
-          <div class="summary-pill"><strong>Core Stack</strong>HTML, CSS, JavaScript, Node.js basics, Express.js basics</div>
-          <div class="summary-pill"><strong>Project Proof</strong>10 projects, 10 case studies, portfolio deployed on Vercel</div>
-          <div class="summary-pill"><strong>Strength</strong>Clean responsive UI with ECE and IoT problem-solving</div>
         </div>
       </div>
       <div class="hero-avatar-wrap" id="avatarHero" aria-label="Professional avatar voice intro">
@@ -2862,7 +2950,7 @@
           </div>
         </div>
         <div class="avatar-loading" id="avatarLoading">Voice intro ready</div>
-        <div class="avatar-caption" id="avatarCaption">Click Hear Intro to listen to a short portfolio summary.</div>
+        <div class="avatar-caption" id="avatarCaption">Short summary about my skills, projects, and current role.</div>
         <div class="avatar-actions">
           <button class="avatar-stop-btn voice-stop-trigger" type="button">Stop</button>
           <button class="avatar-play-btn play-intro-trigger" type="button">Hear Intro</button>
