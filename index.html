@@ -425,66 +425,6 @@
       flex-wrap: wrap;
     }
 
-    .hero-ribbon-chip {
-      position: relative;
-      flex: 1 1 190px;
-      max-width: 230px;
-      min-height: 48px;
-      border: 1px solid rgba(56,201,160,0.2);
-      border-radius: 6px;
-      overflow: hidden;
-      background: rgba(15,26,46,0.34);
-      isolation: isolate;
-    }
-
-    .hero-ribbon-chip::before,
-    .hero-ribbon-chip::after {
-      content: '';
-      position: absolute;
-      inset: 50% auto auto -18%;
-      width: 138%;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
-      transform: translateY(-50%) rotate(-4deg);
-      animation: ctaRibbonFlow 2.9s linear infinite;
-      box-shadow: 0 0 22px rgba(56,201,160,0.32);
-    }
-
-    .hero-ribbon-chip::after {
-      height: 1px;
-      transform: translateY(-50%) rotate(4deg);
-      animation-duration: 3.8s;
-      animation-direction: reverse;
-      opacity: 0.64;
-    }
-
-    .hero-ribbon-chip span {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 22px rgba(56,201,160,0.62);
-      background:
-        radial-gradient(circle, var(--accent) 0 42%, transparent 44%);
-      animation: ribbonPulse 1.8s ease-in-out infinite;
-    }
-
-    @keyframes ctaRibbonFlow {
-      0% { background-position: 0 0; transform: translateY(-50%) rotate(-4deg) translateX(-8%); }
-      50% { transform: translateY(-50%) rotate(-4deg) translateX(8%); }
-      100% { background-position: 220px 0; transform: translateY(-50%) rotate(-4deg) translateX(-8%); }
-    }
-
-    @keyframes ribbonPulse {
-      0%, 100% { opacity: 0.64; transform: translate(-50%, -50%) scale(0.85); }
-      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.22); }
-    }
-
     .hero-avatar-wrap {
       position: relative;
       flex: 0 0 clamp(330px, 31vw, 400px);
@@ -2530,14 +2470,185 @@
       background: rgba(255,255,255,0.6);
     }
 
-    body.light-mode .hero-ribbon-chip {
-      background: rgba(255,255,255,0.54);
-      border-color: rgba(20,130,104,0.18);
-    }
-
     body.light-mode .trust-badges span,
     body.light-mode .open-badge {
       background: rgba(56,201,160,0.1);
+    }
+
+    /* Cleaner v1.8 hero composition */
+    #home {
+      min-height: 760px;
+      padding-top: 92px;
+      padding-bottom: 64px;
+    }
+
+    .hero-ribbon {
+      opacity: 0.28;
+      inset: 92px -120px auto;
+      height: min(44vw, 430px);
+    }
+
+    .ribbon-orbit {
+      display: none;
+    }
+
+    .hero-inner {
+      grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.72fr);
+      gap: clamp(48px, 7vw, 96px);
+    }
+
+    .hero-content {
+      max-width: 760px;
+    }
+
+    .hero-topline {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .hero-eyebrow {
+      margin-bottom: 0;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-name {
+      font-size: clamp(58px, 8vw, 104px);
+      line-height: 0.88;
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      max-width: 700px;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(22px, 2.8vw, 34px);
+      font-weight: 600;
+      line-height: 1.16;
+      color: var(--text);
+      letter-spacing: 0;
+      margin-bottom: 18px;
+    }
+
+    .hero-desc {
+      max-width: 660px;
+      font-size: 17px;
+      line-height: 1.72;
+      margin-bottom: 30px;
+    }
+
+    .hero-cta {
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .hero-proof-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      max-width: 660px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(15,26,46,0.5);
+      margin-bottom: 18px;
+    }
+
+    .hero-proof-strip span {
+      padding: 14px 16px;
+      border-right: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero-proof-strip span:last-child {
+      border-right: 0;
+    }
+
+    .hero-proof-strip strong {
+      display: block;
+      color: var(--accent);
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      line-height: 1;
+      letter-spacing: 0;
+      margin-bottom: 6px;
+      text-transform: none;
+    }
+
+    .trust-badges {
+      margin-top: 0;
+    }
+
+    .recruiter-summary {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      max-width: 760px;
+      margin-top: 18px;
+    }
+
+    .summary-pill {
+      padding: 12px;
+    }
+
+    .summary-pill strong {
+      font-size: 12px;
+    }
+
+    .hero-avatar-wrap {
+      width: min(390px, 100%);
+      min-height: 500px;
+      justify-self: end;
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(56,201,160,0.17), transparent 30%),
+        linear-gradient(rgba(79,168,232,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,168,232,0.04) 1px, transparent 1px),
+        linear-gradient(145deg, rgba(15,26,46,0.94), rgba(8,12,20,0.66));
+      background-size: auto, 32px 32px, 32px 32px, auto;
+    }
+
+    .hero-avatar-wrap::after {
+      content: 'PROFILE / VOICE INTRO';
+    }
+
+    #talkingAvatar {
+      padding: 70px 38px 122px;
+    }
+
+    .avatar-portrait-frame {
+      width: min(245px, 74%);
+      border-radius: 22px;
+    }
+
+    .avatar-loading,
+    .avatar-caption {
+      left: 22px;
+      right: 22px;
+    }
+
+    .avatar-loading {
+      top: 22px;
+    }
+
+    .avatar-caption {
+      bottom: 82px;
+    }
+
+    .avatar-actions {
+      right: 22px;
+      bottom: 28px;
+    }
+
+    body.light-mode .hero-title {
+      color: var(--text);
+    }
+
+    body.light-mode .hero-proof-strip {
+      background: rgba(255,255,255,0.68);
     }
 
     /* ── Mobile ── */
@@ -2559,7 +2670,52 @@
       section { padding: 0 20px; }
       .about-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
-      .hero-name { font-size: 36px; }
+      #home {
+        min-height: auto;
+        padding-top: 92px;
+        padding-bottom: 56px;
+      }
+      .hero-ribbon {
+        opacity: 0.18;
+      }
+      .hero-topline {
+        justify-content: center;
+        gap: 10px;
+      }
+      .hero-name {
+        font-size: clamp(44px, 15vw, 64px);
+        line-height: 0.92;
+      }
+      .hero-title {
+        font-size: clamp(20px, 7vw, 28px);
+      }
+      .hero-desc {
+        font-size: 15px;
+        margin-bottom: 24px;
+      }
+      .hero-cta {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      .hero-proof-strip {
+        grid-template-columns: 1fr;
+      }
+      .hero-proof-strip span {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .hero-proof-strip span:last-child {
+        border-bottom: 0;
+      }
+      .recruiter-summary {
+        grid-template-columns: 1fr;
+      }
+      .hero-avatar-wrap {
+        min-height: 430px;
+      }
+      #talkingAvatar {
+        padding: 66px 28px 124px;
+      }
       .skills-bars-grid { grid-template-columns: 1fr; padding: 24px 20px; }
       .skills-cats { grid-template-columns: 1fr; }
       .tech-stack-panel { padding: 20px; }
@@ -2663,20 +2819,25 @@
     </div>
     <div class="hero-inner">
       <div class="hero-content">
-        <p class="hero-eyebrow">Associate Software Engineer - Oppty TechHub Private Limited</p>
+        <div class="hero-topline">
+          <p class="hero-eyebrow">Associate Software Engineer - Oppty TechHub</p>
+          <div class="open-badge"><span class="open-dot"></span>Available for opportunities</div>
+        </div>
         <h1 class="hero-name">Giridhar<br><span>Reddy</span></h1>
-        <div class="open-badge"><span class="open-dot"></span>Available for opportunities</div>
-        <p class="hero-title">// Frontend Developer · Embedded Systems · IoT</p>
+        <p class="hero-title">Frontend Developer focused on clean, responsive web experiences.</p>
         <p class="hero-desc">
-          Frontend-focused Associate Software Engineer building responsive web apps with JavaScript,
-          Node.js basics, and Electronics & Communication Engineering problem-solving.
+          I build recruiter-ready interfaces with HTML, CSS, JavaScript, Node.js basics,
+          and an Electronics & Communication Engineering mindset for structured problem-solving.
         </p>
         <div class="hero-cta">
           <a href="projects.html" class="btn-primary">View Projects</a>
-          <a href="#contact" class="btn-ghost">Get in Touch</a>
           <a href="RESUME.pdf" download class="btn-ghost download-animate">Download PDF</a>
-          <a href="RESUME.docx" download class="btn-ghost download-animate">Download DOCX</a>
-          <div class="hero-ribbon-chip" aria-hidden="true"><span></span></div>
+          <a href="#contact" class="btn-ghost">Contact Me</a>
+        </div>
+        <div class="hero-proof-strip" aria-label="Quick portfolio proof">
+          <span><strong>10+</strong> Projects</span>
+          <span><strong>7</strong> Frontend Builds</span>
+          <span><strong>Feb 2026</strong> Current Role</span>
         </div>
         <div class="trust-badges" aria-label="Portfolio status badges">
           <span>Version v1.8</span>
