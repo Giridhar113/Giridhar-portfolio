@@ -2284,12 +2284,70 @@
     }
 
     body.light-mode nav {
-      background: rgba(245,248,251,0.86);
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 10px 30px rgba(18,32,51,0.06);
     }
 
     body.light-mode .cursor-glow {
       mix-blend-mode: multiply;
       opacity: 0.42;
+    }
+
+    body.light-mode #home {
+      background:
+        radial-gradient(circle at 72% 46%, rgba(56,201,160,0.13), transparent 32%),
+        radial-gradient(circle at 84% 70%, rgba(79,168,232,0.1), transparent 26%),
+        linear-gradient(180deg, #f7fbff 0%, #eef5fb 100%);
+    }
+
+    body.light-mode #home::before {
+      background-image:
+        linear-gradient(rgba(18,32,51,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18,32,51,0.035) 1px, transparent 1px);
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.55), transparent 92%);
+    }
+
+    body.light-mode #home::after {
+      background:
+        linear-gradient(90deg, rgba(247,251,255,0.96) 0%, rgba(247,251,255,0.82) 46%, rgba(247,251,255,0.2) 100%);
+    }
+
+    body.light-mode .hero-title,
+    body.light-mode .hero-desc,
+    body.light-mode .summary-pill,
+    body.light-mode .avatar-caption,
+    body.light-mode .avatar-loading {
+      color: #4f637a;
+    }
+
+    body.light-mode .hero-avatar-wrap {
+      background:
+        linear-gradient(rgba(79,168,232,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,168,232,0.08) 1px, transparent 1px),
+        radial-gradient(circle at 52% 26%, rgba(56,201,160,0.16), transparent 34%),
+        linear-gradient(135deg, rgba(255,255,255,0.92), rgba(230,240,248,0.74));
+      box-shadow: 0 26px 70px rgba(18,32,51,0.16);
+    }
+
+    body.light-mode .avatar-loading,
+    body.light-mode .avatar-caption,
+    body.light-mode .avatar-stop-btn,
+    body.light-mode .summary-pill {
+      background: rgba(255,255,255,0.78);
+    }
+
+    body.light-mode .avatar-portrait-frame {
+      background: rgba(255,255,255,0.5);
+      box-shadow: 0 24px 58px rgba(18,32,51,0.16);
+    }
+
+    body.light-mode .btn-ghost {
+      background: rgba(255,255,255,0.6);
+    }
+
+    body.light-mode .trust-badges span,
+    body.light-mode .open-badge {
+      background: rgba(56,201,160,0.1);
     }
 
     /* ── Mobile ── */
@@ -3648,9 +3706,26 @@
       cursorGlow.style.transform = `translate3d(${event.clientX - 110}px, ${event.clientY - 110}px, 0)`;
     }, { passive: true });
 
+    const setThemeMode = (mode) => {
+      const lightMode = mode === 'light';
+      document.body.classList.toggle('light-mode', lightMode);
+      themeToggle.textContent = lightMode ? 'dark' : 'light';
+      themeToggle.setAttribute('aria-label', lightMode ? 'Switch to dark theme' : 'Switch to light theme');
+      try {
+        localStorage.setItem('portfolio-theme', lightMode ? 'light' : 'dark');
+      } catch (error) {
+        // Theme still works when localStorage is unavailable.
+      }
+    };
+
+    try {
+      setThemeMode(localStorage.getItem('portfolio-theme') === 'light' ? 'light' : 'dark');
+    } catch (error) {
+      setThemeMode('dark');
+    }
+
     themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      themeToggle.textContent = document.body.classList.contains('light-mode') ? 'dark' : 'theme';
+      setThemeMode(document.body.classList.contains('light-mode') ? 'dark' : 'light');
     });
 
     scrollTopButton.addEventListener('click', () => {
