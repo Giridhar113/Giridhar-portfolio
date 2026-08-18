@@ -336,7 +336,7 @@
     }
 
     .hero-avatar-wrap::after {
-      content: 'VOICE INTRO / 3D ASSISTANT';
+      content: 'VOICE INTRO / PROFILE AVATAR';
       position: absolute;
       left: 18px;
       bottom: 16px;
@@ -352,26 +352,87 @@
       position: absolute;
       inset: 0;
       z-index: 1;
+      display: grid;
+      place-items: center;
+      padding: 72px 42px 110px;
     }
 
-    #talkingAvatar canvas {
+    .avatar-portrait-frame {
+      position: relative;
+      width: min(250px, 72%);
+      aspect-ratio: 1 / 1.25;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(56,201,160,0.18);
+      background:
+        radial-gradient(circle at 50% 16%, rgba(56,201,160,0.16), transparent 38%),
+        rgba(8,12,20,0.36);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.38);
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+    }
+
+    .hero-avatar-wrap.is-speaking .avatar-portrait-frame {
+      border-color: rgba(56,201,160,0.4);
+      box-shadow: 0 26px 78px rgba(0,0,0,0.42), 0 0 34px rgba(56,201,160,0.1);
+    }
+
+    .avatar-portrait-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 62%, rgba(8,12,20,0.2));
+      pointer-events: none;
+    }
+
+    .avatar-portrait {
       display: block;
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      object-position: 50% 24%;
+      transform: scale(1.04);
+      transition: transform 0.28s ease, filter 0.28s ease;
     }
 
-    .avatar-no-three {
+    .hero-avatar-wrap.is-speaking .avatar-portrait {
+      transform: scale(1.07);
+      filter: saturate(1.08);
+    }
+
+    .avatar-wave {
       position: absolute;
-      inset: 0;
-      z-index: 1;
-      display: none;
-      place-items: center;
-      padding: 32px;
-      text-align: center;
-      color: var(--muted);
-      background:
-        radial-gradient(circle at 50% 48%, rgba(56,201,160,0.18), transparent 34%),
-        radial-gradient(circle at 52% 65%, rgba(79,168,232,0.1), transparent 45%);
+      left: 50%;
+      bottom: 86px;
+      z-index: 4;
+      display: flex;
+      align-items: end;
+      gap: 4px;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .avatar-wave span {
+      width: 4px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      animation: voiceWave 0.8s ease-in-out infinite;
+    }
+
+    .avatar-wave span:nth-child(2) { animation-delay: 0.12s; }
+    .avatar-wave span:nth-child(3) { animation-delay: 0.24s; }
+    .avatar-wave span:nth-child(4) { animation-delay: 0.36s; }
+
+    .hero-avatar-wrap.is-speaking .avatar-wave {
+      opacity: 1;
+    }
+
+    @keyframes voiceWave {
+      0%, 100% { height: 8px; opacity: 0.5; }
+      50% { height: 24px; opacity: 1; }
     }
 
     .avatar-loading,
@@ -2224,9 +2285,15 @@
           <span>Last Updated Aug 2026</span>
         </div>
       </div>
-      <div class="hero-avatar-wrap" id="avatarHero" aria-label="3D talking avatar intro">
-        <div id="talkingAvatar" aria-hidden="true"></div>
-        <div class="avatar-no-three" id="avatarNoThree">Captions are ready even if 3D is unavailable.</div>
+      <div class="hero-avatar-wrap" id="avatarHero" aria-label="Professional avatar voice intro">
+        <div id="talkingAvatar" aria-hidden="true">
+          <div class="avatar-portrait-frame">
+            <img src="assets/giridhar-3d-avatar.jpg" alt="" class="avatar-portrait" loading="eager">
+          </div>
+          <div class="avatar-wave" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
         <div class="avatar-loading" id="avatarLoading">Voice intro ready</div>
         <div class="avatar-caption" id="avatarCaption">Click Hear Intro to listen to a short portfolio summary.</div>
         <button class="avatar-play-btn play-intro-trigger" type="button">Hear Intro</button>
@@ -3328,7 +3395,6 @@
     <a href="https://wa.me/918179721034?text=Hi%20Giridhar%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20connect." target="_blank" rel="noopener">WhatsApp</a>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     const progress = document.getElementById('scrollProgress');
     const scrollTopButton = document.getElementById('scrollTop');
@@ -3625,34 +3691,16 @@
     (() => {
       const avatarHero = document.getElementById('avatarHero');
       const avatarNode = document.getElementById('talkingAvatar');
-      const avatarNoThree = document.getElementById('avatarNoThree');
       const avatarStatus = document.getElementById('avatarLoading');
       const avatarCaption = document.getElementById('avatarCaption');
+      const avatarFrame = avatarNode?.querySelector('.avatar-portrait-frame');
       const playIntroButtons = document.querySelectorAll('.play-intro-trigger');
 
       if (!avatarHero || !avatarNode) return;
 
-      // Edit this text whenever you want the hero character to say something different.
       const INTRO_TEXT = window.__avatarIntroText;
-      // Swap these colors to update the 3D character accent palette.
-      const ACCENT = 0x38c9a0;
-      const ACCENT_2 = 0x4fa8e8;
-
-      let renderer = null;
-      let scene = null;
-      let camera = null;
-      let character = null;
-      let head = null;
-      let leftEye = null;
-      let rightEye = null;
-      let mouth = null;
-      let frameId = null;
-      let isVisible = true;
       let isSpeaking = false;
-      let mouthTimer = null;
-      let blinkTimer = null;
-      let targetRotationX = 0;
-      let targetRotationY = 0;
+      let captionTimer = null;
 
       const setStatus = (message) => {
         if (avatarStatus) avatarStatus.textContent = message;
@@ -3674,179 +3722,11 @@
         avatarHero.classList.toggle('is-speaking', speaking);
       };
 
-      const resizeAvatar = () => {
-        if (!renderer || !camera) return;
-        const rect = avatarNode.getBoundingClientRect();
-        const width = Math.max(1, rect.width);
-        const height = Math.max(1, rect.height);
-        renderer.setSize(width, height, false);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
-      };
-
-      const createPrimitiveCharacter = () => {
-        if (!window.THREE) {
-          if (avatarNoThree) avatarNoThree.style.display = 'grid';
-          setStatus('3D unavailable. Caption mode ready.');
-          return false;
-        }
-
-        try {
-          scene = new THREE.Scene();
-          camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-          camera.position.set(0, 0.36, 8.15);
-
-          renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-          avatarNode.appendChild(renderer.domElement);
-
-          const ambient = new THREE.AmbientLight(0x7fd9ff, 0.56);
-          const key = new THREE.DirectionalLight(0xbef8ea, 0.82);
-          const rim = new THREE.DirectionalLight(0x4fa8e8, 0.44);
-          key.position.set(2.2, 3.2, 4.8);
-          rim.position.set(-3.5, 1.4, -2.5);
-          scene.add(ambient, key, rim);
-
-          character = new THREE.Group();
-          character.scale.set(0.82, 0.82, 0.82);
-          character.position.y = -0.02;
-          scene.add(character);
-
-          const headMaterial = new THREE.MeshStandardMaterial({
-            color: 0x249b91,
-            roughness: 0.88,
-            metalness: 0.02,
-            transparent: true,
-            opacity: 0.88,
-            flatShading: true
-          });
-          const bodyMaterial = new THREE.MeshStandardMaterial({
-            color: 0x10263b,
-            roughness: 0.72,
-            metalness: 0.18,
-            transparent: true,
-            opacity: 0.9
-          });
-          const facePlateMaterial = new THREE.MeshBasicMaterial({
-            color: 0x9ff7e7,
-            transparent: true,
-            opacity: 0.13,
-            side: THREE.DoubleSide
-          });
-          const glowMaterial = new THREE.MeshBasicMaterial({ color: 0x38c9a0 });
-          const mouthMaterial = new THREE.MeshBasicMaterial({ color: 0x4fa8e8 });
-          const accentLineMaterial = new THREE.MeshBasicMaterial({
-            color: 0x38c9a0,
-            transparent: true,
-            opacity: 0.42
-          });
-
-          head = new THREE.Mesh(new THREE.IcosahedronGeometry(1.02, 2), headMaterial);
-          head.position.y = 0.82;
-          head.scale.set(0.84, 1.02, 0.72);
-          character.add(head);
-
-          const facePlate = new THREE.Mesh(new THREE.PlaneGeometry(0.94, 0.52), facePlateMaterial);
-          facePlate.position.set(0, 0.86, 0.77);
-          facePlate.rotation.z = -0.02;
-          character.add(facePlate);
-
-          leftEye = new THREE.Mesh(new THREE.SphereGeometry(0.06, 16, 12), glowMaterial);
-          rightEye = leftEye.clone();
-          leftEye.position.set(-0.26, 1.03, 0.84);
-          rightEye.position.set(0.26, 1.03, 0.84);
-          character.add(leftEye, rightEye);
-
-          const brow = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.025, 0.035), accentLineMaterial);
-          brow.position.set(0, 1.22, 0.8);
-          character.add(brow);
-
-          mouth = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.055, 0.045), mouthMaterial);
-          mouth.position.set(0, 0.65, 0.86);
-          character.add(mouth);
-
-          const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.24, 0.36, 18), bodyMaterial);
-          neck.position.y = -0.18;
-          character.add(neck);
-
-          const shoulders = new THREE.Mesh(new THREE.CylinderGeometry(0.88, 1.14, 0.42, 32), bodyMaterial);
-          shoulders.position.y = -0.68;
-          shoulders.scale.z = 0.28;
-          character.add(shoulders);
-
-          const baseGlow = new THREE.Mesh(
-            new THREE.CylinderGeometry(1.18, 1.18, 0.025, 48),
-            new THREE.MeshBasicMaterial({ color: 0x4fa8e8, transparent: true, opacity: 0.12 })
-          );
-          baseGlow.position.y = -0.94;
-          baseGlow.scale.z = 0.34;
-          character.add(baseGlow);
-
-          resizeAvatar();
-          setStatus('Voice intro ready');
-          return true;
-        } catch (error) {
-          console.warn('3D character could not initialize:', error);
-          if (avatarNoThree) avatarNoThree.style.display = 'grid';
-          setStatus('3D unavailable. Caption mode ready.');
-          return false;
-        }
-      };
-
-      const scheduleBlink = () => {
-        window.clearTimeout(blinkTimer);
-        blinkTimer = window.setTimeout(() => {
-          if (!leftEye || !rightEye) return scheduleBlink();
-          leftEye.scale.y = 0.08;
-          rightEye.scale.y = 0.08;
-          window.setTimeout(() => {
-            if (leftEye && rightEye) {
-              leftEye.scale.y = 1;
-              rightEye.scale.y = 1;
-            }
-            scheduleBlink();
-          }, 120);
-        }, 3000 + Math.random() * 3000);
-      };
-
-      const stopMouthAnimation = () => {
-        window.clearTimeout(mouthTimer);
-        mouthTimer = null;
-        if (mouth) {
-          mouth.scale.set(1, 1, 1);
-          mouth.rotation.z = 0;
-        }
-      };
-
-      const animateMouth = () => {
-        if (!isSpeaking || !mouth) return;
-        mouth.scale.x = 0.86 + Math.random() * 0.44;
-        mouth.scale.y = 1 + Math.random() * 3.2;
-        mouth.rotation.z = (Math.random() - 0.5) * 0.025;
-        mouthTimer = window.setTimeout(animateMouth, 110 + Math.random() * 120);
-      };
-
-      const renderLoop = (time = 0) => {
-        if (!isVisible || !renderer || !scene || !camera) return;
-
-        const seconds = time * 0.001;
-        if (character) {
-          character.position.y = Math.sin(seconds * 1.35) * 0.08;
-          character.rotation.y += (targetRotationY - character.rotation.y) * 0.06;
-          character.rotation.x += (targetRotationX - character.rotation.x) * 0.06;
-        }
-        if (head) head.rotation.y = Math.sin(seconds * 0.8) * 0.08;
-        renderer.render(scene, camera);
-        frameId = window.requestAnimationFrame(renderLoop);
-      };
-
-      const startRenderLoop = () => {
-        if (!frameId && renderer) frameId = window.requestAnimationFrame(renderLoop);
-      };
-
-      const stopRenderLoop = () => {
-        if (frameId) window.cancelAnimationFrame(frameId);
-        frameId = null;
+      const finishSpeech = (message = 'Voice intro ready') => {
+        window.clearTimeout(captionTimer);
+        setSpeaking(false);
+        setButtons(false);
+        setStatus(message);
       };
 
       const chooseVoice = () => {
@@ -3854,20 +3734,12 @@
         return voices.find((voice) => /en-IN|en-US|en-GB/i.test(voice.lang)) || voices[0] || null;
       };
 
-      const finishSpeech = (message = 'Voice intro ready') => {
-        setSpeaking(false);
-        stopMouthAnimation();
-        setButtons(false);
-        setStatus(message);
-      };
-
       const runCaptionOnlySpeech = () => {
         setCaption(INTRO_TEXT);
         setButtons(true, 'Playing...');
         setStatus('Caption mode playing');
         setSpeaking(true);
-        animateMouth();
-        window.setTimeout(() => finishSpeech('Caption mode ready'), 5200);
+        captionTimer = window.setTimeout(() => finishSpeech('Caption mode ready'), 5200);
       };
 
       const playIntro = () => {
@@ -3892,14 +3764,6 @@
           setButtons(true, 'Speaking...');
           setStatus('Speaking with browser voice');
           setSpeaking(true);
-          animateMouth();
-        };
-
-        utterance.onboundary = () => {
-          if (mouth) {
-            mouth.scale.x = 1.12;
-            mouth.scale.y = 3.8;
-          }
         };
 
         utterance.onend = () => finishSpeech('Voice intro ready');
@@ -3908,35 +3772,26 @@
         window.speechSynthesis.speak(utterance);
       };
 
-      const ready = createPrimitiveCharacter();
-      if (ready) {
-        scheduleBlink();
-        startRenderLoop();
-      }
-
       avatarHero.addEventListener('pointermove', (event) => {
+        if (!avatarFrame) return;
         const rect = avatarHero.getBoundingClientRect();
-        targetRotationY = ((event.clientX - rect.left) / rect.width - 0.5) * 0.46;
-        targetRotationX = ((event.clientY - rect.top) / rect.height - 0.5) * -0.28;
+        const rotateY = ((event.clientX - rect.left) / rect.width - 0.5) * 4.6;
+        const rotateX = ((event.clientY - rect.top) / rect.height - 0.5) * -2.8;
+        avatarFrame.style.transform = `translateY(-2px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       }, { passive: true });
 
       avatarHero.addEventListener('pointerleave', () => {
-        targetRotationX = 0;
-        targetRotationY = 0;
+        if (avatarFrame) avatarFrame.style.transform = '';
       });
 
-      window.addEventListener('resize', resizeAvatar, { passive: true });
       playIntroButtons.forEach((button) => button.addEventListener('click', playIntro));
 
       document.addEventListener('visibilitychange', () => {
-        isVisible = !document.hidden;
         if (document.hidden) {
           window.speechSynthesis?.cancel?.();
-          finishSpeech('3D character paused');
-          stopRenderLoop();
-        } else {
+          finishSpeech('Voice intro paused');
+        } else if (!isSpeaking) {
           setStatus('Voice intro ready');
-          startRenderLoop();
         }
       });
     })();
