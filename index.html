@@ -425,6 +425,66 @@
       flex-wrap: wrap;
     }
 
+    .hero-ribbon-chip {
+      position: relative;
+      flex: 1 1 190px;
+      max-width: 230px;
+      min-height: 48px;
+      border: 1px solid rgba(56,201,160,0.2);
+      border-radius: 6px;
+      overflow: hidden;
+      background: rgba(15,26,46,0.34);
+      isolation: isolate;
+    }
+
+    .hero-ribbon-chip::before,
+    .hero-ribbon-chip::after {
+      content: '';
+      position: absolute;
+      inset: 50% auto auto -18%;
+      width: 138%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+      transform: translateY(-50%) rotate(-4deg);
+      animation: ctaRibbonFlow 2.9s linear infinite;
+      box-shadow: 0 0 22px rgba(56,201,160,0.32);
+    }
+
+    .hero-ribbon-chip::after {
+      height: 1px;
+      transform: translateY(-50%) rotate(4deg);
+      animation-duration: 3.8s;
+      animation-direction: reverse;
+      opacity: 0.64;
+    }
+
+    .hero-ribbon-chip span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 22px rgba(56,201,160,0.62);
+      background:
+        radial-gradient(circle, var(--accent) 0 42%, transparent 44%);
+      animation: ribbonPulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes ctaRibbonFlow {
+      0% { background-position: 0 0; transform: translateY(-50%) rotate(-4deg) translateX(-8%); }
+      50% { transform: translateY(-50%) rotate(-4deg) translateX(8%); }
+      100% { background-position: 220px 0; transform: translateY(-50%) rotate(-4deg) translateX(-8%); }
+    }
+
+    @keyframes ribbonPulse {
+      0%, 100% { opacity: 0.64; transform: translate(-50%, -50%) scale(0.85); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.22); }
+    }
+
     .hero-avatar-wrap {
       position: relative;
       flex: 0 0 clamp(330px, 31vw, 400px);
@@ -2470,6 +2530,11 @@
       background: rgba(255,255,255,0.6);
     }
 
+    body.light-mode .hero-ribbon-chip {
+      background: rgba(255,255,255,0.54);
+      border-color: rgba(20,130,104,0.18);
+    }
+
     body.light-mode .trust-badges span,
     body.light-mode .open-badge {
       background: rgba(56,201,160,0.1);
@@ -2611,7 +2676,7 @@
           <a href="#contact" class="btn-ghost">Get in Touch</a>
           <a href="RESUME.pdf" download class="btn-ghost download-animate">Download PDF</a>
           <a href="RESUME.docx" download class="btn-ghost download-animate">Download DOCX</a>
-          <button class="btn-primary play-intro-btn play-intro-trigger" type="button" id="playAvatarIntro">Hear Intro</button>
+          <div class="hero-ribbon-chip" aria-hidden="true"><span></span></div>
         </div>
         <div class="trust-badges" aria-label="Portfolio status badges">
           <span>Version v1.8</span>
