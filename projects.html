@@ -9,7 +9,7 @@
   <meta property="og:description" content="Ten featured projects across frontend development, IoT, embedded systems, Python gesture recognition, and dashboard-style web apps.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://giridhar-portfolio.vercel.app/projects.html">
-  <meta property="og:image" content="assets/portfolio-website.svg">
+  <meta property="og:image" content="assets/og-preview.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://giridhar-portfolio.vercel.app/projects.html">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -191,6 +191,31 @@
       flex-wrap: wrap;
       gap: 10px;
       margin-bottom: 22px;
+    }
+
+    .project-tools {
+      display: grid;
+      grid-template-columns: minmax(220px, 420px) 1fr;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .project-search {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: rgba(8,12,20,0.72);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      padding: 12px 14px;
+    }
+
+    .project-search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56,201,160,0.08);
+      outline: none;
     }
 
     .project-filter-tab {
@@ -536,6 +561,7 @@
       }
       .project-filter-tabs::-webkit-scrollbar { display: none; }
       .project-filter-tab { flex: 0 0 auto; }
+      .project-tools { grid-template-columns: 1fr; }
       .project-card { min-height: auto; }
       .project-actions { flex-direction: column; }
       .project-link { text-align: center; }
@@ -583,6 +609,9 @@
         <button class="project-filter-tab" type="button" data-project-filter="systems" aria-pressed="false">ECE / IoT (2)</button>
         <button class="project-filter-tab" type="button" data-project-filter="ml" aria-pressed="false">ML (1)</button>
         <button class="project-filter-tab" type="button" data-project-filter="soon" aria-pressed="false">Coming Soon (2)</button>
+      </div>
+      <div class="project-tools">
+        <input class="project-search" id="projectSearch" type="search" placeholder="Search projects by name, stack, or feature" aria-label="Search projects">
       </div>
 
       <div class="projects-grid">
@@ -855,13 +884,15 @@
   </main>
 
   <footer>
-    <p>Portfolio v1.7 - 2026 Giridhar Reddy Parlapalli - All Rights Reserved</p>
+    <p>Portfolio v1.8 - 2026 Giridhar Reddy Parlapalli - All Rights Reserved</p>
   </footer>
   <script>
     const projectFilterButtons = document.querySelectorAll('[data-project-filter]');
     const projectCards = document.querySelectorAll('.project-card[data-project-type]');
     const projectRoadmapCards = document.querySelectorAll('.project-roadmap-card');
     const projectFilterStatus = document.getElementById('projectFilterStatus');
+    const projectSearch = document.getElementById('projectSearch');
+    let activeProjectFilter = 'all';
     const projectFilterLabels = {
       all: 'Showing all 10 projects.',
       frontend: 'Showing 7 frontend projects.',
@@ -870,32 +901,43 @@
       soon: 'Showing 2 coming-soon projects.'
     };
 
-    const applyProjectFilter = (filter) => {
+    const applyProjectFilter = (filter = activeProjectFilter) => {
+      activeProjectFilter = filter || 'all';
+      const query = projectSearch?.value.trim().toLowerCase() || '';
+      let visibleCount = 0;
+
       projectCards.forEach((card) => {
-        const matchesType = card.dataset.projectType === filter;
-        const matchesStatus = filter === 'soon' && card.dataset.projectStatus === 'soon';
-        const visible = filter === 'all' || matchesType || matchesStatus;
+        const matchesType = card.dataset.projectType === activeProjectFilter;
+        const matchesStatus = activeProjectFilter === 'soon' && card.dataset.projectStatus === 'soon';
+        const matchesFilter = activeProjectFilter === 'all' || matchesType || matchesStatus;
+        const matchesSearch = !query || card.textContent.toLowerCase().includes(query);
+        const visible = matchesFilter && matchesSearch;
+        if (visible) visibleCount += 1;
         card.classList.toggle('is-hidden', !visible);
       });
 
       projectRoadmapCards.forEach((card) => {
-        card.classList.toggle('is-hidden', filter !== 'all');
+        card.classList.toggle('is-hidden', activeProjectFilter !== 'all' || Boolean(query));
       });
 
       projectFilterButtons.forEach((button) => {
-        const active = button.dataset.projectFilter === filter;
+        const active = button.dataset.projectFilter === activeProjectFilter;
         button.classList.toggle('active', active);
         button.setAttribute('aria-pressed', String(active));
       });
 
       if (projectFilterStatus) {
-        projectFilterStatus.textContent = projectFilterLabels[filter] || projectFilterLabels.all;
+        projectFilterStatus.textContent = query
+          ? `Showing ${visibleCount} project${visibleCount === 1 ? '' : 's'} matching "${query}".`
+          : projectFilterLabels[activeProjectFilter] || projectFilterLabels.all;
       }
     };
 
     projectFilterButtons.forEach((button) => {
       button.addEventListener('click', () => applyProjectFilter(button.dataset.projectFilter));
     });
+
+    projectSearch?.addEventListener('input', () => applyProjectFilter(activeProjectFilter));
   </script>
 </body>
 </html>

@@ -1,4 +1,8 @@
-# Portfolio v1.7
+# Portfolio v1.8
+
+[![Version](https://img.shields.io/badge/version-v1.8-38c9a0)](RELEASE_NOTES.md)
+[![Status](https://img.shields.io/badge/status-job--ready-38c9a0)](https://giridhar-portfolio.vercel.app/)
+[![Deploy](https://img.shields.io/badge/deploy-Vercel-111827)](https://giridhar-portfolio.vercel.app/)
 
 Job-ready personal portfolio for Giridhar Reddy Parlapalli, built as a static HTML/CSS website.
 
@@ -30,6 +34,11 @@ This portfolio highlights my professional summary, technical skills, experience,
 - `experience.html` - Current role and focus areas
 - `projects.html` - Project portfolio
 - `resume.html` - Resume-style summary
+- `now.html` - Current building and learning snapshot
+- `uses.html` - Tools, stack, and workflow
+- `certificates.html` - Certificate proof placeholder page
+- `case-studies.html` - Index of all project case studies
+- `404.html` - Branded not-found page
 
 ## Projects Included
 
@@ -85,15 +94,19 @@ This portfolio highlights my professional summary, technical skills, experience,
 
 Full release history is available in [`RELEASE_NOTES.md`](RELEASE_NOTES.md).
 
-Portfolio v1.7 focuses on recruiter conversion polish: resume preview, better contact form validation, clearer GitHub proof, and stronger UI states.
+Portfolio v1.8 focuses on complete recruiter-brand polish, deeper navigation, project discovery, and SEO/social readiness.
 
-Portfolio v1.7 includes:
+Portfolio v1.8 includes:
 
-- Resume preview modal with direct PDF/DOCX download actions.
-- Web3Forms contact form loading state, validation, and clearer success/error feedback.
-- Message-length helper for cleaner recruiter inquiries.
-- Stronger GitHub/contact proof card with case-study count.
-- Version and footer sync across the portfolio.
+- Recruiter quick summary inside the hero section.
+- Project search on the homepage and dedicated Projects page.
+- Currently Building section for React, TypeScript, Node.js, Express.js, and active project focus.
+- Recruiter FAQ section before contact.
+- Web3Forms subject options, success animation, and message validation.
+- Voice intro Stop button and stronger caption state.
+- Branded Open Graph preview image using the professional avatar.
+- New Now, Uses, Certificates, Case Studies index, and 404 pages.
+- Updated sitemap, changelog, and project README template.
 
 Portfolio v1.6 focuses on complete project proof, synced filtering, sitemap coverage, and recruiter-ready project case studies.
 

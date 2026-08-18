@@ -4,22 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Giridhar Reddy Parlapalli | Frontend Developer Portfolio</title>
-  <meta name="description" content="Portfolio v1.7 for Giridhar Reddy Parlapalli, a frontend-focused Associate Software Engineer with resume preview, skills, experience timeline, featured projects, achievements, testimonials, and Web3Forms contact.">
+  <meta name="description" content="Portfolio v1.8 for Giridhar Reddy Parlapalli, a frontend-focused Associate Software Engineer with recruiter summary, project search, case studies, resume preview, skills, timeline, achievements, FAQ, and Web3Forms contact.">
+  <meta name="keywords" content="Giridhar Reddy Parlapalli, frontend developer, associate software engineer, HTML, CSS, JavaScript, Node.js, Express.js, portfolio, Hyderabad">
   <meta property="og:title" content="Giridhar Reddy Parlapalli | Frontend Developer Portfolio">
   <meta property="og:description" content="Recruiter-ready developer brand website with skills, projects, resume, experience timeline, achievements, testimonials, and contact form.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://giridhar-portfolio.vercel.app/">
-  <meta property="og:image" content="assets/portfolio-website.svg">
+  <meta property="og:image" content="assets/og-preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Giridhar Reddy Parlapalli | Frontend Developer Portfolio">
   <meta name="twitter:description" content="Recruiter-ready developer brand website with skills, projects, resume, experience timeline, achievements, testimonials, and contact form.">
-  <meta name="twitter:image" content="assets/portfolio-website.svg">
+  <meta name="twitter:image" content="assets/og-preview.jpg">
   <link rel="canonical" href="https://giridhar-portfolio.vercel.app/">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="manifest" href="site.webmanifest">
+  <link rel="preload" as="image" href="assets/giridhar-3d-avatar.jpg">
   <meta name="theme-color" content="#38c9a0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Giridhar Reddy Parlapalli",
+    "jobTitle": "Associate Software Engineer",
+    "url": "https://giridhar-portfolio.vercel.app/",
+    "image": "https://giridhar-portfolio.vercel.app/assets/og-preview.jpg",
+    "email": "mailto:giridhar.parlapalli1@gmail.com",
+    "telephone": "+91-8179721034",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Hyderabad",
+      "addressRegion": "Telangana",
+      "addressCountry": "IN"
+    },
+    "sameAs": [
+      "https://github.com/Giridhar113",
+      "https://www.linkedin.com/in/giridharreddy01/"
+    ],
+    "knowsAbout": ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "Responsive Web Design", "IoT", "Embedded Systems"]
+  }
+  </script>
   <style>
     :root {
       --navy: #080c14;
@@ -454,12 +481,24 @@
 
     .avatar-loading { top: 18px; }
     .avatar-caption { bottom: 76px; }
+    .hero-avatar-wrap.is-speaking .avatar-caption {
+      border-color: rgba(56,201,160,0.35);
+      color: var(--text);
+      box-shadow: 0 0 0 1px rgba(56,201,160,0.08), 0 14px 30px rgba(56,201,160,0.08);
+    }
 
-    .avatar-play-btn {
+    .avatar-actions {
       position: absolute;
       right: 18px;
       bottom: 30px;
       z-index: 6;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .avatar-play-btn,
+    .avatar-stop-btn {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
       letter-spacing: 0.08em;
@@ -472,12 +511,48 @@
       transition: transform 0.18s ease, opacity 0.18s ease;
     }
 
-    .avatar-play-btn:hover { transform: translateY(-2px); }
+    .avatar-stop-btn {
+      color: var(--muted);
+      background: rgba(8,12,20,0.86);
+      border: 1px solid var(--border);
+    }
+
+    .avatar-play-btn:hover,
+    .avatar-stop-btn:hover { transform: translateY(-2px); }
 
     .play-intro-btn[disabled],
-    .avatar-play-btn[disabled] {
+    .avatar-play-btn[disabled],
+    .avatar-stop-btn[disabled] {
       opacity: 0.62;
       cursor: wait;
+    }
+
+    .recruiter-summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 26px 0 0;
+      max-width: 720px;
+    }
+
+    .summary-pill {
+      border: 1px solid var(--border);
+      background: rgba(15,26,46,0.68);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .summary-pill strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--accent);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0;
     }
 
     .btn-primary {
@@ -1286,6 +1361,31 @@
       margin: -10px 0 18px;
     }
 
+    .project-tools {
+      display: grid;
+      grid-template-columns: minmax(220px, 420px) 1fr;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .project-search {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: rgba(8,12,20,0.72);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      padding: 12px 14px;
+    }
+
+    .project-search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56,201,160,0.08);
+    }
+
     .project-filter-tab {
       font-family: 'DM Mono', monospace;
       font-size: 11px;
@@ -1311,6 +1411,15 @@
 
     .project-card.is-hidden {
       display: none;
+    }
+
+    .project-card {
+      animation: filterIn 0.24s ease both;
+    }
+
+    @keyframes filterIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .achievement-grid,
@@ -1364,7 +1473,9 @@
     .story-grid,
     .quiz-grid,
     .learning-grid,
-    .hire-grid {
+    .hire-grid,
+    .building-grid,
+    .faq-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
@@ -1373,7 +1484,9 @@
     .story-card,
     .quiz-card,
     .learning-card,
-    .hire-card {
+    .hire-card,
+    .building-card,
+    .faq-card {
       background: var(--card);
       border: 1px solid var(--border2);
       border-radius: 8px;
@@ -1384,7 +1497,9 @@
     .story-card:hover,
     .quiz-card:hover,
     .learning-card:hover,
-    .hire-card:hover {
+    .hire-card:hover,
+    .building-card:hover,
+    .faq-card:hover {
       border-color: rgba(56,201,160,0.32);
       transform: translateY(-2px);
     }
@@ -1392,7 +1507,9 @@
     .story-time,
     .quiz-label,
     .learning-label,
-    .hire-label {
+    .hire-label,
+    .building-label,
+    .faq-label {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
       color: var(--accent);
@@ -1404,7 +1521,9 @@
     .story-card h3,
     .quiz-card h3,
     .learning-card h3,
-    .hire-card h3 {
+    .hire-card h3,
+    .building-card h3,
+    .faq-card h3 {
       font-family: 'Syne', sans-serif;
       font-size: 16px;
       color: var(--text);
@@ -1416,6 +1535,8 @@
     .quiz-card p,
     .learning-card p,
     .hire-card p,
+    .building-card p,
+    .faq-card p,
     .quiz-result {
       font-size: 13px;
       color: var(--muted);
@@ -1609,6 +1730,7 @@
     }
 
     .contact-form input,
+    .contact-form select,
     .contact-form textarea {
       width: 100%;
       border: 1px solid var(--border);
@@ -1628,6 +1750,7 @@
     }
 
     .contact-form input:focus,
+    .contact-form select:focus,
     .contact-form textarea:focus {
       border-color: var(--accent);
       background: rgba(8,12,20,0.82);
@@ -1678,6 +1801,15 @@
     .form-status.success { color: var(--accent); border-color: rgba(56,201,160,0.28); }
     .form-status.error { color: var(--accent3); border-color: rgba(244,162,97,0.28); }
     .form-status.info { color: var(--accent2); border-color: rgba(79,168,232,0.24); }
+
+    .form-status.success {
+      animation: statusPop 0.38s ease;
+    }
+
+    @keyframes statusPop {
+      0% { transform: scale(0.98); opacity: 0.4; }
+      100% { transform: scale(1); opacity: 1; }
+    }
 
     .field-hint {
       font-family: 'DM Mono', monospace;
@@ -2036,6 +2168,10 @@
         min-height: 360px;
         margin: 0 auto;
       }
+      .recruiter-summary,
+      .project-tools {
+        grid-template-columns: 1fr;
+      }
       .hero-eyebrow {
         justify-content: center;
         font-size: 10px;
@@ -2095,6 +2231,8 @@
     .quiz-card,
     .learning-card,
     .hire-card,
+    .building-card,
+    .faq-card,
     .proof-card,
     .contact-form,
     .contact-item,
@@ -2132,12 +2270,14 @@
     }
 
     .contact-form input,
+    .contact-form select,
     .contact-form textarea,
     .quiz-controls select {
       transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
     }
 
     .contact-form input:focus,
+    .contact-form select:focus,
     .contact-form textarea:focus,
     .quiz-controls select:focus {
       box-shadow: 0 0 0 3px rgba(56,201,160,0.08);
@@ -2194,6 +2334,8 @@
       .testimonial-grid,
       .learning-grid,
       .hire-grid,
+      .building-grid,
+      .faq-grid,
       .quiz-grid,
       .quiz-controls { grid-template-columns: 1fr; }
       .proof-grid { grid-template-columns: 1fr 1fr; }
@@ -2204,6 +2346,8 @@
       .testimonial-card,
       .learning-card,
       .hire-card,
+      .building-card,
+      .faq-card,
       .proof-card,
       .contact-form,
       .stat-card { padding: 22px 18px; }
@@ -2216,7 +2360,7 @@
         bottom: 12px;
         z-index: 180;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 6px;
         padding: 8px;
         background: rgba(8,12,20,0.92);
@@ -2279,10 +2423,16 @@
           <button class="btn-primary play-intro-btn play-intro-trigger" type="button" id="playAvatarIntro">Hear Intro</button>
         </div>
         <div class="trust-badges" aria-label="Portfolio status badges">
-          <span>Version v1.7</span>
+          <span>Version v1.8</span>
           <span>Open to Work</span>
           <span>PDF Resume</span>
           <span>Last Updated Aug 2026</span>
+        </div>
+        <div class="recruiter-summary" aria-label="Recruiter quick summary">
+          <div class="summary-pill"><strong>Role Target</strong>Frontend Developer / Associate Software Engineer</div>
+          <div class="summary-pill"><strong>Core Stack</strong>HTML, CSS, JavaScript, Node.js basics, Express.js basics</div>
+          <div class="summary-pill"><strong>Project Proof</strong>10 projects, 10 case studies, portfolio deployed on Vercel</div>
+          <div class="summary-pill"><strong>Strength</strong>Clean responsive UI with ECE and IoT problem-solving</div>
         </div>
       </div>
       <div class="hero-avatar-wrap" id="avatarHero" aria-label="Professional avatar voice intro">
@@ -2296,7 +2446,10 @@
         </div>
         <div class="avatar-loading" id="avatarLoading">Voice intro ready</div>
         <div class="avatar-caption" id="avatarCaption">Click Hear Intro to listen to a short portfolio summary.</div>
-        <button class="avatar-play-btn play-intro-trigger" type="button">Hear Intro</button>
+        <div class="avatar-actions">
+          <button class="avatar-stop-btn voice-stop-trigger" type="button">Stop</button>
+          <button class="avatar-play-btn play-intro-trigger" type="button">Hear Intro</button>
+        </div>
       </div>
     </div>
   </section>
@@ -2858,6 +3011,9 @@
         <button class="project-filter-tab" type="button" data-project-filter="ml" aria-pressed="false">ML (1)</button>
         <button class="project-filter-tab" type="button" data-project-filter="soon" aria-pressed="false">Coming Soon (2)</button>
       </div>
+      <div class="project-tools">
+        <input class="project-search" id="projectSearch" type="search" placeholder="Search projects by name, stack, or feature" aria-label="Search projects">
+      </div>
       <div class="projects-grid">
         <div class="project-card" data-project-type="frontend" data-project-status="completed">
           <div class="project-num">01</div>
@@ -3078,15 +3234,42 @@
 
   <div class="divider"></div>
 
+  <!-- CURRENTLY BUILDING -->
+  <section id="currently-building">
+    <div class="section-wrap">
+      <p class="section-label">06 &nbsp; CURRENTLY BUILDING</p>
+      <h2 class="section-title">What I Am Improving Next</h2>
+      <div class="building-grid">
+        <article class="building-card">
+          <div class="building-label">Product Build</div>
+          <h3>Job Portal System</h3>
+          <p>Improving the recruiter and candidate flows with saved applications, clearer dashboards, and reusable localStorage patterns before public deployment.</p>
+        </article>
+        <article class="building-card">
+          <div class="building-label">Learning Path</div>
+          <h3>React + TypeScript</h3>
+          <p>Moving from vanilla JavaScript into component-based UI development, typed props, reusable state patterns, and cleaner frontend architecture.</p>
+        </article>
+        <article class="building-card">
+          <div class="building-label">Backend Basics</div>
+          <h3>Node.js + Express.js</h3>
+          <p>Practicing routes, API structure, validation, and form workflows so frontend projects can grow into full-stack applications.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- ACHIEVEMENTS -->
   <section id="achievements">
     <div class="section-wrap">
-      <p class="section-label">06 &nbsp; ACHIEVEMENTS</p>
+      <p class="section-label">07 &nbsp; ACHIEVEMENTS</p>
       <h2 class="section-title">Proof of Progress</h2>
       <div class="achievement-grid">
         <article class="achievement-card">
           <div class="achievement-kicker">Developer Brand</div>
-          <h3>Portfolio v1.7 release</h3>
+          <h3>Portfolio v1.8 release</h3>
           <p>
             Expanded the portfolio with complete project case studies, category filters,
             project proof chips, resume downloads, Web3Forms contact, and mobile-first navigation.
@@ -3115,7 +3298,7 @@
   <!-- TESTIMONIALS -->
   <section id="testimonials">
     <div class="section-wrap">
-      <p class="section-label">07 &nbsp; TESTIMONIALS</p>
+      <p class="section-label">08 &nbsp; TESTIMONIALS</p>
       <h2 class="section-title">How I Add Value</h2>
       <div class="testimonial-grid">
         <article class="testimonial-card">
@@ -3151,7 +3334,7 @@
   <!-- STORY -->
   <section id="story">
     <div class="section-wrap">
-      <p class="section-label">08 &nbsp; STORY</p>
+      <p class="section-label">09 &nbsp; STORY</p>
       <h2 class="section-title">How I Work</h2>
       <div class="story-grid">
         <article class="story-card">
@@ -3187,7 +3370,7 @@
   <!-- ROLE FIT -->
   <section id="role-fit">
     <div class="section-wrap">
-      <p class="section-label">09 &nbsp; ROLE FIT</p>
+      <p class="section-label">10 &nbsp; ROLE FIT</p>
       <h2 class="section-title">Hiring Fit Quiz</h2>
       <div class="quiz-grid">
         <article class="quiz-card">
@@ -3237,7 +3420,7 @@
   <!-- WHY HIRE ME -->
   <section id="why-hire">
     <div class="section-wrap">
-      <p class="section-label">10 &nbsp; WHY HIRE ME</p>
+      <p class="section-label">11 &nbsp; WHY HIRE ME</p>
       <h2 class="section-title">Why I Am a Strong Fit</h2>
       <div class="hire-grid">
         <article class="hire-card">
@@ -3261,10 +3444,37 @@
 
   <div class="divider"></div>
 
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="section-wrap">
+      <p class="section-label">12 &nbsp; FAQ</p>
+      <h2 class="section-title">Ask Me About My Projects</h2>
+      <div class="faq-grid">
+        <article class="faq-card">
+          <div class="faq-label">Project Proof</div>
+          <h3>Which project best shows frontend skill?</h3>
+          <p>The Portfolio Website and Kaira Commerce UI best show responsive layout, component thinking, smooth interactions, and recruiter-focused presentation.</p>
+        </article>
+        <article class="faq-card">
+          <div class="faq-label">Learning Path</div>
+          <h3>What are you improving next?</h3>
+          <p>I am strengthening React, TypeScript, Node.js, Express.js, and MongoDB fundamentals so my frontend projects can grow into complete full-stack products.</p>
+        </article>
+        <article class="faq-card">
+          <div class="faq-label">Availability</div>
+          <h3>Are you open to interviews?</h3>
+          <p>Yes. I am open to frontend developer and associate software engineer opportunities, especially roles where clean UI and steady learning matter.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- CONTACT -->
   <section id="contact">
     <div class="section-wrap">
-      <p class="section-label">11 &nbsp; CONTACT</p>
+      <p class="section-label">13 &nbsp; CONTACT</p>
       <h2 class="section-title">Let's Connect</h2>
       <div class="contact-grid">
         <div class="contact-intro">
@@ -3286,7 +3496,13 @@
               <input type="text" name="name" placeholder="Your name" aria-label="Your name" autocomplete="name" required>
               <input type="email" name="email" placeholder="Your email" aria-label="Your email" autocomplete="email" required>
             </div>
-            <input type="text" name="subject" placeholder="Subject" aria-label="Message subject" required>
+            <select name="subject" aria-label="Message subject" required>
+              <option value="">Choose message type</option>
+              <option value="Job Opportunity">Job opportunity</option>
+              <option value="Project Discussion">Project discussion</option>
+              <option value="Interview">Interview</option>
+              <option value="General">General</option>
+            </select>
             <textarea name="message" id="messageField" placeholder="Message" aria-label="Message" minlength="20" maxlength="700" required></textarea>
             <div class="field-hint" id="messageHint">Minimum 20 characters. Keep it short and clear.</div>
             <button type="submit" class="btn-primary">Send Message</button>
@@ -3383,7 +3599,9 @@
   </div>
 
   <footer>
-    Portfolio v1.7 - 2026 Giridhar Reddy Parlapalli - All Rights Reserved
+    Portfolio v1.8 - 2026 Giridhar Reddy Parlapalli - All Rights Reserved
+    <br>
+    <a href="RELEASE_NOTES.md">Changelog</a> / <a href="now.html">Now</a> / <a href="uses.html">Uses</a> / <a href="certificates.html">Certificates</a>
   </footer>
 
   <button class="scroll-top" id="scrollTop" type="button" aria-label="Scroll to top">↑</button>
@@ -3391,6 +3609,7 @@
   <div class="mobile-bottom-nav" aria-label="Mobile quick navigation">
     <a href="#home">Home</a>
     <a href="#projects">Projects</a>
+    <a href="#resume">Resume</a>
     <a href="tel:+918179721034">Call</a>
     <a href="https://wa.me/918179721034?text=Hi%20Giridhar%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20connect." target="_blank" rel="noopener">WhatsApp</a>
   </div>
@@ -3491,6 +3710,8 @@
     const projectCards = document.querySelectorAll('#projects .project-card');
     const projectRoadmapCards = document.querySelectorAll('#projects .project-roadmap-card');
     const projectFilterStatus = document.getElementById('projectFilterStatus');
+    const projectSearch = document.getElementById('projectSearch');
+    let activeProjectFilter = 'all';
     const projectFilterLabels = {
       all: 'Showing all 10 projects.',
       frontend: 'Showing 7 frontend builds.',
@@ -3499,24 +3720,33 @@
       soon: 'Showing 2 coming soon projects.'
     };
 
-    const applyProjectFilter = (filter) => {
+    const applyProjectFilter = (filter = activeProjectFilter) => {
+      activeProjectFilter = filter || 'all';
+      const query = projectSearch?.value.trim().toLowerCase() || '';
+      let visibleCount = 0;
+
       projectFilterButtons.forEach((button) => {
-        const isActive = button.dataset.projectFilter === filter;
+        const isActive = button.dataset.projectFilter === activeProjectFilter;
         button.classList.toggle('active', isActive);
         button.setAttribute('aria-pressed', String(isActive));
       });
 
       projectCards.forEach((card) => {
-        const matches = filter === 'all' || card.dataset.projectType === filter || card.dataset.projectStatus === filter;
+        const filterMatches = activeProjectFilter === 'all' || card.dataset.projectType === activeProjectFilter || card.dataset.projectStatus === activeProjectFilter;
+        const searchMatches = !query || card.textContent.toLowerCase().includes(query);
+        const matches = filterMatches && searchMatches;
+        if (matches) visibleCount += 1;
         card.classList.toggle('is-hidden', !matches);
       });
 
       projectRoadmapCards.forEach((card) => {
-        card.classList.toggle('is-hidden', filter !== 'all');
+        card.classList.toggle('is-hidden', activeProjectFilter !== 'all' || Boolean(query));
       });
 
       if (projectFilterStatus) {
-        projectFilterStatus.textContent = projectFilterLabels[filter] || projectFilterLabels.all;
+        projectFilterStatus.textContent = query
+          ? `Showing ${visibleCount} project${visibleCount === 1 ? '' : 's'} matching "${query}".`
+          : projectFilterLabels[activeProjectFilter] || projectFilterLabels.all;
       }
     };
 
@@ -3536,6 +3766,8 @@
         activate();
       });
     });
+
+    projectSearch?.addEventListener('input', () => applyProjectFilter(activeProjectFilter));
 
     const quizMatches = {
       frontend: {
@@ -3695,6 +3927,7 @@
       const avatarCaption = document.getElementById('avatarCaption');
       const avatarFrame = avatarNode?.querySelector('.avatar-portrait-frame');
       const playIntroButtons = document.querySelectorAll('.play-intro-trigger');
+      const stopVoiceButtons = document.querySelectorAll('.voice-stop-trigger');
 
       if (!avatarHero || !avatarNode) return;
 
@@ -3717,6 +3950,12 @@
         });
       };
 
+      const setStopButtons = (disabled) => {
+        stopVoiceButtons.forEach((button) => {
+          button.disabled = disabled;
+        });
+      };
+
       const setSpeaking = (speaking) => {
         isSpeaking = speaking;
         avatarHero.classList.toggle('is-speaking', speaking);
@@ -3726,6 +3965,7 @@
         window.clearTimeout(captionTimer);
         setSpeaking(false);
         setButtons(false);
+        setStopButtons(true);
         setStatus(message);
       };
 
@@ -3737,6 +3977,7 @@
       const runCaptionOnlySpeech = () => {
         setCaption(INTRO_TEXT);
         setButtons(true, 'Playing...');
+        setStopButtons(false);
         setStatus('Caption mode playing');
         setSpeaking(true);
         captionTimer = window.setTimeout(() => finishSpeech('Caption mode ready'), 5200);
@@ -3762,6 +4003,7 @@
 
         utterance.onstart = () => {
           setButtons(true, 'Speaking...');
+          setStopButtons(false);
           setStatus('Speaking with browser voice');
           setSpeaking(true);
         };
@@ -3785,6 +4027,14 @@
       });
 
       playIntroButtons.forEach((button) => button.addEventListener('click', playIntro));
+      stopVoiceButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          window.speechSynthesis?.cancel?.();
+          finishSpeech('Voice intro stopped');
+          setCaption('Voice intro stopped. Click Hear Intro to replay.');
+        });
+      });
+      setStopButtons(true);
 
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) {

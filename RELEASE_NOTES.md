@@ -1,26 +1,34 @@
 # Release Notes
 
-## Portfolio v1.7
+## Portfolio v1.8
 
-Portfolio v1.7 focuses on recruiter conversion polish and contact reliability.
+Portfolio v1.8 focuses on complete recruiter-brand polish, project discovery, supporting pages, and SEO/social readiness.
 
 ### Added
 
-- Resume preview modal on the homepage.
-- Direct PDF and DOCX download actions inside the resume preview.
-- Web3Forms message validation before submission.
-- Contact form loading spinner and clearer info/success/error states.
-- Message-length helper for cleaner form submissions.
+- Recruiter quick summary in the hero section.
+- Project search on the homepage and dedicated Projects page.
+- Currently Building section for active project focus and learning path.
+- Recruiter FAQ section before contact.
+- Web3Forms subject options: Job opportunity, Project discussion, Interview, and General.
+- Voice intro Stop button and stronger caption state.
+- Branded Open Graph preview image using the professional avatar.
+- New `now.html`, `uses.html`, `certificates.html`, `case-studies.html`, and `404.html` pages.
+- `PROJECT_README_TEMPLATE.md` for future project repositories.
+- `CHANGELOG.md` shortcut to release history.
 
 ### Improved
 
-- Contact proof card now highlights the public GitHub profile, live portfolio repo, and 10 case studies.
-- Homepage trust badges now show v1.7 and August 2026 freshness.
-- Footer version text is synced across all pages.
+- About page now uses the professional 3D-style avatar.
+- Contact form success state now has a small animation.
+- Sitemap now includes the new supporting pages.
+- Social share metadata now points to the branded OG preview image.
+- Mobile bottom navigation now includes a resume shortcut.
 
 ### Notes
 
 - Project-specific GitHub buttons still remain honest as Repo Soon/GitHub Soon until those repositories are public.
+- Certificate pages are prepared for real certificate images or verification links when available.
 
 ## Portfolio v1.6
 
