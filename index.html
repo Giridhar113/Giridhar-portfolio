@@ -2549,6 +2549,54 @@
         linear-gradient(180deg, var(--navy) 0%, #090f1b 100%);
     }
 
+    .hero-ribbon {
+      position: absolute;
+      inset: 92px -7vw auto;
+      height: min(43vw, 430px);
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0.34;
+      filter: drop-shadow(0 0 18px rgba(56,201,160,0.22));
+    }
+
+    .hero-ribbon svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .ribbon-line {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 18 34;
+      transform-origin: center;
+      animation:
+        ribbonFlow 11s linear infinite,
+        ribbonFloat 8s ease-in-out infinite;
+    }
+
+    .ribbon-main {
+      stroke: rgba(56,201,160,0.58);
+      stroke-width: 2;
+    }
+
+    .ribbon-blue {
+      stroke: rgba(79,168,232,0.34);
+      stroke-width: 1.4;
+      stroke-dasharray: 10 42;
+      animation-delay: -2s, -1s;
+    }
+
+    .ribbon-glow {
+      stroke: rgba(56,201,160,0.16);
+      stroke-width: 12;
+      stroke-dasharray: none;
+      filter: blur(10px);
+      animation: ribbonPulse 5.8s ease-in-out infinite;
+    }
+
     #home::before {
       opacity: 0.72;
       background-size: 72px 72px;
@@ -2565,7 +2613,7 @@
       position: absolute;
       pointer-events: none;
       border-radius: 999px;
-      opacity: 0.52;
+      opacity: 0.24;
       filter: blur(0.2px);
     }
 
@@ -2782,6 +2830,23 @@
         linear-gradient(180deg, #f8fbff 0%, #edf4f9 100%);
     }
 
+    body.light-mode .hero-ribbon {
+      opacity: 0.26;
+      filter: drop-shadow(0 0 14px rgba(20,130,104,0.16));
+    }
+
+    body.light-mode .ribbon-main {
+      stroke: rgba(20,130,104,0.42);
+    }
+
+    body.light-mode .ribbon-blue {
+      stroke: rgba(36,112,172,0.28);
+    }
+
+    body.light-mode .ribbon-glow {
+      stroke: rgba(20,130,104,0.1);
+    }
+
     body.light-mode #home::after {
       background: linear-gradient(90deg, rgba(248,251,255,0.98) 0%, rgba(248,251,255,0.82) 56%, rgba(248,251,255,0.38) 100%);
     }
@@ -2799,6 +2864,21 @@
     @keyframes heroLineDrift {
       0%, 100% { transform: translate3d(-12px, 0, 0); opacity: 0.2; }
       50% { transform: translate3d(18px, -10px, 0); opacity: 0.72; }
+    }
+
+    @keyframes ribbonFlow {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: -208; }
+    }
+
+    @keyframes ribbonFloat {
+      0%, 100% { transform: translate3d(0, 0, 0) scaleY(1); }
+      50% { transform: translate3d(0, 12px, 0) scaleY(1.04); }
+    }
+
+    @keyframes ribbonPulse {
+      0%, 100% { opacity: 0.42; transform: translate3d(0, 0, 0); }
+      50% { opacity: 0.8; transform: translate3d(0, 10px, 0); }
     }
 
     @keyframes proofShine {
@@ -2840,6 +2920,11 @@
         min-height: auto;
         padding-top: 92px;
         padding-bottom: 56px;
+      }
+      .hero-ribbon {
+        inset: 110px -260px auto;
+        height: 360px;
+        opacity: 0.2;
       }
       .hero-topline {
         justify-content: center;
@@ -2983,6 +3068,13 @@
       }
       body { padding-bottom: 74px; }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ribbon-line,
+      .ribbon-glow {
+        animation: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -3005,6 +3097,13 @@
 
   <!-- HERO -->
   <section id="home">
+    <div class="hero-ribbon" aria-hidden="true">
+      <svg viewBox="0 0 1440 520" preserveAspectRatio="none" focusable="false">
+        <path class="ribbon-glow" d="M-120 292 C 112 190, 254 204, 430 278 S 782 368, 955 244 S 1248 64, 1560 168"></path>
+        <path class="ribbon-line ribbon-main" d="M-120 292 C 112 190, 254 204, 430 278 S 782 368, 955 244 S 1248 64, 1560 168"></path>
+        <path class="ribbon-line ribbon-blue" d="M-100 360 C 108 260, 314 318, 498 218 S 802 70, 1004 190 S 1278 358, 1550 284"></path>
+      </svg>
+    </div>
     <div class="hero-inner">
       <div class="hero-content">
         <div class="hero-topline">
