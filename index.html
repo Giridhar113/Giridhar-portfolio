@@ -241,6 +241,102 @@
       background: linear-gradient(90deg, var(--navy) 0%, rgba(8,12,20,0.88) 42%, rgba(8,12,20,0.2) 100%);
     }
 
+    .hero-ribbon {
+      position: absolute;
+      inset: 64px 0 auto;
+      height: min(58vw, 520px);
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0.68;
+      filter: drop-shadow(0 0 24px rgba(56,201,160,0.12));
+    }
+
+    .hero-ribbon svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .ribbon-line {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 14 28;
+      animation: ribbonFlow 10s linear infinite, ribbonFloat 7s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .ribbon-line.main {
+      stroke: rgba(56,201,160,0.72);
+      stroke-width: 2.2;
+    }
+
+    .ribbon-line.blue {
+      stroke: rgba(79,168,232,0.46);
+      stroke-width: 1.4;
+      animation-duration: 12s, 8s;
+      animation-delay: -2s, -1s;
+    }
+
+    .ribbon-line.soft {
+      stroke: rgba(244,162,97,0.28);
+      stroke-width: 1.1;
+      animation-duration: 15s, 9s;
+      animation-delay: -4s, -2s;
+    }
+
+    .ribbon-orbit {
+      position: absolute;
+      right: clamp(240px, 21vw, 360px);
+      top: clamp(80px, 10vw, 140px);
+      width: clamp(120px, 15vw, 210px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(56,201,160,0.12);
+      border-radius: 50%;
+      animation: ribbonOrbit 14s linear infinite;
+    }
+
+    .ribbon-orbit::before,
+    .ribbon-orbit::after {
+      content: '';
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 20px rgba(56,201,160,0.54);
+    }
+
+    .ribbon-orbit::before {
+      top: 18%;
+      left: 12%;
+    }
+
+    .ribbon-orbit::after {
+      right: 18%;
+      bottom: 16%;
+      background: var(--accent2);
+      box-shadow: 0 0 20px rgba(79,168,232,0.46);
+    }
+
+    @keyframes ribbonFlow {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: -168; }
+    }
+
+    @keyframes ribbonFloat {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(0, 12px, 0) scale(1.015); }
+    }
+
+    @keyframes ribbonOrbit {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     .hero-eyebrow {
       font-family: 'DM Mono', monospace;
       font-size: 11px;
@@ -2123,6 +2219,8 @@
     .hero-inner {
       width: min(1270px, calc(100vw - 80px));
       margin: 0 auto;
+      position: relative;
+      z-index: 2;
       display: grid;
       grid-template-columns: minmax(0, 1fr) clamp(360px, 33vw, 430px);
       align-items: center;
@@ -2167,6 +2265,16 @@
         width: min(310px, 86vw);
         min-height: 360px;
         margin: 0 auto;
+      }
+      .hero-ribbon {
+        inset: 76px -160px auto;
+        height: 440px;
+        opacity: 0.42;
+      }
+      .ribbon-orbit {
+        right: 210px;
+        top: 78px;
+        width: 120px;
       }
       .recruiter-summary,
       .project-tools {
@@ -2310,6 +2418,23 @@
     body.light-mode #home::after {
       background:
         linear-gradient(90deg, rgba(247,251,255,0.96) 0%, rgba(247,251,255,0.82) 46%, rgba(247,251,255,0.2) 100%);
+    }
+
+    body.light-mode .hero-ribbon {
+      opacity: 0.48;
+      filter: drop-shadow(0 0 20px rgba(56,201,160,0.1));
+    }
+
+    body.light-mode .ribbon-line.main {
+      stroke: rgba(20,130,104,0.5);
+    }
+
+    body.light-mode .ribbon-line.blue {
+      stroke: rgba(36,112,172,0.34);
+    }
+
+    body.light-mode .ribbon-line.soft {
+      stroke: rgba(196,109,54,0.22);
     }
 
     body.light-mode .hero-title,
@@ -2463,6 +2588,14 @@
 
   <!-- HERO -->
   <section id="home">
+    <div class="hero-ribbon" aria-hidden="true">
+      <svg viewBox="0 0 1440 520" preserveAspectRatio="none">
+        <path class="ribbon-line main" d="M-70 332 C 172 188, 318 450, 548 286 S 902 118, 1118 264 S 1322 412, 1510 206"></path>
+        <path class="ribbon-line blue" d="M-80 248 C 190 390, 370 108, 596 246 S 924 430, 1166 188 S 1360 92, 1515 236"></path>
+        <path class="ribbon-line soft" d="M-90 386 C 168 308, 286 212, 510 350 S 852 206, 1050 340 S 1300 452, 1518 316"></path>
+      </svg>
+      <span class="ribbon-orbit"></span>
+    </div>
     <div class="hero-inner">
       <div class="hero-content">
         <p class="hero-eyebrow">Associate Software Engineer - Oppty TechHub Private Limited</p>
