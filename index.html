@@ -4067,7 +4067,7 @@
         <button class="chatbot-close" id="chatbotClose" type="button" aria-label="Close portfolio assistant">x</button>
       </div>
       <div class="chatbot-messages" id="chatbotMessages" aria-live="polite">
-        <div class="chatbot-message bot">Hi. Ask about my skills, projects, resume, experience, or contact details.</div>
+        <div class="chatbot-message bot">Hi. Ask about my skills, projects, resume, experience, or contact details. AI may ask for sign-in if required by the provider.</div>
       </div>
       <div class="chatbot-quick" aria-label="Quick portfolio questions">
         <button class="chatbot-chip" type="button" data-chat-question="What are your best projects?">Best projects</button>
@@ -4093,6 +4093,7 @@
     <a href="https://wa.me/918179721034?text=Hi%20Giridhar%2C%20I%20saw%20your%20portfolio%20and%20want%20to%20connect." target="_blank" rel="noopener">WhatsApp</a>
   </div>
 
+  <script src="https://js.puter.com/v2/"></script>
   <script>
     const progress = document.getElementById('scrollProgress');
     const scrollTopButton = document.getElementById('scrollTop');
@@ -4155,38 +4156,44 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    const portfolioAnswers = [
-      {
-        keys: ['project', 'projects', 'work', 'built', 'best'],
-        answer: 'Best projects to review first: Portfolio Website, Travel Website, College Website Management System, Job Portal System, Kaira Commerce, Finance Website, IoT Home Automation, Embedded Systems, and Sign Language Converter. Use the Projects section for filters and case-study links.',
-        target: '#projects'
-      },
-      {
-        keys: ['skill', 'skills', 'stack', 'technology', 'technologies'],
-        answer: 'Core skills: HTML, CSS, JavaScript, Node.js basics, Express.js basics, responsive UI, GitHub, Web3Forms, LocalStorage, and ECE/IoT fundamentals. The Skills section shows progress bars and related tool groups.',
-        target: '#skills'
-      },
-      {
-        keys: ['resume', 'cv', 'download', 'pdf', 'docx'],
-        answer: 'Resume is available as PDF and DOCX. Open the Resume section to preview it, or use the Download PDF and Download DOCX buttons.',
-        target: '#resume'
-      },
-      {
-        keys: ['experience', 'job', 'company', 'oppty', 'techhub', 'role'],
-        answer: 'Current role: Associate Software Engineer at Oppty TechHub Pvt. Ltd., Hyderabad, Telangana. Start date: Feb 11, 2026. The experience timeline explains responsibilities and growth focus.',
-        target: '#experience'
-      },
-      {
-        keys: ['contact', 'email', 'phone', 'whatsapp', 'linkedin', 'github', 'hire'],
-        answer: 'Best contact options: email giridhar.parlapalli1@gmail.com, phone/WhatsApp +91 8179721034, LinkedIn profile, or GitHub at github.com/Giridhar113. The contact form uses Web3Forms.',
-        target: '#contact'
-      },
-      {
-        keys: ['available', 'opportunity', 'open', 'joining'],
-        answer: 'Giridhar is open to frontend developer and associate software engineer opportunities, especially roles involving responsive UI, JavaScript interactions, and practical product dashboards.',
-        target: '#contact'
-      }
-    ];
+    const portfolioContext = `
+You are Giridhar Portfolio Assistant on Giridhar Reddy Parlapalli's personal portfolio website.
+Answer as a helpful recruiter assistant, not as Giridhar himself.
+Keep answers short, truthful, professional, and based only on this context.
+If asked for something outside the portfolio, say you can help with projects, skills, resume, experience, or contact.
+
+Profile:
+- Name: Giridhar Reddy Parlapalli.
+- Role: Frontend-focused Associate Software Engineer.
+- Location: Hyderabad, Telangana.
+- Current company: Oppty TechHub Pvt. Ltd.
+- Current role start date: Feb 11, 2026.
+- Open to frontend developer and associate software engineer opportunities.
+
+Skills:
+- HTML, CSS, JavaScript, Node.js basics, Express.js basics.
+- Responsive UI, dashboard-style interfaces, LocalStorage, Web3Forms, GitHub, Vercel.
+- ECE background with IoT and embedded systems fundamentals.
+
+Projects:
+- Portfolio Website: recruiter-ready portfolio with skills, projects, resume, animations, Web3Forms contact, and Vercel deployment.
+- Travel Website: destination discovery and travel planning UI with packages, reviews, budget tools, LocalStorage, and EmailJS.
+- College Website Management System: role-based Admin, Teacher, and Student dashboards with attendance, announcements, and academic info.
+- Job Portal System: job browsing, search, applications, recruiter listing management, LocalStorage, and EmailJS. Status: under development.
+- Learning Management System: course management, progress tracking, quizzes, certifications, and analytics. Status: under development.
+- Kaira Commerce: responsive e-commerce UI.
+- Finance Website: trust-focused finance landing page.
+- IoT Home Automation: remote appliance control concept using Cisco Packet Tracer.
+- Embedded Systems: ARM Cortex-M0+ KL25Z practice including UART, LED FSM, 7-segment display, and MBED.
+- Sign Language Converter: Python/OpenCV prototype for ASL sign-to-text.
+
+Contact:
+- Email: giridhar.parlapalli1@gmail.com
+- Phone/WhatsApp: +91 8179721034
+- GitHub: https://github.com/Giridhar113
+- LinkedIn: https://www.linkedin.com/in/giridharreddy01/
+- Resume is available in PDF and DOCX on the portfolio.
+`;
 
     const appendChatMessage = (text, type = 'bot', target = '') => {
       if (!chatbotMessages) return;
@@ -4203,22 +4210,51 @@
       }
       chatbotMessages.appendChild(message);
       chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      return message;
     };
 
-    const getPortfolioAnswer = (question) => {
+    const readAiText = (response) => {
+      if (typeof response === 'string') return response;
+      if (response?.message?.content) return response.message.content;
+      if (Array.isArray(response?.choices)) return response.choices[0]?.message?.content || '';
+      return String(response || '');
+    };
+
+    const getSectionTarget = (question) => {
       const normalized = question.toLowerCase();
-      return portfolioAnswers.find((item) => item.keys.some((key) => normalized.includes(key))) || {
-        answer: 'I can help with projects, skills, resume, experience, availability, and contact details. Try asking: "What are your best projects?" or "How can I contact you?"',
-        target: '#projects'
-      };
+      if (/resume|cv|download|pdf|docx/.test(normalized)) return '#resume';
+      if (/skill|stack|technology|html|css|javascript|node|express/.test(normalized)) return '#skills';
+      if (/experience|company|oppty|role|job/.test(normalized)) return '#experience';
+      if (/contact|email|phone|whatsapp|linkedin|github|hire|available/.test(normalized)) return '#contact';
+      return '#projects';
     };
 
-    const askPortfolioAssistant = (question) => {
+    const askPortfolioAssistant = async (question) => {
       const cleanQuestion = question.trim();
       if (!cleanQuestion) return;
       appendChatMessage(cleanQuestion, 'user');
-      const response = getPortfolioAnswer(cleanQuestion);
-      window.setTimeout(() => appendChatMessage(response.answer, 'bot', response.target), 180);
+      const thinkingMessage = appendChatMessage('Thinking...', 'bot');
+
+      try {
+        if (!window.puter?.ai?.chat) {
+          throw new Error('AI library unavailable');
+        }
+
+        const response = await window.puter.ai.chat(`${portfolioContext}\nVisitor question: ${cleanQuestion}`);
+        const answer = readAiText(response).trim() || 'I could not generate a response. Please ask about projects, skills, resume, experience, or contact.';
+        thinkingMessage.textContent = answer;
+      } catch (error) {
+        thinkingMessage.textContent = 'AI chat is not available right now. Please ask about projects, skills, resume, experience, or contact, or use the contact section directly.';
+      }
+
+      const target = getSectionTarget(cleanQuestion);
+      const link = document.createElement('a');
+      link.href = target;
+      link.textContent = ' Open section';
+      link.style.color = 'var(--accent)';
+      link.style.marginLeft = '4px';
+      thinkingMessage.appendChild(link);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
     };
 
     const setChatbotOpen = (open) => {
