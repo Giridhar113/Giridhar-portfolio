@@ -7,7 +7,7 @@
   <meta name="description" content="Portfolio v1.8 for Giridhar Reddy Parlapalli, a frontend-focused Associate Software Engineer with recruiter summary, project search, case studies, resume preview, skills, timeline, achievements, FAQ, and Web3Forms contact.">
   <meta name="keywords" content="Giridhar Reddy Parlapalli, frontend developer, associate software engineer, HTML, CSS, JavaScript, Node.js, Express.js, portfolio, Hyderabad">
   <meta property="og:title" content="Giridhar Reddy Parlapalli | Frontend Developer Portfolio">
-  <meta property="og:description" content="Recruiter-ready developer brand website with skills, projects, resume, experience timeline, achievements, testimonials, and contact form.">
+  <meta property="og:description" content="Recruiter-ready developer brand website with skills, projects, resume, experience timeline, achievements, and contact form.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://giridhar-portfolio.vercel.app/">
   <meta property="og:image" content="assets/og-preview.jpg">
@@ -15,7 +15,7 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Giridhar Reddy Parlapalli | Frontend Developer Portfolio">
-  <meta name="twitter:description" content="Recruiter-ready developer brand website with skills, projects, resume, experience timeline, achievements, testimonials, and contact form.">
+  <meta name="twitter:description" content="Recruiter-ready developer brand website with skills, projects, resume, experience timeline, achievements, and contact form.">
   <meta name="twitter:image" content="assets/og-preview.jpg">
   <link rel="canonical" href="https://giridhar-portfolio.vercel.app/">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -347,11 +347,6 @@
       animation: fadeUp 0.7s 0.5s ease both;
     }
 
-    .hero-avatar-wrap.is-speaking {
-      border-color: rgba(56,201,160,0.34);
-      box-shadow: 0 30px 90px rgba(0,0,0,0.34), 0 0 40px rgba(56,201,160,0.08);
-    }
-
     .hero-avatar-wrap::before {
       content: '';
       position: absolute;
@@ -363,7 +358,7 @@
     }
 
     .hero-avatar-wrap::after {
-      content: 'VOICE INTRO / PROFILE AVATAR';
+      content: 'PROFILE AVATAR';
       position: absolute;
       left: 18px;
       bottom: 16px;
@@ -400,11 +395,6 @@
       transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
     }
 
-    .hero-avatar-wrap.is-speaking .avatar-portrait-frame {
-      border-color: rgba(56,201,160,0.4);
-      box-shadow: 0 26px 78px rgba(0,0,0,0.42), 0 0 34px rgba(56,201,160,0.1);
-    }
-
     .avatar-portrait-frame::after {
       content: '';
       position: absolute;
@@ -423,46 +413,6 @@
       transition: transform 0.28s ease, filter 0.28s ease;
     }
 
-    .hero-avatar-wrap.is-speaking .avatar-portrait {
-      transform: scale(1.07);
-      filter: saturate(1.08);
-    }
-
-    .avatar-wave {
-      position: absolute;
-      left: 50%;
-      bottom: 86px;
-      z-index: 4;
-      display: flex;
-      align-items: end;
-      gap: 4px;
-      transform: translateX(-50%);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .avatar-wave span {
-      width: 4px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--accent);
-      animation: voiceWave 0.8s ease-in-out infinite;
-    }
-
-    .avatar-wave span:nth-child(2) { animation-delay: 0.12s; }
-    .avatar-wave span:nth-child(3) { animation-delay: 0.24s; }
-    .avatar-wave span:nth-child(4) { animation-delay: 0.36s; }
-
-    .hero-avatar-wrap.is-speaking .avatar-wave {
-      opacity: 1;
-    }
-
-    @keyframes voiceWave {
-      0%, 100% { height: 8px; opacity: 0.5; }
-      50% { height: 24px; opacity: 1; }
-    }
-
-    .avatar-loading,
     .avatar-caption {
       position: absolute;
       left: 18px;
@@ -479,53 +429,7 @@
       padding: 10px 12px;
     }
 
-    .avatar-loading { top: 18px; }
     .avatar-caption { bottom: 76px; }
-    .hero-avatar-wrap.is-speaking .avatar-caption {
-      border-color: rgba(56,201,160,0.35);
-      color: var(--text);
-      box-shadow: 0 0 0 1px rgba(56,201,160,0.08), 0 14px 30px rgba(56,201,160,0.08);
-    }
-
-    .avatar-actions {
-      position: absolute;
-      right: 18px;
-      bottom: 30px;
-      z-index: 6;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .avatar-play-btn,
-    .avatar-stop-btn {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      color: #04201a;
-      background: var(--accent);
-      border: 0;
-      border-radius: 6px;
-      padding: 9px 12px;
-      cursor: pointer;
-      transition: transform 0.18s ease, opacity 0.18s ease;
-    }
-
-    .avatar-stop-btn {
-      color: var(--muted);
-      background: rgba(8,12,20,0.86);
-      border: 1px solid var(--border);
-    }
-
-    .avatar-play-btn:hover,
-    .avatar-stop-btn:hover { transform: translateY(-2px); }
-
-    .play-intro-btn[disabled],
-    .avatar-play-btn[disabled],
-    .avatar-stop-btn[disabled] {
-      opacity: 0.62;
-      cursor: wait;
-    }
 
     .recruiter-summary {
       display: grid;
@@ -1432,15 +1336,13 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .achievement-grid,
-    .testimonial-grid {
+    .achievement-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
 
-    .achievement-card,
-    .testimonial-card {
+    .achievement-card {
       background: var(--card);
       border: 1px solid var(--border2);
       border-radius: 8px;
@@ -1448,14 +1350,12 @@
       transition: border-color 0.2s, transform 0.2s;
     }
 
-    .achievement-card:hover,
-    .testimonial-card:hover {
+    .achievement-card:hover {
       border-color: rgba(79,168,232,0.38);
       transform: translateY(-2px);
     }
 
-    .achievement-kicker,
-    .testimonial-role {
+    .achievement-kicker {
       font-family: 'DM Mono', monospace;
       font-size: 10px;
       color: var(--accent);
@@ -1464,8 +1364,7 @@
       margin-bottom: 10px;
     }
 
-    .achievement-card h3,
-    .testimonial-card h3 {
+    .achievement-card h3 {
       font-family: 'Syne', sans-serif;
       font-size: 16px;
       color: var(--text);
@@ -1473,15 +1372,12 @@
       margin-bottom: 10px;
     }
 
-    .achievement-card p,
-    .testimonial-card p {
+    .achievement-card p {
       font-size: 13px;
       color: var(--muted);
       line-height: 1.75;
     }
 
-    .story-grid,
-    .quiz-grid,
     .learning-grid,
     .hire-grid,
     .building-grid,
@@ -1491,8 +1387,6 @@
       gap: 18px;
     }
 
-    .story-card,
-    .quiz-card,
     .learning-card,
     .hire-card,
     .building-card,
@@ -1504,8 +1398,6 @@
       transition: border-color 0.2s, transform 0.2s;
     }
 
-    .story-card:hover,
-    .quiz-card:hover,
     .learning-card:hover,
     .hire-card:hover,
     .building-card:hover,
@@ -1514,8 +1406,6 @@
       transform: translateY(-2px);
     }
 
-    .story-time,
-    .quiz-label,
     .learning-label,
     .hire-label,
     .building-label,
@@ -1528,8 +1418,6 @@
       margin-bottom: 8px;
     }
 
-    .story-card h3,
-    .quiz-card h3,
     .learning-card h3,
     .hire-card h3,
     .building-card h3,
@@ -1541,13 +1429,10 @@
       line-height: 1.3;
     }
 
-    .story-card p,
-    .quiz-card p,
     .learning-card p,
     .hire-card p,
     .building-card p,
-    .faq-card p,
-    .quiz-result {
+    .faq-card p {
       font-size: 13px;
       color: var(--muted);
       line-height: 1.75;
@@ -1564,40 +1449,6 @@
     .learning-panel .section-title {
       font-size: clamp(22px, 3vw, 28px);
       margin-bottom: 22px;
-    }
-
-    .quiz-panel {
-      margin-top: 22px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 26px;
-      display: grid;
-      gap: 16px;
-    }
-
-    .quiz-controls {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .quiz-controls select {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      background: rgba(8,12,20,0.55);
-      color: var(--text);
-      font: inherit;
-      font-size: 13px;
-      padding: 12px;
-      outline: none;
-    }
-
-    .quiz-result {
-      border-left: 2px solid var(--accent);
-      padding-left: 14px;
-      min-height: 46px;
     }
 
     /* ── Contact ── */
@@ -2248,9 +2099,6 @@
     .project-card,
     .project-roadmap-card,
     .achievement-card,
-    .testimonial-card,
-    .story-card,
-    .quiz-card,
     .learning-card,
     .hire-card,
     .building-card,
@@ -2293,15 +2141,13 @@
 
     .contact-form input,
     .contact-form select,
-    .contact-form textarea,
-    .quiz-controls select {
+    .contact-form textarea {
       transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
     }
 
     .contact-form input:focus,
     .contact-form select:focus,
-    .contact-form textarea:focus,
-    .quiz-controls select:focus {
+    .contact-form textarea:focus {
       box-shadow: 0 0 0 3px rgba(56,201,160,0.08);
     }
 
@@ -2337,8 +2183,7 @@
     body.light-mode .hero-title,
     body.light-mode .hero-desc,
     body.light-mode .summary-pill,
-    body.light-mode .avatar-caption,
-    body.light-mode .avatar-loading {
+    body.light-mode .avatar-caption {
       color: #4f637a;
     }
 
@@ -2351,9 +2196,7 @@
       box-shadow: 0 26px 70px rgba(18,32,51,0.16);
     }
 
-    body.light-mode .avatar-loading,
     body.light-mode .avatar-caption,
-    body.light-mode .avatar-stop-btn,
     body.light-mode .summary-pill {
       background: rgba(255,255,255,0.78);
     }
@@ -2499,7 +2342,7 @@
     }
 
     .hero-avatar-wrap::after {
-      content: 'PROFILE / VOICE INTRO';
+      content: 'PROFILE';
     }
 
     #talkingAvatar {
@@ -2511,23 +2354,13 @@
       border-radius: 22px;
     }
 
-    .avatar-loading,
     .avatar-caption {
       left: 22px;
       right: 22px;
     }
 
-    .avatar-loading {
-      top: 22px;
-    }
-
     .avatar-caption {
       bottom: 82px;
-    }
-
-    .avatar-actions {
-      right: 22px;
-      bottom: 28px;
     }
 
     body.light-mode .hero-title {
@@ -2732,30 +2565,13 @@
       animation: portraitBreath 6s ease-in-out infinite;
     }
 
-    .avatar-wave {
-      bottom: 20px;
-    }
-
-    .avatar-loading,
-    .avatar-caption,
-    .avatar-actions {
+    .avatar-caption {
       position: relative;
       inset: auto;
       left: auto;
       right: auto;
       bottom: auto;
       top: auto;
-    }
-
-    .avatar-loading {
-      order: -1;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      color: var(--accent);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
     }
 
     .avatar-caption {
@@ -2765,15 +2581,6 @@
       font-size: 11px;
     }
 
-    .avatar-actions {
-      justify-content: flex-end;
-      padding-bottom: 24px;
-    }
-
-    .avatar-play-btn,
-    .avatar-stop-btn {
-      border-radius: 8px;
-    }
 
     body.light-mode #home {
       background:
@@ -2908,10 +2715,6 @@
         min-height: 300px;
         padding: 0;
       }
-      .avatar-actions {
-        justify-content: center;
-        padding-bottom: 24px;
-      }
       .skills-bars-grid { grid-template-columns: 1fr; padding: 24px 20px; }
       .skills-cats { grid-template-columns: 1fr; }
       .tech-stack-panel { padding: 20px; }
@@ -2929,21 +2732,16 @@
       .project-filter-tab {
         flex: 0 0 auto;
       }
-      .story-grid,
       .achievement-grid,
-      .testimonial-grid,
       .learning-grid,
       .hire-grid,
       .building-grid,
-      .faq-grid,
-      .quiz-grid,
-      .quiz-controls { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
       .proof-grid { grid-template-columns: 1fr 1fr; }
       .section-wrap { padding: 72px 0 48px; }
       .project-card,
       .project-roadmap-card,
       .achievement-card,
-      .testimonial-card,
       .learning-card,
       .hire-card,
       .building-card,
@@ -3027,21 +2825,13 @@
           <span><strong>Feb 2026</strong> Current Role</span>
         </div>
       </div>
-      <div class="hero-avatar-wrap" id="avatarHero" aria-label="Professional avatar voice intro">
+      <div class="hero-avatar-wrap" id="avatarHero" aria-label="Professional profile avatar">
         <div id="talkingAvatar" aria-hidden="true">
           <div class="avatar-portrait-frame">
             <img src="assets/giridhar-3d-avatar.jpg" alt="" class="avatar-portrait" loading="eager">
           </div>
-          <div class="avatar-wave" aria-hidden="true">
-            <span></span><span></span><span></span><span></span>
-          </div>
         </div>
-        <div class="avatar-loading" id="avatarLoading">Voice intro ready</div>
-        <div class="avatar-caption" id="avatarCaption">Short summary about my skills, projects, and current role.</div>
-        <div class="avatar-actions">
-          <button class="avatar-stop-btn voice-stop-trigger" type="button">Stop</button>
-          <button class="avatar-play-btn play-intro-trigger" type="button">Hear Intro</button>
-        </div>
+        <div class="avatar-caption">Frontend Developer · ECE Background · Hyderabad</div>
       </div>
     </div>
   </section>
@@ -3887,132 +3677,10 @@
 
   <div class="divider"></div>
 
-  <!-- TESTIMONIALS -->
-  <section id="testimonials">
-    <div class="section-wrap">
-      <p class="section-label">08 &nbsp; TESTIMONIALS</p>
-      <h2 class="section-title">How I Add Value</h2>
-      <div class="testimonial-grid">
-        <article class="testimonial-card">
-          <div class="testimonial-role">Recruiter View</div>
-          <h3>Clear project communication</h3>
-          <p>
-            "The portfolio quickly shows what Giridhar can build, what tools he uses,
-            and how his project work connects to frontend and full-stack development."
-          </p>
-        </article>
-        <article class="testimonial-card">
-          <div class="testimonial-role">Team View</div>
-          <h3>Dependable learner</h3>
-          <p>
-            "He presents work with structure, explains outcomes clearly, and shows a steady
-            learning path from HTML/CSS into JavaScript, Node.js, and Express.js."
-          </p>
-        </article>
-        <article class="testimonial-card">
-          <div class="testimonial-role">Client View</div>
-          <h3>Professional first impression</h3>
-          <p>
-            "The site gives a direct route to resume, projects, contact details, and strengths
-            without making the visitor search around."
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- STORY -->
-  <section id="story">
-    <div class="section-wrap">
-      <p class="section-label">09 &nbsp; STORY</p>
-      <h2 class="section-title">How I Work</h2>
-      <div class="story-grid">
-        <article class="story-card">
-          <div class="story-time">Daily work</div>
-          <h3>A day in my life</h3>
-          <p>
-            I spend my day turning UI requirements into clean HTML/CSS layouts, testing mobile spacing,
-            adding JavaScript interactions, checking browser behavior, and documenting what changed.
-          </p>
-        </article>
-        <article class="story-card">
-          <div class="story-time">Engineering habit</div>
-          <h3>Debug first, polish second</h3>
-          <p>
-            My ECE background taught me to isolate problems before guessing. I use that same approach
-            for CSS layout bugs, JavaScript behavior, and responsive design issues.
-          </p>
-        </article>
-        <article class="story-card">
-          <div class="story-time">Lessons learned</div>
-          <h3>Things that did not work</h3>
-          <p>
-            Early projects taught me that good UI is not only about colors. Clear hierarchy, readable
-            spacing, real links, and mobile behavior matter more to recruiters and users.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ROLE FIT -->
-  <section id="role-fit">
-    <div class="section-wrap">
-      <p class="section-label">10 &nbsp; ROLE FIT</p>
-      <h2 class="section-title">Hiring Fit Quiz</h2>
-      <div class="quiz-grid">
-        <article class="quiz-card">
-          <div class="quiz-label">Frontend</div>
-          <h3>Responsive UI work</h3>
-          <p>Best match for landing pages, portfolio pages, mobile layouts, and clean HTML/CSS interfaces.</p>
-        </article>
-        <article class="quiz-card">
-          <div class="quiz-label">JavaScript</div>
-          <h3>Interactive behavior</h3>
-          <p>Useful for DOM interactions, form flows, scroll effects, counters, tooltips, and browser polish.</p>
-        </article>
-        <article class="quiz-card">
-          <div class="quiz-label">Systems</div>
-          <h3>ECE + IoT foundation</h3>
-          <p>Relevant for teams that value debugging discipline, embedded systems exposure, and logical problem solving.</p>
-        </article>
-      </div>
-      <div class="quiz-panel">
-        <div class="quiz-controls">
-          <select id="roleType" aria-label="Role type">
-            <option value="frontend">Frontend Developer</option>
-            <option value="junior">Junior Software Engineer</option>
-            <option value="iot">IoT / Embedded Support</option>
-          </select>
-          <select id="workType" aria-label="Work type">
-            <option value="ui">Responsive UI</option>
-            <option value="js">JavaScript interactions</option>
-            <option value="debug">Debugging and polish</option>
-          </select>
-          <select id="priorityType" aria-label="Priority">
-            <option value="fast">Fast learner</option>
-            <option value="projects">Project proof</option>
-            <option value="team">Team collaboration</option>
-          </select>
-        </div>
-        <button class="btn-primary" type="button" id="quizButton">Show Match</button>
-        <div class="quiz-result" id="quizResult">
-          Pick a role focus and I will show the strongest matching skills and projects.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
   <!-- WHY HIRE ME -->
   <section id="why-hire">
     <div class="section-wrap">
-      <p class="section-label">11 &nbsp; WHY HIRE ME</p>
+      <p class="section-label">08 &nbsp; WHY HIRE ME</p>
       <h2 class="section-title">Why I Am a Strong Fit</h2>
       <div class="hire-grid">
         <article class="hire-card">
@@ -4039,7 +3707,7 @@
   <!-- FAQ -->
   <section id="faq">
     <div class="section-wrap">
-      <p class="section-label">12 &nbsp; FAQ</p>
+      <p class="section-label">09 &nbsp; FAQ</p>
       <h2 class="section-title">Ask Me About My Projects</h2>
       <div class="faq-grid">
         <article class="faq-card">
@@ -4066,7 +3734,7 @@
   <!-- CONTACT -->
   <section id="contact">
     <div class="section-wrap">
-      <p class="section-label">13 &nbsp; CONTACT</p>
+      <p class="section-label">10 &nbsp; CONTACT</p>
       <h2 class="section-title">Let's Connect</h2>
       <div class="contact-grid">
         <div class="contact-intro">
@@ -4219,11 +3887,6 @@
     const openResumePreviewContact = document.getElementById('openResumePreviewContact');
     const closeResumePreview = document.getElementById('closeResumePreview');
     const cursorGlow = document.getElementById('cursorGlow');
-    const quizButton = document.getElementById('quizButton');
-    const quizResult = document.getElementById('quizResult');
-    const roleType = document.getElementById('roleType');
-    const workType = document.getElementById('workType');
-    const priorityType = document.getElementById('priorityType');
 
     const updateScrollProgress = () => {
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
@@ -4275,7 +3938,7 @@
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('section .section-wrap, .project-card, .project-roadmap-card, .achievement-card, .testimonial-card, .learning-card, .hire-card, .proof-card, .contact-item').forEach((el) => {
+    document.querySelectorAll('section .section-wrap, .project-card, .project-roadmap-card, .achievement-card, .learning-card, .hire-card, .proof-card, .contact-item').forEach((el) => {
       el.classList.add('reveal');
       revealObserver.observe(el);
     });
@@ -4377,48 +4040,6 @@
     });
 
     projectSearch?.addEventListener('input', () => applyProjectFilter(activeProjectFilter));
-
-    const quizMatches = {
-      frontend: {
-        skills: 'HTML5, CSS3, JavaScript, responsive UI, cross-browser polish',
-        projects: 'Portfolio Website, Kaira Commerce Website, Finance Website, Travel Website',
-        note: 'Best fit for frontend developer roles focused on clean layouts and recruiter-facing UI.'
-      },
-      junior: {
-        skills: 'JavaScript, GitHub, debugging, agile collaboration, fast learning',
-        projects: 'Portfolio Website, Kaira Commerce Website, Finance Website',
-        note: 'Best fit for associate or junior software engineer roles where consistency and learning speed matter.'
-      },
-      iot: {
-        skills: 'HTML, CSS, JavaScript, LocalStorage, dashboard thinking, structured workflows',
-        projects: 'IoT Home Automation, Embedded Systems, Sign Language Converter',
-        note: 'Best fit for teams that value frontend ability plus ECE/system-level thinking.'
-      }
-    };
-
-    const workLabels = {
-      ui: 'responsive UI and mobile-first spacing',
-      js: 'JavaScript interactions and browser behavior',
-      debug: 'debugging, polish, and cross-browser fixes'
-    };
-
-    const priorityLabels = {
-      fast: 'fast learner',
-      projects: 'project proof',
-      team: 'team collaboration'
-    };
-
-    if (quizButton && quizResult) {
-      quizButton.addEventListener('click', () => {
-        const match = quizMatches[roleType.value];
-        quizResult.innerHTML = `
-          <strong>Match:</strong> ${match.note}<br>
-          <strong>Hiring focus:</strong> ${workLabels[workType.value]} with ${priorityLabels[priorityType.value]}.<br>
-          <strong>Skills to review:</strong> ${match.skills}.<br>
-          <strong>Projects to open first:</strong> ${match.projects}.
-        `;
-      });
-    }
 
     document.querySelectorAll('[data-copy]').forEach((item) => {
       item.addEventListener('click', async () => {
@@ -4525,135 +4146,6 @@
         }
       });
     }
-
-
-    window.__avatarIntroText = "Hi, I'm Giridhar. I build full-stack products from frontend interfaces to practical dashboard workflows. My focus is clean user experience, strong project execution, and continuous learning.";
-
-    (() => {
-      const avatarHero = document.getElementById('avatarHero');
-      const avatarNode = document.getElementById('talkingAvatar');
-      const avatarStatus = document.getElementById('avatarLoading');
-      const avatarCaption = document.getElementById('avatarCaption');
-      const avatarFrame = avatarNode?.querySelector('.avatar-portrait-frame');
-      const playIntroButtons = document.querySelectorAll('.play-intro-trigger');
-      const stopVoiceButtons = document.querySelectorAll('.voice-stop-trigger');
-
-      if (!avatarHero || !avatarNode) return;
-
-      const INTRO_TEXT = window.__avatarIntroText;
-      let isSpeaking = false;
-      let captionTimer = null;
-
-      const setStatus = (message) => {
-        if (avatarStatus) avatarStatus.textContent = message;
-      };
-
-      const setCaption = (message) => {
-        if (avatarCaption) avatarCaption.textContent = message;
-      };
-
-      const setButtons = (disabled, label = 'Hear Intro') => {
-        playIntroButtons.forEach((button) => {
-          button.disabled = disabled;
-          button.textContent = label;
-        });
-      };
-
-      const setStopButtons = (disabled) => {
-        stopVoiceButtons.forEach((button) => {
-          button.disabled = disabled;
-        });
-      };
-
-      const setSpeaking = (speaking) => {
-        isSpeaking = speaking;
-        avatarHero.classList.toggle('is-speaking', speaking);
-      };
-
-      const finishSpeech = (message = 'Voice intro ready') => {
-        window.clearTimeout(captionTimer);
-        setSpeaking(false);
-        setButtons(false);
-        setStopButtons(true);
-        setStatus(message);
-      };
-
-      const chooseVoice = () => {
-        const voices = window.speechSynthesis?.getVoices?.() || [];
-        return voices.find((voice) => /en-IN|en-US|en-GB/i.test(voice.lang)) || voices[0] || null;
-      };
-
-      const runCaptionOnlySpeech = () => {
-        setCaption(INTRO_TEXT);
-        setButtons(true, 'Playing...');
-        setStopButtons(false);
-        setStatus('Caption mode playing');
-        setSpeaking(true);
-        captionTimer = window.setTimeout(() => finishSpeech('Caption mode ready'), 5200);
-      };
-
-      const playIntro = () => {
-        setCaption(INTRO_TEXT);
-
-        if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
-          runCaptionOnlySpeech();
-          return;
-        }
-
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(INTRO_TEXT);
-        const selectedVoice = chooseVoice();
-        if (selectedVoice) utterance.voice = selectedVoice;
-        utterance.lang = selectedVoice?.lang || 'en-IN';
-        utterance.rate = 0.94;
-        utterance.pitch = 1;
-        setButtons(true, 'Preparing...');
-        setStatus('Preparing browser voice');
-
-        utterance.onstart = () => {
-          setButtons(true, 'Speaking...');
-          setStopButtons(false);
-          setStatus('Speaking with browser voice');
-          setSpeaking(true);
-        };
-
-        utterance.onend = () => finishSpeech('Voice intro ready');
-        utterance.onerror = () => finishSpeech('Speech failed. Caption mode ready.');
-
-        window.speechSynthesis.speak(utterance);
-      };
-
-      avatarHero.addEventListener('pointermove', (event) => {
-        if (!avatarFrame) return;
-        const rect = avatarHero.getBoundingClientRect();
-        const rotateY = ((event.clientX - rect.left) / rect.width - 0.5) * 4.6;
-        const rotateX = ((event.clientY - rect.top) / rect.height - 0.5) * -2.8;
-        avatarFrame.style.transform = `translateY(-2px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      }, { passive: true });
-
-      avatarHero.addEventListener('pointerleave', () => {
-        if (avatarFrame) avatarFrame.style.transform = '';
-      });
-
-      playIntroButtons.forEach((button) => button.addEventListener('click', playIntro));
-      stopVoiceButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-          window.speechSynthesis?.cancel?.();
-          finishSpeech('Voice intro stopped');
-          setCaption('Voice intro stopped. Click Hear Intro to replay.');
-        });
-      });
-      setStopButtons(true);
-
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          window.speechSynthesis?.cancel?.();
-          finishSpeech('Voice intro paused');
-        } else if (!isSpeaking) {
-          setStatus('Voice intro ready');
-        }
-      });
-    })();
   </script>
 
 </body>
